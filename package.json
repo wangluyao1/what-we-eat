@@ -1,0 +1,36 @@
+{
+  "name": "what-we-eat",
+  "version": "1.0.0",
+  "description": "Final Project of CS5610 Web Dev",
+  "main": "express.js",
+  "dependencies": {
+    "angular": "^1.6.5",
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "mongoose": "^4.11.6",
+    "passport": "^0.3.2",
+    "q": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangluyao1/what-we-eat.git"
+  },
+  "keywords": [
+    "restaurants",
+    "food",
+    "webApp"
+  ],
+  "author": "Luyao Wang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wangluyao1/what-we-eat/issues"
+  },
+  "homepage": "https://github.com/wangluyao1/what-we-eat#readme"
+}
