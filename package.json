@@ -2,7 +2,7 @@
   "name": "what-we-eat",
   "version": "1.0.0",
   "description": "Final Project of CS5610 Web Dev",
-  "main": "express.js",
+  "main": "server.js",
   "dependencies": {
     "angular": "^1.6.5",
     "body-parser": "^1.17.2",
@@ -20,6 +20,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
