@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("what-we-eat")
         .controller("ProfileController", ProfileController)
 
     function ProfileController(userService, $location, user) {

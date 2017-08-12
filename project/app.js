@@ -3,4 +3,4 @@
  */
 var db = require("./model/models.server");
 
-require("./services/user.service.server");
+require("./service/user.service.server");
