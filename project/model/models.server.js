@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var q = require('q');
 
 var connectionString = 'mongodb://localhost/what-we-eat'; // for local
-if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
+if(process.env.MLAB_USERNAME_PROJECT) { // check if running remotely
     var username = process.env.MLAB_USERNAME_PROJECT; // get from environment
     var password = process.env.MLAB_PASSWORD_PROJECT;
     connectionString = 'mongodb://' + username + ':' + password;
