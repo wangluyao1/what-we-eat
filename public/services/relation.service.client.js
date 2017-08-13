@@ -10,42 +10,48 @@
 
         var api = {
             "createRelation": createRelation,
-            "findRelation":findRelation,
-            "findRelationByTo":findRelationByTo,
-            "findRelationByFrom":findRelationByFrom,
-            "findRelationByToAndFrom":findRelationByToAndFrom,
+            //find
+            //1.follow
+            "findFollow":findFollow,
+            "findFollowByTo":findFollowByTo,
+            "findFollowByFrom":findFollowByFrom,
+
+            "updateFollow":updateFollow,
+
             "deleteRelation":deleteRelation
         };
 
         return api;
 
-        function createRelation(from,to) {
-            var url = "/relation";
-            $http.post(url,{from:from,toUser:to});
+        function createRelation(relation) {
+            var url = "/api/relation";
+            $http.post(url,relation);
         }
 
-        function findRelationByTo(toUser) {
-            var url = "/relation?toUser="+toUser;
+        function findFollowByTo(toUserId) {
+            var url = "/api/relation/follower/"+toUserId;
             $http.get(url);
         }
 
-        function findRelationByFrom(from) {
-            var url = "/relation?from="+from;
+        function findFollowByFrom(fromUserId) {
+            var url = "/api/relation/following/"+fromUserId;
             $http.get(url);
         }
 
-        function findRelationByToAndFrom(from,to) {
-            var url ="/relation?from="+from+"&toUser="+to;
+        function findFollow(fromUserId,toUserId) {
+            var url ="/api/relation/follow?from="+fromUserId+"&toUser="+toUserId;
             $http.get(url);
         }
 
-        function deleteRelation(from,to) {
-            var url ="/relation?from="+from+"&toUser="+to;
+        function updateFollow(followId) {
+            var url ="/api/relation/follow/"+followId;
+            $http.put(url);
+        }
+
+        function deleteRelation(relationId) {
+            var url ="/api/relation/"+relationId;
             $http.delete(url);
         }
-
-
-
     }
 
 })();
