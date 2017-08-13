@@ -11,7 +11,7 @@
 
         model.searchRestaurantsByAddress = searchRestaurantsByAddress;
         model.searchUserByUsername = searchUserByUsername;
-        model.userDetail = userDetail;
+        model.goToUserDetail = goToUserDetail;
 
         function init() {
 
@@ -29,11 +29,11 @@
                 .then(function (response) {
                     //todo : cannot find user
                     model.usersResult = response.data;
-                })
+                });
         }
 
-        function userDetail(userId) {
-            $location.url("/user/detail/"+userId);
+        function goToUserDetail(userResultId) {
+            $location.url("/user/detail/"+ model.usersResult._id);
         }
     }
 

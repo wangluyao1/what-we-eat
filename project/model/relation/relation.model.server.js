@@ -4,10 +4,8 @@
 var mongoose = require("mongoose");
 var relationSchema = require("./relation.schema.server");
 var relationModel = mongoose.model("RelationModel",relationSchema);
-var userModel = mongoose.model("UserModel",userSchema);
 
 relationModel.createRelation = createRelation;
-;
 relationModel.findRelationById = findRelationById;
 //relationModel.findAllLikes = findAllLikes;
 relationModel.findFollow = findFollow;
@@ -15,10 +13,13 @@ relationModel.findAllFollowers = findAllFollowers;
 relationModel.findAllFollowings = findAllFollowings;
 relationModel.deleteRelation = deleteRelation;
 
-modules.export = relationModel;
+module.exports = relationModel;
 
 function createRelation(relation) {
-    return relationModel.createRelation(relation);
+    return relationModel.create(relation);
+        // .then(function (newRelation) {
+        //     return newRelation;
+        // });
 }
 
 function findRelationById(relationId) {
@@ -26,7 +27,7 @@ function findRelationById(relationId) {
 }
 
 function findFollow(from,toUser) {
-    return relationModel.findOne({from:from,toUser:toUser,type:follow});
+    return relationModel.findOne({from:from,toUser:toUser,type:"FOLLOW"});
 }
 
 function findAllFollowers(toUser) {
@@ -38,6 +39,6 @@ function findAllFollowings(from) {
 }
 
 function deleteRelation(relationId) {
-    return relationModel.remove(relationId);
+    return relationModel.findByIdAndRemove(relationId);
 }
 

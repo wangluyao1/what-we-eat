@@ -6,15 +6,18 @@
         .module("what-we-eat")
         .controller("UserDetailController", UserDetailController);
 
-    function UserDetailController(userService, $location,user) {
+    function UserDetailController($routeParams,userService, $location,user) {
         var model = this;
+
+        model.follow = follow;
+        model.unfollow = unfollow;
 
         model.currentUser = user;
         model.viewedUserId = $routeParams["uid"];
 
         function init() {
             userService
-                .findUserById(viewedUserId)
+                .findUserById(model.viewedUserId)
                 .then(function (response) {
                     model.viewedUser = response.data;
                 });
@@ -22,11 +25,19 @@
 
         init();
 
-        function follow(followedUserId) {
-            relationService
-                .createRelation(model.currentUser._id,followedUserId)
+        function follow(toUserId) {
+            userService
+                .follow(model.viewedUserId)
                 .then(function (response) {
+                    model.alert("Follow success");
+                })
+        }
 
+        function unfollow(toUserId) {
+            userService
+                .unfollow(model.viewedUserId)
+                .then(function (response) {
+                    model.alert("Unfollow success");
                 })
         }
 

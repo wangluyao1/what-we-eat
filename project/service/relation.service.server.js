@@ -45,7 +45,7 @@ function findFollowByFrom(req,res) {
         });
 }
 
-function findRelationByToUser(req,res) {
+function findFollowByToUser(req,res) {
     var toUser = req.params.toUser;
     relationModel
         .findAllFollowers(toUser)

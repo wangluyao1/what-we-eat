@@ -15,7 +15,10 @@
             "findUserByCredentials": login,
             "updateUser": updateUser,
             "deleteUser": deleteUser,
-            "checkLogin": checkLogin
+            "checkLogin": checkLogin,
+            "checkLogout" : checkLogout,
+            "follow":follow,
+            "unfollow":unfollow
         };
 
         return api;
@@ -26,6 +29,14 @@
               .then(function (response) {
                   return response.data;
               });
+        }
+
+        function checkLogout(){
+            var url = "/api/checkLogout";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function createUser(user) {
@@ -44,7 +55,6 @@
         }
 
         function login(username, password) {
-
             var url = "/api/login";
             return $http.post(url,{username:username,password:password});
         }
@@ -57,6 +67,16 @@
         function deleteUser(userId) {
             var url = "/api/user/"+ userId;
             return $http.delete(url);
+        }
+
+        function follow(to){
+            var url = "/api/user/follow/"+ to;
+            return $http.get(url);
+        }
+
+        function unfollow(to) {
+            var url = "/api/user/unfollow/"+to;
+            return $http.get(url);
         }
 
     }

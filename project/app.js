@@ -4,3 +4,4 @@
 var db = require("./model/models.server");
 
 require("./service/user.service.server");
+require("./service/relation.service.server");

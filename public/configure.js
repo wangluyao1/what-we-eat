@@ -35,7 +35,10 @@
             .when("/user/detail/:uid",{
                 templateUrl: "views/user/templates/user-detail.view.client.html",
                 controller: "UserDetailController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
             })
             // .when("/user/detail/:uid/res_list",{
             //     templateUrl: "views/user/templates/user-detail.view.client.html",
