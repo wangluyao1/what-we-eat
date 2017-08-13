@@ -52,11 +52,6 @@
         function updateUser(userId, user) {
             var url = "/api/user/" + userId;
             return $http.put(url,user);
-            // var _user = findUserById(userId);
-            // if (_user != null) {
-            //     var index = userData.indexOf(_user);
-            //     userData[index] = user;
-            // }
         }
 
         function deleteUser(userId) {

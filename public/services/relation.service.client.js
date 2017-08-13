@@ -4,65 +4,47 @@
 (function () {
     angular
         .module("what-we-eat")
-        .service("userService", userService);
+        .service("relationService", relationService);
 
-    function userService($http) {
+    function relationService($http) {
 
         var api = {
-            "createUser": createUser,
-            "findUserById": findUserById,
-            "findUserByUserName": findUserByUserName,
-            "findUserByCredentials": login,
-            "updateUser": updateUser,
-            "deleteUser": deleteUser,
-            "checkLogin": checkLogin
+            "createRelation": createRelation,
+            "findRelation":findRelation,
+            "findRelationByTo":findRelationByTo,
+            "findRelationByFrom":findRelationByFrom,
+            "findRelationByToAndFrom":findRelationByToAndFrom,
+            "deleteRelation":deleteRelation
         };
 
         return api;
 
-        function checkLogin() {
-            var url = "/api/checkLogin";
-          return $http.get(url)
-              .then(function (response) {
-                  return response.data;
-              });
+        function createRelation(from,to) {
+            var url = "/relation";
+            $http.post(url,{from:from,toUser:to});
         }
 
-        function createUser(user) {
-            var url = "/api/user";
-            return $http.post(url,user);
+        function findRelationByTo(toUser) {
+            var url = "/relation?toUser="+toUser;
+            $http.get(url);
         }
 
-        function findUserById(userId) {
-            var url = "/api/user/" + userId;
-            return $http.get(url);
+        function findRelationByFrom(from) {
+            var url = "/relation?from="+from;
+            $http.get(url);
         }
 
-        function findUserByUserName(username) {
-            var url = "/api/user?username="+username;
-            return $http.get(url);
+        function findRelationByToAndFrom(from,to) {
+            var url ="/relation?from="+from+"&toUser="+to;
+            $http.get(url);
         }
 
-        function login(username, password) {
-
-            var url = "/api/login";
-            return $http.post(url,{username:username,password:password});
+        function deleteRelation(from,to) {
+            var url ="/relation?from="+from+"&toUser="+to;
+            $http.delete(url);
         }
 
-        function updateUser(userId, user) {
-            var url = "/api/user/" + userId;
-            return $http.put(url,user);
-            // var _user = findUserById(userId);
-            // if (_user != null) {
-            //     var index = userData.indexOf(_user);
-            //     userData[index] = user;
-            // }
-        }
 
-        function deleteUser(userId) {
-            var url = "/api/user/"+ userId;
-            return $http.delete(url);
-        }
 
     }
 
