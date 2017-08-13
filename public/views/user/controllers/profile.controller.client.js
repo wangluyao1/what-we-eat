@@ -4,7 +4,7 @@
 (function () {
     angular
         .module("what-we-eat")
-        .controller("ProfileController", ProfileController)
+        .controller("ProfileController", ProfileController);
 
     function ProfileController(userService, $location, user) {
         var model = this;
@@ -28,6 +28,7 @@
         function updateUser(user) {
             var promise = userService.updateUser(model.userId, user);
             promise.then(function (response) {
+                //todo: remind update success
             });
         }
 

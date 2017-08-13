@@ -1,0 +1,61 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand pull-left" href="#">What We Eat</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#!/login">Login</a></li>
+                <li><a href="#!/register">Register</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<label for="searchAddress">Search Restaurants By Street Address</label>
+<input class="form-control"
+       id = "searchAddress"
+       name = "searchAddress"
+       placeholder="316 W. Washington Ave., Madison, WI"
+       ng-model="address"/>
+
+<a class="btn btn-lg btn-default pull-right"
+   role="button"
+   ng-click="model.searchRestaurantsByAddress(address)">Search </a>
+
+<label for="searchUser">Search User</label>
+<input class="form-control"
+       id = "searchUser"
+       name = "searchUser"
+       placeholder="username"
+       ng-model="username"/>
+
+<a class="btn btn-lg btn-default pull-right"
+   role="button"
+   ng-click="model.searchUserByUsername(username)">Search</a>
+
+
+
+<table class="table">
+    <tr ng-repeat="restaurant in model.restaurants">
+        <td>
+            <img src= {{restaurant.logoUrl}}>
+        </td>
+
+        <td>
+            <a href="#!/details/{{restaurant.apiKey}}">
+                {{restaurant.name}}
+            </a>
+        </td>
+    </tr>
+</table>
+
+<!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
+<a ng-click="model.userDetail(model.userResult._id)">{{model.usersResult.username}}</a>

@@ -18,6 +18,8 @@
 
     <script src="services/user.service.client.js"></script>
 
+    <script src="views/home/controllers/home.controller.client.js"></script>
+
     <script src="views/user/controllers/login.controller.client.js"></script>
     <script src="views/user/controllers/profile.controller.client.js"></script>
     <script src="views/user/controllers/register.controller.client.js"></script>
@@ -27,13 +29,16 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div ng-view></div>
+<div ng-view class="container-fluid"></div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
