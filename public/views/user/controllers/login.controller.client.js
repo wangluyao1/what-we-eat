@@ -21,6 +21,7 @@
             var promise = userService.findUserByCredentials(user.username, user.password);
             promise.then(function (response) {
                 if (!response.data) {
+                    //todo remind why cannot log in
                     model.alert = "Unable to log in.";
                 } else {
                     $location.url("profile");// + response.data._id);

@@ -9,8 +9,8 @@
     function config($routeProvider) {
         $routeProvider
             .when("/", {
-                templateUrl: "views/user/templates/login.view.client.html",
-                controller: "LoginController",
+                templateUrl: "views/home/templates/home.view.client.html",
+                controller: "SearchController",
                 controllerAs: "model"
             })
             .when("/login", {
@@ -31,6 +31,26 @@
                     user:checkLogin
                 }
             })
+            //view other users
+            .when("/user/detail/:uid",{
+                templateUrl: "views/user/templates/user-detail.view.client.html",
+                controller: "UserDetailController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
+            // .when("/user/detail/:uid/res_list",{
+            //     templateUrl: "views/user/templates/user-detail.view.client.html",
+            //     controller: "",
+            //     controllerAs: "model",
+            // })
+            // .when("/user/detail/:uid/res_list/:listId",{
+            //     templateUrl: "views/user/templates/user-detail.view.client.html",
+            //     controller: "",
+            //     controllerAs: "model",
+            // })
+
     }
 
     function checkLogin(userService,$q,$location) {

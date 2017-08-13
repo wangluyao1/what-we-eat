@@ -14,14 +14,20 @@ userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByGoogleId = findUserByGoogleId;
 
-
-userModel.addWebsite = addWebsite;
-userModel.removeWebsite = removeWebsite;
+//follow
+userModel.addTo = addToArray;
+userModel.deleteFromArray = deleteFromArray;
+userModel.follow = follow;
+userModel.unfollow = unfollow;
+userModel.addFollower = addFollower;
+userModel.addFollowing = addFollowing;
+userModel.deleteFollowing = deleteFollowing;
+userModel.deleteFollower = deleteFollower;
 
 module.exports = userModel;
 
 function createUser(user) {
-        return userModel.create(user);
+    return userModel.create(user);
 }
 
 function findUserById(userId) {
@@ -52,23 +58,74 @@ function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id': googleId});
 }
 
-function addWebsite(userId, websiteId) {
-    userModel
-        .findUserById(userId)
+function addToArray(userId,where,toAdd) {
+    return userModel
+        .findById(userId)
         .then(function (user) {
-            user.websites.push(websiteId);
+            user.get(where).push(toAdd);
             return user.save();
-        });
+        })
 }
 
-function removeWebsite(userId,websiteId) {
-    userModel
-        .findUserById(userId)
+function deleteFromArray(userId,arrayName,toDeleteId) {
+    return userModel
+        .findById(userId)
         .then(function (user) {
-            var index = user.websites.indexOf(websiteId);
-            user.websites.splice(index,1);
-            return user.save();
-        });
+            var array = user.get(arrayName);
+            var index = array.indexOf(toDeleteId);
+            user.get(arrayName).splice(index,1);
+            user.save();
+        })
 }
+
+function addFollowing(userId,toAddRelationId) {
+    return userModel
+        .addTo(userId,"followings",toAddRelationId);
+}
+
+function deleteFollowing(userId,toDeleteRelationId) {
+    return userModel.deleteFromArray(userId,"followings",toDeleteRelationId);
+}
+
+function addFollower(userId,toAddRelationId) {
+    return userModel
+        .addTo(userId,"followers",toAddRelationId);
+}
+
+function deleteFollower(userId,toDeleteRelationId) {
+    return userModel.deleteFromArray(userId,"followers",toDeleteRelationId);
+}
+
+function follow(fromId,toId) {
+    var relationModel = require("../relation/relation.model.server");
+    return relationModel
+        .createRelation({from:fromId,toUser:toId,type:"FOLLOW"})
+        .then(function (newRelation) {
+                userModel.addFollowing(fromId, newRelation)
+                    .then(function () {
+                       return userModel.addFollower(toId, newRelation);
+                    })
+            }
+            );
+}
+
+function unfollow(fromId,toId) {
+    var relationModel = require("../relation/relation.model.server");
+    return relationModel
+        .findFollow(fromId,toId)
+        .then(function (follow) {
+            return relationModel
+                .deleteRelation(follow._id)
+                .then(function () {
+                    return userModel
+                        .deleteFollower(toId,follow._id)
+                        .then(function () {
+                            return userModel
+                                .deleteFollowing(fromId,follow._id);
+                        })
+                });
+        })
+}
+
 
 

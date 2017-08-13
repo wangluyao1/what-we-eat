@@ -1,0 +1,13 @@
+<div>
+    <form>
+    username : {{model.viewedUser.username}}
+    <button ng-click="model.follow(viewedUser._id)" role="button">
+        Follow
+    </button>
+        <button ng-click="model.unfollow(viewedUser._id)" role="button">
+            Unfollow
+        </button>
+    </form>
+    first name: {{model.viewedUser.firstname}}
+    last name :{{model.viewedUser.lastName}}
+</div>

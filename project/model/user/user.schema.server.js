@@ -20,6 +20,8 @@ var userSchema = mongoose.Schema({
     phone: String,
     roles: {type:String,enum:['USER','ADMIN','RESTAURANT'],default:'USER'},
     //restaurantsList: String,
+    followings:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],
+    followers:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],
     dateCreated: {type:Date,default:Date.now}
     },{collection:"user"});
 module.exports = userSchema;

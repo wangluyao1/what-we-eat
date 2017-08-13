@@ -8,6 +8,9 @@ var LocalStrategy = require('passport-local').Strategy;
 // var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
+
 // var facebookConfig = {
 //     clientID: process.env.FACEBOOK_CLIENT_ID,
 //     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
@@ -18,6 +21,7 @@ var googleConfig = {
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK_URL
 };
+
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 app.get('/auth/google/callback',
     passport.authenticate('google', {
@@ -27,6 +31,30 @@ app.get('/auth/google/callback',
 
 
 // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+passport.use(new LocalStrategy(localStrategy));
+
+// app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+// app.get('/auth/facebook/callback',
+//     passport.authenticate('facebook', {
+//         successRedirect: '/#/user',
+//         failureRedirect: '/#/login'
+//     }));
+
+app.post('/api/user', createUser);
+app.get('/api/user', findUserByUsername);
+app.post('/api/login', passport.authenticate('local'), login);
+app.get('/api/user/:userId', findUserById);
+app.put('/api/user/:userId', updateUser);
+app.delete('/api/user/:userId', deleteUser);
+app.get('/api/checkLogin', checkLogin);
+app.get('/api/checkLogout',logout);
+//app.get('/all/users',getAllUsers);
+
+//follow
+app.get('/api/user/follow/:tuid',follow);
+app.get('/api/user/unfollow/:tuid',unfollow);
+
 // function facebookStrategy(token, refreshToken, profile, done) {
 //     userModel
 //         .findUserfindUserByFacebookId(profile.id)
@@ -68,7 +96,7 @@ app.get('/auth/google/callback',
 //         );
 // }
 
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
 function googleStrategy(token, refreshToken, profile, done) {
     userModel
         .findUserByGoogleId(profile.id)
@@ -110,12 +138,6 @@ function googleStrategy(token, refreshToken, profile, done) {
         );
 }
 
-
-passport.serializeUser(serializeUser);
-passport.deserializeUser(deserializeUser);
-
-passport.use(new LocalStrategy(localStrategy));
-
 function localStrategy(username, password, done) {
     userModel
         .findUserByCredentials(username, password)//{username: username, password: password})
@@ -134,22 +156,6 @@ function localStrategy(username, password, done) {
         );
 }
 
-// app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-// app.get('/auth/facebook/callback',
-//     passport.authenticate('facebook', {
-//         successRedirect: '/#/user',
-//         failureRedirect: '/#/login'
-//     }));
-
-
-app.post('/api/user', createUser);
-app.get('/api/user', findUserByUsername);
-app.post('/api/login', passport.authenticate('local'), login);
-app.get('/api/user/:userId', findUserById);
-app.put('/api/user/:userId', updateUser);
-app.delete('/api/user/:userId', deleteUser);
-app.get('/api/checkLogin', checkLogin);
-//app.get('/all/users',getAllUsers);
 
 // function getAllUsers(req,res) {
 //     res.send(userData);
@@ -159,10 +165,10 @@ function checkLogin(req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
 }
 
-// function logout(req, res) {
-//     req.logOut();
-//     res.send(200);
-// }
+function logout(req, res) {
+    req.logOut();
+    res.send(200);
+}
 
 function createUser(req, res) {
     var user = req.body;
@@ -173,10 +179,6 @@ function createUser(req, res) {
         }, function (err) {
             res.send(err);
         })
-    // var date = new Date();
-    // user._id = (date.getTime()).toString();
-    // userData.push(user);
-    // res.send(user);
 }
 
 function findUserByUsername(req, res) {
@@ -188,13 +190,6 @@ function findUserByUsername(req, res) {
         }, function (err) {
             res.sendStatus(404).send(err);
         });
-    // for(var u in userData){
-    //     if(userData[u].username === username){
-    //         res.send(userData[u]);
-    //         return;
-    //     }
-    // }
-    // res.send("0");
 }
 
 function findUserByCredentials(req, res) {
@@ -207,13 +202,6 @@ function findUserByCredentials(req, res) {
         }, function (err) {
             res.sendStatus(404).send(err);
         });
-    // for(var u in userData){
-    //     if(userData[u].username === username && userData[u].password === password){
-    //         res.send(userData[u]);
-    //         return;
-    //     }
-    // }
-    // res.send("0");
 }
 
 function login(req, res) {
@@ -293,4 +281,29 @@ function deserializeUser(user, done) {
                 done(err, null);
             }
         );
+}
+
+//follow
+function follow(req,res) {
+    var toUserId = req.params.tuid;
+    var fromUserId = req.user._id;
+    userModel
+        .follow(fromUserId,toUserId)
+        .then(function (status) {
+            res.json(status);
+        },function (err) {
+            res.sendStatus(500).send(err);
+        })
+}
+
+function unfollow(req,res) {
+    var toUserId = req.params.tuid;
+    var fromUserId = req.user._id;
+    userModel
+        .unfollow(fromUserId,toUserId)
+        .then(function (status) {
+            res.json(status);
+        },function (err) {
+            res.sendStatus(500).send(err);
+        })
 }
