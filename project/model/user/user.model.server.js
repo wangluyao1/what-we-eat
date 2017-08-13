@@ -21,7 +21,7 @@ userModel.removeWebsite = removeWebsite;
 module.exports = userModel;
 
 function createUser(user) {
-        return userModel.create(user);
+    return userModel.create(user);
 }
 
 function findUserById(userId) {
