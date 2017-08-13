@@ -50,6 +50,11 @@
             //     controller: "",
             //     controllerAs: "model",
             // })
+            .when("/restaurant/details/:restaurantKey",{
+                templateUrl: "views/restaurant/templates/client/detail.view.client.html",
+                controller: "ResDetailController",
+                controllerAs: "model"
+            })
 
     }
 

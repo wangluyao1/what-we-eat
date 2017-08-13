@@ -42,20 +42,7 @@
    ng-click="model.searchUserByUsername(username)">Search</a>
 
 
-
-<table class="table">
-    <tr ng-repeat="restaurant in model.restaurants">
-        <td>
-            <img src= {{restaurant.logoUrl}}>
-        </td>
-
-        <td>
-            <a href="#!/details/{{restaurant.apiKey}}">
-                {{restaurant.name}}
-            </a>
-        </td>
-    </tr>
-</table>
+<div ng-include="'views/restaurant/templates/restaurant-list.view.client.html'"></div>
 
 <!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
 <a ng-click="model.goToUserDetail(model.usersResult)"> userResult: {{model.usersResult.username}}</a>
