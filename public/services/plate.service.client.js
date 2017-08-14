@@ -29,7 +29,7 @@
 
         function updatePlate(plateId,plate) {
             var url = "/api/plate/"+plateId;
-            return $http.post(url,plate);
+            return $http.put(url,plate);
         }
 
         function deletePlate(plateId) {

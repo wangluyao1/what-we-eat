@@ -9,26 +9,61 @@ module.exports = restaurantModel;
 
 restaurantModel.createRestaurant = createRestaurant;
 restaurantModel.updateRestaurant = updateRestaurant;
+restaurantModel.addPlateForRes = addPlateForRes;
+deletePlateForRes.deletePlateForRes = deletePlateForRes;
 restaurantModel.findRestaurantById = findRestaurantById;
-restaurantModel.findMenu = findMenu;
+restaurantModel.findRestaurantByUser = findRestaurantByUser;
 restaurantModel.deleteRestaurant = deleteRestaurant;
 
 function createRestaurant(res) {
-    return restaurantModel.createRestaurant(res);
+    var userModel = require("../user/user.model.server");
+    return restaurantModel
+        .create(res)
+        .then(function (restaurantDoc) {
+            var rId = restaurantDoc._id;
+            restaurantModel
+                .findRestaurantById(rId)
+                .then(function (rest) {
+                    if(!rest.key){
+                        rest.key = rest._id;
+                        rest.save();
+                    }
+                });
+            return userModel
+                .bindRestaurant(res.manager,rId);
+        });
 }
 
 function updateRestaurant(resId,newRes) {
+    newRes._id=resId;
     return restaurantModel.update({_id:resId},{$set:newRes});
 }
 
-function findMenu(resId) {
-    var plateModel = require("../plate/plate.model.server");
-    return plateModel
-        .findPlatesByRes(resId);
+function addPlateForRes(resId,plate) {
+    return restaurantModel
+        .findById(resId)
+        .then(function (restaurant) {
+            restaurant.menu.push(plate);
+            return restaurant.save();
+        })
+}
+
+function deletePlateForRes(resId,plateId) {
+    return restaurantModel
+        .findById(resId)
+        .then(function (restaurant) {
+            var index = restaurant.menu.indexOf(plateId);
+            restaurant.menu.splice(index,1);
+            return restaurant.save();
+        })
 }
 
 function findRestaurantById(resId) {
     return restaurantModel.findById(resId);
+}
+
+function findRestaurantByUser(userId) {
+    return restaurantModel.find({manager:userId});
 }
 
 function deleteRestaurant(resId) {

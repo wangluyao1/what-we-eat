@@ -6,13 +6,12 @@
         .module("what-we-eat")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($location, userService,currentUser) {
+    function RegisterController($location, userService) {
         var model = this;
 
         model.register = register;
 
         function init() {
-
         }
 
         init();
@@ -33,8 +32,8 @@
                 user.roles = role;
                 var promise2 = userService.createUser(user);
                 promise2.then(function (response2) {
-                    currentUser = response2.data;
-                    $location.url("profile");
+                    var user = response2.data;
+                    $location.url("/profile");
                 });
             });
         }

@@ -20,6 +20,7 @@ var userSchema = mongoose.Schema({
     phone: String,
     roles: {type:String,enum:['USER','ADMIN','MANAGER'],default:'USER'},
     //restaurantsList: String,
+    restaurant:{type:mongoose.Schema.ObjectId,ref:"RestaurantModel"},
     followings:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],
     followers:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],
     dateCreated: {type:Date,default:Date.now}

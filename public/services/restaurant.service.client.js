@@ -34,7 +34,7 @@
 
         function updateRestaurant(resId,restaurant) {
             var url = "/api/restaurant/"+resId;
-            return $http.post(url,restaurant);
+            return $http.put(url,restaurant);
         }
 
         function deleteRestaurant(resId) {

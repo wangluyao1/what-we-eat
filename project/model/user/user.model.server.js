@@ -14,6 +14,9 @@ userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByGoogleId = findUserByGoogleId;
 
+//manager
+userModel.bindRestaurant = bindRestaurant;
+
 //follow
 userModel.addTo = addToArray;
 userModel.deleteFromArray = deleteFromArray;
@@ -47,7 +50,15 @@ function updateUser(userId,user) {
 }
 
 function deleteUser(userId) {
-    return userModel.findByIdAndRemove(userId);
+    var restaurantModel = require("../restaurant/restaurant.model.server");
+    return userModel.findByIdAndRemove(userId)
+        .then(function (user) {
+            return restaurantModel
+                .findRestaurantByUser(userId)
+                .then(function (restaurant) {
+                    restaurantModel.deleteRestaurant(restaurant._id);
+                })
+        });
 }
 
 function findUserByFacebookId(facebookId) {
@@ -57,6 +68,14 @@ function findUserByFacebookId(facebookId) {
 function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id': googleId});
 }
+
+function bindRestaurant(managerId,newRes) {
+    return userModel.update({_id:managerId},{$set:{restaurant:newRes}})
+        .then(function (newRestaurant) {
+            return newRestaurant;
+        });
+}
+
 
 function addToArray(userId,where,toAdd) {
     return userModel

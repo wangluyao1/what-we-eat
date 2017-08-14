@@ -1,0 +1,11 @@
+<h1>Create Restaurant</h1>
+<label for="resName">Username</label>
+<input name="resName"
+       ng-model="model.res.name"
+       type="text"
+       id="resName"
+       class="form-control"
+       placeholder="resName"/>
+<a class="btn btn-primary btn-block"
+   ng-click="model.createRestaurant(model.res)"
+   role="button">create</a>

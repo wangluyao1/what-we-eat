@@ -1,8 +1,14 @@
 
+<div ng-show="model.alert"
+     class="alert alert-success">
+    {{model.alert}}
+</div>
 <div class="container-fluid">
     <label for="restaurantName">Restaurant Name</label>
+    <button class="btn-success" ng-click="model.updateRestaurant(model.res)">Save</button>
+
     <input name="restaurantName"
-           ng-model="model.res.resName"
+           ng-model="model.res.name"
            type="text"
            id="restaurantName"
            class="form-control"
@@ -10,7 +16,7 @@
     />
     <label for="restaurantAddress">Restaurant Address</label>
     <input name="restaurantAddress"
-           ng-model="model.res.resAddress"
+           ng-model="model.res.address"
            type="text"
            id="restaurantAddress"
            class="form-control"

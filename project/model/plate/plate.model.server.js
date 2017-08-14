@@ -14,7 +14,12 @@ plateModel.findPlatesByRes = findPlatesByRes;
 plateModel.deletePlate = deletePlate;
 
 function createPlate(plate) {
-    return plateModel.create(plate);
+    var restaurantModel = require("../plate/plate.model.server");
+    return plateModel.create(plate)
+        .then(function (plateDoc) {
+            return restaurantModel
+                   .addPlateForRes(plate.restaurant,plateDoc._id);
+        });
 }
 
 function updatePlate(plateId,newPlate) {
@@ -26,9 +31,17 @@ function findPlateById(plateId) {
 }
 
 function findPlatesByRes(resId) {
-    return plateModel.find({restaurant:resId});
+    return plateModel.find({restaurant:resId})
+        .then(function (plates) {
+            return plates;
+        });
 }
 
 function deletePlate(plateId) {
-    return plateModel.findByIdAndRemove(plateId);
+    var restaurantModel = require("../plate/plate.model.server");
+    return plateModel.findByIdAndRemove(plateId)
+        .then(function (plate) {
+            return restaurantModel
+                .deletePlateForRes(resId,plateId);
+        });
 }

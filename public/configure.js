@@ -50,15 +50,29 @@
             //     controller: "",
             //     controllerAs: "model",
             // })
+            .when("/restaurant/create",{
+                templateUrl: "views/restaurant/templates/manager/res-create.view.client.html",
+                controller: "ResCreateController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
             .when("/restaurant/details/:restaurantKey",{
                 templateUrl: "views/restaurant/templates/client/detail.view.client.html",
                 controller: "ResDetailController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
             })
             .when("/restaurant/details/:restaurantKey/edit",{
                 templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
                 controller: "ResDetailEditController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
             })
 
     }
@@ -77,4 +91,37 @@
             });
         return deferred.promise;
     }
+
+    function checkCurrentUser(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .loggedin()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.resolve({});
+                } else {
+                    deferred.resolve(user);
+                }
+            })
+            .catch(function (error) {
+            });
+        return deferred.promise;
+    }
+
+    function checkAdmin(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .checkAdmin()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.reject();
+                    $location.url('/');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
+    }
+
+
 })();

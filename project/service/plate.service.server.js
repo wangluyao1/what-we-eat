@@ -34,7 +34,7 @@ function findPlateById(req,res) {
 
 function updatePlate(req,res) {
     var plateId = req.params.pId;
-    var newPlate = req.body.plate;
+    var newPlate = req.body;
     return plateModel
         .updatePlate(plateId,newPlate)
         .then(function (plate) {

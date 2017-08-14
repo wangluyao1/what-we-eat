@@ -13,7 +13,7 @@ app.delete("/api/restaurant/:rId",deleteRestaurant);
 function createRestaurant(req,res) {
     var newRes = req.body;
     return restaurantModel
-        .createPlate(newRes)
+        .createRestaurant(newRes)
         .then(function (status) {
             res.json(status);
         },function (err) {
@@ -45,7 +45,7 @@ function findMenuByResId(req,res) {
 
 function updateRestaurant(req,res) {
     var resId = req.params.rId;
-    var newRes = req.body.restaurant;
+    var newRes = req.body;
     return restaurantModel
         .updateRestaurant(resId,newRes)
         .then(function (restaurant) {

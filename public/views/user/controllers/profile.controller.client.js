@@ -14,6 +14,7 @@
 
         model.updateUser = updateUser;
         model.unregister = unregister;
+        model.goToStore = goToStore;
 
         function init() {
             //model.user = userService.findUserById(model.userId);
@@ -42,6 +43,14 @@
                     }
                 });
 
+        }
+
+        function goToStore() {
+            if(!model.currentUser.restaurant){
+                $location.url("/restaurant/create");
+            } else{
+                $location.url("/restaurant/details/"+user.restaurant+"/edit");
+            }
         }
     }
 })();
