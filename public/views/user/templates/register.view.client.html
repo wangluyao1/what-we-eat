@@ -27,8 +27,17 @@
            id="verifyPassword"
            class="form-control"
            placeholder="verify password">
+    <label for="role">Role</label>
+    <div id="role" class="role">
+        <input type="radio"
+               ng-model="role"
+               value="USER"> USER
+        <input type="radio"
+               ng-model="role"
+               value="MANAGER"> RESTAURANT MANAGER
+    </div>
     <a class="btn btn-primary btn-block"
-       ng-click="model.register(model.user)"
+       ng-click="model.register(model.user,role)"
        role="button">Register</a>
     <a class="btn btn-danger btn-block"
        href="#!/login"

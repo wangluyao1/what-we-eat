@@ -3,6 +3,7 @@
  */
 var mongoose = require("mongoose");
 var restaurantSchema = mongoose.Schema({
+    manager:{type:mongoose.Schema.ObjectId,ref:"UserModel"},
     key:String,
     name:String,
     address:String,

@@ -18,7 +18,7 @@ var userSchema = mongoose.Schema({
     email: String,
     photo: String,
     phone: String,
-    roles: {type:String,enum:['USER','ADMIN','RESTAURANT'],default:'USER'},
+    roles: {type:String,enum:['USER','ADMIN','MANAGER'],default:'USER'},
     //restaurantsList: String,
     followings:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],
     followers:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],

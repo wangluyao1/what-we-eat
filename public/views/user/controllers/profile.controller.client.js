@@ -9,6 +9,7 @@
     function ProfileController(userService, $location, user) {
         var model = this;
         //model.userId = $routeParams["uid"];
+        model.currentUser = user;
         model.userId = user._id;
 
         model.updateUser = updateUser;

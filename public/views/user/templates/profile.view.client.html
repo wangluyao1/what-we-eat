@@ -23,6 +23,15 @@
                class="form-control"
                placeholder="username"
         />
+        <label for="role">ROLE</label>
+        <input name="role"
+               readonly
+               ng-model="model.user.roles"
+               type="text"
+               id="role"
+               class="form-control"
+               placeholder="role"
+        />
         <label for="email">Email</label>
         <input name="email"
                ng-model="model.user.email"
@@ -48,11 +57,19 @@
                placeholder="lastName"
         />
 
+        <div ng-switch="model.currentUser.roles">
+            <div ng-switch-when="USER">
         <form>
             <a><h2>Restaurant Lists</h2></a>
             <a><h2>Following</h2></a>
             <a><h2>Followers</h2></a>
         </form>
+            </div>
+            <div ng-switch-when="MANAGER">
+                    <a><h2>Store</h2></a>
+                </form>
+            </div>
+        </div>
 
         <a class="btn btn-warning btn-block"
            ng-click="model.unregister()"
