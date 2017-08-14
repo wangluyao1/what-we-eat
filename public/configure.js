@@ -55,6 +55,11 @@
                 controller: "ResDetailController",
                 controllerAs: "model"
             })
+            .when("/restaurant/details/:restaurantKey/edit",{
+                templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
+                controller: "ResDetailEditController",
+                controllerAs: "model"
+            })
 
     }
 
