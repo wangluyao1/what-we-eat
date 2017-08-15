@@ -20,6 +20,7 @@
                 .findUserById(model.viewedUserId)
                 .then(function (response) {
                     model.viewedUser = response.data;
+                    findAllFollowers(model.viewedUserId);
                 });
         }
 
@@ -29,7 +30,7 @@
             userService
                 .follow(model.viewedUserId)
                 .then(function (response) {
-                    model.alert("Follow success");
+                    model.alert= "Follow success";
                 })
         }
 
@@ -37,7 +38,26 @@
             userService
                 .unfollow(model.viewedUserId)
                 .then(function (response) {
-                    model.alert("Unfollow success");
+                    model.alert= "Unfollow success";
+                })
+        }
+
+        function findAllFollowers(userId) {
+            return userService
+                .findFollowers(userId)
+                .then(function (response) {
+                    var followersRelation = response.data;
+                    var followers =[];
+                    followersRelation
+                        .forEach(function (relation) {
+                            var from = relation.from;
+                            userService
+                                .findUserById(from)
+                                .then(function (user) {
+                                    followers.push(user.data);
+                                });
+                            model.followers = followers;
+                        })
                 })
         }
 

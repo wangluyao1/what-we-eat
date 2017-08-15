@@ -9,23 +9,21 @@
     function ResDetailEditController($routeParams,restaurantService,plateService,user) {
         var model = this;
 
+        model.restaurantKey = $routeParams['restaurantKey'];
+
         model.user = user;
         model.addPlate = addPlate;
         model.saveMenu = saveMenu;
         model.updateRestaurant = updateRestaurant;
-
-        model.restaurantKey = $routeParams['restaurantKey'];
+        model.removePlate = removePlate;
+        model.refreshPlates = refreshPlates();
 
         function init() {
             return restaurantService
                 .findRestaurantById(model.restaurantKey)
                 .then(function (response) {
                     model.res = response.data;
-                    return restaurantService
-                        .findPlatesByResId(model.restaurantKey)
-                        .then(function (response) {
-                            model.plates = response.data;
-                        });
+                    refreshPlates();
                 });
         }
         init();
@@ -56,12 +54,24 @@
                 .then(function () {
                     model.alert="Add Plate Success";
                     model.toAddPlate = null;
-                    return restaurantService
-                        .findPlatesByResId(model.restaurantKey)
-                        .then(function (response) {
-                            model.plates = response.data;
-                        })
+                    refreshPlates();
                 });
+        }
+
+        function refreshPlates() {
+            return restaurantService
+                .findPlatesByResId(model.restaurantKey)
+                .then(function (response) {
+                    model.plates = response.data;
+                })
+        }
+
+        function removePlate(plate) {
+            return plateService
+                .deletePlate(plate._id)
+                .then(function () {
+                    refreshPlates();
+                })
         }
 
 

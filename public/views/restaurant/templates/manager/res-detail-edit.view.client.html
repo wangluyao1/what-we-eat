@@ -40,7 +40,8 @@
                 <td><input class="form-control input-sm" ng-model="plate.description" value="{{plate.description}}"> </td>
                 <td><input class="form-control input-sm" ng-model="plate.price" value="{{plate.price}}"> </td>
                 <td>
-                <td>Added<span class="glyphicon glyphicon-ok" role="button" ng-click="model.saveMenu(toAddPlate)"></span>
+                <td>Added<span class="glyphicon glyphicon-ok" role="button" ng-click="model.saveMenu()"></span>
+                <span class="glyphicon glyphicon-remove" role="button" ng-click="model.removePlate(plate)"></span>
                 </td>
                     <!--<span class="glyphicon glyphicon-pencil" role="button"></span>-->
                 </td>

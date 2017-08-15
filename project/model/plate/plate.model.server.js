@@ -39,10 +39,16 @@ function findPlatesByRes(resId) {
 }
 
 function deletePlate(plateId) {
-    var restaurantModel = require("../plate/plate.model.server");
-    return plateModel.findByIdAndRemove(plateId)
+    var restaurantModel = require("../restaurant/restaurant.model.server");
+    return plateModel
+        .findById(plateId)
         .then(function (plate) {
+            var resId = plate.restaurant;
             return restaurantModel
-                .deletePlateForRes(resId,plateId);
+                .findByIdAndRemove(plateId)
+                .then(function () {
+                    return restaurantModel
+                        .deletePlateForRes(resId,plateId);
+                });
         });
 }

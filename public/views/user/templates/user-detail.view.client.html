@@ -1,3 +1,9 @@
+<div ng-show="model.alert"
+     class="alert alert-success">
+    {{model.alert}}
+</div>
+
+
 <div>
     <form>
     username : {{model.viewedUser.username}}
@@ -11,3 +17,19 @@
     first name: {{model.viewedUser.firstname}}
     last name :{{model.viewedUser.lastName}}
 </div>
+
+<form>
+    Followings:{{model.followings.length}}
+    Followers:{{model.followers.length}}
+</form>
+<table>
+    <tr>
+    <th>Followers</th>
+    <th>Followings</th>
+    </tr>
+    <tr ng-repeat="follower in model.followers">
+        <td>{{follower.username}}</td>
+    </tr>
+</table>
+
+{{model.followers}}

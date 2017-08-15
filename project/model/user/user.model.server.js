@@ -26,6 +26,8 @@ userModel.addFollower = addFollower;
 userModel.addFollowing = addFollowing;
 userModel.deleteFollowing = deleteFollowing;
 userModel.deleteFollower = deleteFollower;
+userModel.findAllFollowersByUserId = findAllFollowersByUserId;
+//userModel.findAllFollowingsByUserId = findAllFollowingsByUserId;
 
 module.exports = userModel;
 
@@ -144,6 +146,25 @@ function unfollow(fromId,toId) {
                         })
                 });
         })
+}
+
+function findAllFollowersByUserId(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('followers')
+        .exec()
+        .then(function (user) {
+            return user.followers;
+        });
+
+    // var relationModel = require("../relation/relation.model.server");
+    // return relationModel
+    //     .findAllFollowers(userId)
+    //     .populate('from')
+    //     .exec()
+    //     .then(function (relation) {
+    //         return relation;
+    //     })
 }
 
 
