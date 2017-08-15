@@ -25,11 +25,20 @@
 <table>
     <tr>
     <th>Followers</th>
-    <th>Followings</th>
     </tr>
     <tr ng-repeat="follower in model.followers">
         <td>{{follower.username}}</td>
     </tr>
 </table>
 
-{{model.followers}}
+<table>
+    <tr>
+        <th>Followers</th>
+    </tr>
+    <tr ng-repeat="following in model.followings">
+        <td>{{following.username}}</td>
+    </tr>
+</table>
+
+Followers: {{model.followers}}
+Followings:{{model.followings}}

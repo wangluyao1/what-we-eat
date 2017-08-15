@@ -19,7 +19,8 @@
             "checkLogout" : checkLogout,
             "follow":follow,
             "unfollow":unfollow,
-            "findFollowers":findFollowers
+            "findFollowers":findFollowers,
+            "findFollowings":findFollowings
         };
 
         return api;
@@ -82,6 +83,11 @@
 
         function findFollowers(userId) {
             var url = "/api/user/"+userId+"/followers";
+            return $http.get(url);
+        }
+
+        function findFollowings(userId) {
+            var url = "/api/user/"+userId+"/followings";
             return $http.get(url);
         }
 

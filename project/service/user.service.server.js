@@ -55,6 +55,7 @@ app.get('/api/checkLogout',logout);
 app.get('/api/user/follow/:tuid',follow);
 app.get('/api/user/unfollow/:tuid',unfollow);
 app.get('/api/user/:userId/followers',findFollowers);
+app.get('/api/user/:userId/followings',findFollowings);
 
 // function facebookStrategy(token, refreshToken, profile, done) {
 //     userModel
@@ -315,6 +316,17 @@ function findFollowers(req,res) {
         .findAllFollowersByUserId(userId)
         .then(function (followers) {
             res.json(followers);
+        },function (err) {
+            res.sendStatus(404).send(err);
+        })
+}
+
+function findFollowings(req,res) {
+    var userId = req.params.userId;
+    userModel
+        .findAllFollowingsByUserId(userId)
+        .then(function (followings) {
+            res.json(followings);
         },function (err) {
             res.sendStatus(404).send(err);
         })

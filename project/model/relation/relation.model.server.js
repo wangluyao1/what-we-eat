@@ -23,7 +23,10 @@ function createRelation(relation) {
 }
 
 function findRelationById(relationId) {
-    return relationModel.findById(relationId);
+    return relationModel
+        .findById(relationId)
+        .populate('from')
+        .exec();
 }
 
 function findFollow(from,toUser) {

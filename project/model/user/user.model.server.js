@@ -27,7 +27,7 @@ userModel.addFollowing = addFollowing;
 userModel.deleteFollowing = deleteFollowing;
 userModel.deleteFollower = deleteFollower;
 userModel.findAllFollowersByUserId = findAllFollowersByUserId;
-//userModel.findAllFollowingsByUserId = findAllFollowingsByUserId;
+userModel.findAllFollowingsByUserId = findAllFollowingsByUserId;
 
 module.exports = userModel;
 
@@ -156,15 +156,16 @@ function findAllFollowersByUserId(userId) {
         .then(function (user) {
             return user.followers;
         });
+}
 
-    // var relationModel = require("../relation/relation.model.server");
-    // return relationModel
-    //     .findAllFollowers(userId)
-    //     .populate('from')
-    //     .exec()
-    //     .then(function (relation) {
-    //         return relation;
-    //     })
+function findAllFollowingsByUserId(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('followings')
+        .exec()
+        .then(function (user) {
+            return user.followings;
+        });
 }
 
 
