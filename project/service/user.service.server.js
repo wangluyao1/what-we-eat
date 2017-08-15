@@ -54,6 +54,7 @@ app.get('/api/checkLogout',logout);
 //star list
 app.get('/api/user/:userId/starRestaurant/:resId',star);
 app.get('/api/user/:userId/unstarRestaurant/:resId',unstar);
+app.get('/api/user/:userId/starList',starList);
 
 //follow
 app.get('/api/user/follow/:tuid',follow);
@@ -314,7 +315,16 @@ function unstar(req,res) {
         });
 }
 
-
+function starList(req,res) {
+    var userId = req.params.userId;
+    userModel
+        .findStarredRes(userId)
+        .then(function (restarurants) {
+            res.json(restarurants);
+        },function (err) {
+            res.sendStatus(404).send(err);
+        });
+}
 
 //follow
 function follow(req,res) {

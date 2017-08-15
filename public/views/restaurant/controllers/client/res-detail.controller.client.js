@@ -34,7 +34,7 @@
             return restaurantService
                 .findResByKey(model.restaurantKey)
                 .then (function (resp){
-                    if(resp.status === 200){
+                    if(resp.data){
                     return starUserHelper(resp.data);
                     } else {
                         return restaurantService.createRestaurant(newRestaurant)

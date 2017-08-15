@@ -15,6 +15,7 @@
         model.updateUser = updateUser;
         model.unregister = unregister;
         model.goToStore = goToStore;
+        model.goToStarList = goToStarList;
 
         function init() {
             //model.user = userService.findUserById(model.userId);
@@ -51,6 +52,10 @@
             } else{
                 $location.url("/restaurant/details/"+user.restaurant+"/edit");
             }
+        }
+
+        function goToStarList() {
+            $location.url("/user/starlist/"+user._id);
         }
     }
 })();

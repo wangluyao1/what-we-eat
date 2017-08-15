@@ -21,6 +21,7 @@ userModel.deleteFromArray = deleteFromArray;
 //star list
 userModel.starResForUser = starResForUser;
 userModel.unstarResForUser = unstarResForUser;
+userModel.findStarredRes = findStarredRes;
 
 //manager
 userModel.bindRestaurant = bindRestaurant;
@@ -83,6 +84,16 @@ function starResForUser(userId,resId) {
 
 function unstarResForUser(userId,resId) {
     return userModel.deleteFromArray(userId,"starList",resId);
+}
+
+function findStarredRes(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('starList')
+        .exec()
+        .then(function (user) {
+            return user.starList;
+        })
 }
 
 function bindRestaurant(managerId,newRes) {

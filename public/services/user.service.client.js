@@ -22,7 +22,8 @@
             "findFollowers":findFollowers,
             "findFollowings":findFollowings,
             "starRes":starRes,
-            "unstarRes":unstarRes
+            "unstarRes":unstarRes,
+            "getStarList":getStarList
         };
 
         return api;
@@ -100,6 +101,11 @@
 
         function unstarRes(userId,resId) {
             var url = "/api/user/"+userId+"/unstarRestaurant/"+resId;
+            return $http.get(url);
+        }
+
+        function getStarList(userId) {
+            var url = "/api/user/"+userId+"/starList";
             return $http.get(url);
         }
     }
