@@ -12,6 +12,7 @@
             "createRestaurant":createRestaurant,
             "findRestaurantById":findRestaurantById,
             "findPlatesByResId":findPlatesByResId,
+            "findResByKey":findResByKey,
             "updateRestaurant":updateRestaurant,
             "deleteRestaurant":deleteRestaurant
         };
@@ -24,6 +25,11 @@
 
         function findRestaurantById(resId) {
             var url = "/api/restaurant/"+resId;
+            return $http.get(url);
+        }
+
+        function findResByKey(resKey) {
+            var url = "/api/restaurant/key/"+resKey;
             return $http.get(url);
         }
 

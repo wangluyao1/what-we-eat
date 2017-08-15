@@ -20,7 +20,9 @@
             "follow":follow,
             "unfollow":unfollow,
             "findFollowers":findFollowers,
-            "findFollowings":findFollowings
+            "findFollowings":findFollowings,
+            "starRes":starRes,
+            "unstarRes":unstarRes
         };
 
         return api;
@@ -91,6 +93,15 @@
             return $http.get(url);
         }
 
+        function starRes(userId,resId) {
+            var url = "/api/user/"+userId+"/starRestaurant/"+resId;
+            return $http.get(url);
+        }
+
+        function unstarRes(userId,resId) {
+            var url = "/api/user/"+userId+"/unstarRestaurant/"+resId;
+            return $http.get(url);
+        }
     }
 
 })();

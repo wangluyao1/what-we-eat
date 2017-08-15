@@ -57,7 +57,7 @@
                 }
             })
             .when("/restaurant/details/:restaurantKey",{
-                templateUrl: "views/restaurant/templates/client/detail.view.client.html",
+                templateUrl: "views/restaurant/templates/client/res-detail.view.client.html",
                 controller: "ResDetailController",
                 controllerAs: "model",
                 resolve:{

@@ -51,6 +51,10 @@ app.get('/api/checkLogin', checkLogin);
 app.get('/api/checkLogout',logout);
 //app.get('/all/users',getAllUsers);
 
+//star list
+app.get('/api/user/:userId/starRestaurant/:resId',star);
+app.get('/api/user/:userId/unstarRestaurant/:resId',unstar);
+
 //follow
 app.get('/api/user/follow/:tuid',follow);
 app.get('/api/user/unfollow/:tuid',unfollow);
@@ -284,6 +288,33 @@ function deserializeUser(user, done) {
             }
         );
 }
+
+//star list
+function star(req,res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+    userModel
+        .starResForUser(userId,resId)
+            .then(function (status) {
+                res.json(status);
+            },function (err) {
+                res.sendStatus(500).send(err);
+            });
+}
+
+function unstar(req,res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+    userModel
+        .unstarResForUser(userId,resId)
+        .then(function (status) {
+            res.json(status);
+        },function (err) {
+            res.sendStatus(500).send(err);
+        });
+}
+
+
 
 //follow
 function follow(req,res) {

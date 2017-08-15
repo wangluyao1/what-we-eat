@@ -6,6 +6,7 @@ var restaurantModel = require("../model/restaurant/restaurant.model.server");
 
 app.post("/api/restaurant",createRestaurant);
 app.get("/api/restaurant/:rId",findResById);
+app.get("/api/restaurant/key/:resKey",finResByKey);
 app.get("/api/restaurant/:rId/menu",findMenuByResId);
 app.put("/api/restaurant/:rId",updateRestaurant);
 app.delete("/api/restaurant/:rId",deleteRestaurant);
@@ -14,8 +15,8 @@ function createRestaurant(req,res) {
     var newRes = req.body;
     return restaurantModel
         .createRestaurant(newRes)
-        .then(function (status) {
-            res.json(status);
+        .then(function (restaurant) {
+            res.json(restaurant);
         },function (err) {
             res.sendStatus(500).send(err);
         });
@@ -25,6 +26,17 @@ function findResById(req,res) {
     var resId = req.params.rId;
     return restaurantModel
         .findRestaurantById(resId)
+        .then(function (restaurant) {
+            res.json(restaurant);
+        },function (err) {
+            res.sendStatus(404).send(err);
+        })
+}
+
+function finResByKey(req,res) {
+    var resKey = req.params.resKey;
+    return restaurantModel
+        .findResByKey(resKey)
         .then(function (restaurant) {
             res.json(restaurant);
         },function (err) {
