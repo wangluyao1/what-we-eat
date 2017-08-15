@@ -12,6 +12,7 @@ plateModel.updatePlate = updatePlate;
 plateModel.findPlateById = findPlateById;
 plateModel.findPlatesByRes = findPlatesByRes;
 plateModel.deletePlate = deletePlate;
+plateModel.deletePlatesForRes = deletePlatesForRes;
 
 function createPlate(plate) {
     var restaurantModel = require("../restaurant/restaurant.model.server");
@@ -51,4 +52,8 @@ function deletePlate(plateId) {
                         .deletePlateForRes(resId,plateId);
                 });
         });
+}
+
+function deletePlatesForRes(resId) {
+    return plateModel.deleteMany({restaurant:resId});
 }

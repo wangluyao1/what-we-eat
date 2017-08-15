@@ -113,12 +113,7 @@ function deleteRestaurant(resId) {
         .findByIdAndRemove(resId)
         .then(function (res) {
             return plateModel
-                .findPlatesByRes(resId)
-                .then(function (plates) {
-                    plates.forEach(function (plate) {
-                        return plateModel.deletePlate(plate);
-                    })
-                })
+                .deletePlatesForRes(resId);
         });
 }
 

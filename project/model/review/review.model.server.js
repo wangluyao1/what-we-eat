@@ -11,6 +11,7 @@ reviewModel.createReview = createReview;
 reviewModel.publishReview =publishReview;
 reviewModel.updateReview = updateReview;
 reviewModel.deleteReview = deleteReview;
+reviewModel.findReviewById =  findReviewById;
 reviewModel.deleteReviewByUser = deleteReviewByUser;
 reviewModel.deleteReviewByRes = deleteReviewByRes;
 
@@ -42,6 +43,10 @@ function publishReview(reviewId) {
 
 function updateReview(reviewId,newReview) {
     return reviewModel.findOneAndUpdate({_id:reviewId},{$set:newReview});
+}
+
+function findReviewById(reviewId) {
+    return reviewModel.findById(reviewId);
 }
 
 function deleteReview(reviewId) {
