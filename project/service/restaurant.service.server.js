@@ -35,7 +35,7 @@ function findResById(req,res) {
 function findMenuByResId(req,res) {
     var resId = req.params.rId;
     return restaurantModel
-        .findMenu(resId)
+        .findAllPlatesByRes(resId)
         .then(function (menu) {
             res.json(menu);
         },function (err) {

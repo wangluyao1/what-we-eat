@@ -10,10 +10,12 @@ module.exports = restaurantModel;
 restaurantModel.createRestaurant = createRestaurant;
 restaurantModel.updateRestaurant = updateRestaurant;
 restaurantModel.addPlateForRes = addPlateForRes;
-deletePlateForRes.deletePlateForRes = deletePlateForRes;
+restaurantModel.deletePlateForRes = deletePlateForRes;
 restaurantModel.findRestaurantById = findRestaurantById;
 restaurantModel.findRestaurantByUser = findRestaurantByUser;
+restaurantModel.findAllPlatesByRes = findAllPlatesByRes;
 restaurantModel.deleteRestaurant = deleteRestaurant;
+
 
 function createRestaurant(res) {
     var userModel = require("../user/user.model.server");
@@ -30,7 +32,10 @@ function createRestaurant(res) {
                     }
                 });
             return userModel
-                .bindRestaurant(res.manager,rId);
+                .bindRestaurant(res.manager,rId)
+                .then(function (status) {
+                    return rId;
+                });
         });
 }
 
@@ -38,6 +43,7 @@ function updateRestaurant(resId,newRes) {
     newRes._id=resId;
     return restaurantModel.update({_id:resId},{$set:newRes});
 }
+
 
 function addPlateForRes(resId,plate) {
     return restaurantModel
@@ -60,6 +66,17 @@ function deletePlateForRes(resId,plateId) {
 
 function findRestaurantById(resId) {
     return restaurantModel.findById(resId);
+}
+
+function findAllPlatesByRes(resId) {
+    // var plateModel = require("../plate/plate.model.server");
+    return restaurantModel
+        .findRestaurantById(resId)
+        .populate('menu')
+        .exec()
+        .then(function (restaurant) {
+            return restaurant.menu;
+        });
 }
 
 function findRestaurantByUser(userId) {

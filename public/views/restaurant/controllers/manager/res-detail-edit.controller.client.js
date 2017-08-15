@@ -19,12 +19,12 @@
         function init() {
             return restaurantService
                 .findRestaurantById(model.restaurantKey)
-                .then(function (restaurant) {
-                    model.res = restaurant.data;
+                .then(function (response) {
+                    model.res = response.data;
                     return restaurantService
                         .findPlatesByResId(model.restaurantKey)
-                        .then(function (plates) {
-                            model.plates = plates.data;
+                        .then(function (response) {
+                            model.plates = response.data;
                         });
                 });
         }
@@ -56,6 +56,11 @@
                 .then(function () {
                     model.alert="Add Plate Success";
                     model.toAddPlate = null;
+                    return restaurantService
+                        .findPlatesByResId(model.restaurantKey)
+                        .then(function (response) {
+                            model.plates = response.data;
+                        })
                 });
         }
 

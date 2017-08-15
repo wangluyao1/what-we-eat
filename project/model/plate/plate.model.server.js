@@ -14,8 +14,9 @@ plateModel.findPlatesByRes = findPlatesByRes;
 plateModel.deletePlate = deletePlate;
 
 function createPlate(plate) {
-    var restaurantModel = require("../plate/plate.model.server");
-    return plateModel.create(plate)
+    var restaurantModel = require("../restaurant/restaurant.model.server");
+    return plateModel
+        .create(plate)
         .then(function (plateDoc) {
             return restaurantModel
                    .addPlateForRes(plate.restaurant,plateDoc._id);

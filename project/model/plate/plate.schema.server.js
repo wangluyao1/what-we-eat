@@ -4,7 +4,7 @@
 var mongoose = require("mongoose");
 var plateSchema = mongoose.Schema({
     restaurant:{type:mongoose.Schema.ObjectId,ref:"RestaurantModel"},
-    plateName:String,
+    name:String,
     description:String,
     price:String,
     dateCreated: {type:Date,default:Date.now}
