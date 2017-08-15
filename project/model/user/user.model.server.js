@@ -23,6 +23,11 @@ userModel.starResForUser = starResForUser;
 userModel.unstarResForUser = unstarResForUser;
 userModel.findStarredRes = findStarredRes;
 
+//review
+userModel.addReviewForUser = addReviewForUser;
+userModel.deleteReviewForUser = deleteReviewForUser;
+userModel.getReviewsByUser = getReviewsByUser;
+
 //manager
 userModel.bindRestaurant = bindRestaurant;
 
@@ -93,6 +98,24 @@ function findStarredRes(userId) {
         .exec()
         .then(function (user) {
             return user.starList;
+        })
+}
+
+function addReviewForUser(userId,reviewId) {
+    return userModel.addTo(userId,"reviews",reviewId);
+}
+
+function deleteReviewForUser(userId,reviewId) {
+    return userModel.deleteFromArray(userId,"reviews",reviewId);
+}
+
+function getReviewsByUser(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('reviews')
+        .exec()
+        .then(function (user) {
+            return user.reviews;
         })
 }
 

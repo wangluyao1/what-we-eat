@@ -21,6 +21,7 @@ var userSchema = mongoose.Schema({
     roles: {type:String,enum:['USER','ADMIN','MANAGER'],default:'USER'},
     starList:[{type:mongoose.Schema.ObjectId,ref:"RestaurantModel"}],
     restaurant:{type:mongoose.Schema.ObjectId,ref:"RestaurantModel"},
+    reviews:[{type:mongoose.Schema.ObjectId,ref:"ReviewModel"}],
     followings:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],
     followers:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],
     dateCreated: {type:Date,default:Date.now}

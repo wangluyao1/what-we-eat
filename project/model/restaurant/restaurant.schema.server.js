@@ -9,6 +9,7 @@ var restaurantSchema = mongoose.Schema({
     name:String,
     address:String,
     menu:[{type:mongoose.Schema.ObjectId,ref:"PlateModel"}],
+    reviews:[{type:mongoose.Schema.ObjectId,ref:"ReviewModel"}],
     dateCreated: {type:Date,default:Date.now}
 },{collection:"restaurant"});
 module.exports = restaurantSchema;

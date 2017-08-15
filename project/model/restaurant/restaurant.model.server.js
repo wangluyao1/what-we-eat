@@ -28,7 +28,7 @@ function createRestaurant(res) {
         .create(res)
         .then(function (restaurantDoc) {
             var rId = restaurantDoc._id;
-            restaurantModel
+            return restaurantModel
                 .findRestaurantById(rId)
                 .then(function (rest) {
                     if (!rest.key) {
@@ -39,7 +39,7 @@ function createRestaurant(res) {
                         return userModel
                             .bindRestaurant(res.manager, rId)
                             .then(function (status) {
-                                return rId;
+                                return restaurantDoc;
                             });
                     }
                 });
