@@ -5,6 +5,7 @@ var app = require('../../express');
 var reviewModel = require("../model/review/review.model.server");
 
 app.post("/api/review",createReview);
+app.get("/api/review/:reviewId/publish",publishReview);
 app.put("/api/review/:reviewId",updateReview);
 app.get("/api/review/:reviewId",getReviewById);
 app.delete("/api/review/:reviewId",deleteReview);
@@ -20,6 +21,17 @@ function createReview(req,res) {
         })
 }
 
+function publishReview(req,res) {
+    var reviewId = req.params['reviewId'];
+    return reviewModel
+        .publishReview(reviewId)
+        .then(function (review) {
+            res.send(review);
+        },function (err) {
+            res.send(500).sendStatus(err);
+        });
+}
+
 function updateReview(req,res) {
     var reviewId = req.params['reviewId'];
     var newReview = req.body;
@@ -31,6 +43,7 @@ function updateReview(req,res) {
             res.sendStatus(500).send(err);
         })
 }
+
 
 function getReviewById(req,res) {
     var reviewId = req.params['reviewId'];
