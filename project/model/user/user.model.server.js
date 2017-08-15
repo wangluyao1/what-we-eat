@@ -68,10 +68,7 @@ function deleteUser(userId) {
     return userModel.findByIdAndRemove(userId)
         .then(function (user) {
             return restaurantModel
-                .findRestaurantByUser(userId)
-                .then(function (restaurant) {
-                    restaurantModel.deleteRestaurant(restaurant._id);
-                })
+                .delteResForUser(userId);
         });
 }
 

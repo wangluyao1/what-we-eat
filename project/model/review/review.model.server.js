@@ -8,13 +8,62 @@ var reviewModel = mongoose.model("ReviewModel",reviewSchema);
 module.exports = reviewModel;
 
 reviewModel.createReview = createReview;
+reviewModel.publishReview =publishReview;
+reviewModel.updateReview = updateReview;
+reviewModel.deleteReview = deleteReview;
+reviewModel.deleteReviewByUser = deleteReviewByUser;
+reviewModel.deleteReviewByRes = deleteReviewByRes;
 
 
 function createReview(review) {
-    reviewModel
+    var userModel = require("../user/user.model.server");
+    return reviewModel
         .create(review)
         .then(function (reviewDoc) {
-
-        })
-    
+            return userModel
+                .addReviewForUser(review.user,reviewDoc._id)
+                .then(function () {
+                    return reviewDoc;
+                });
+        });
 }
+
+function publishReview(reviewId) {
+    var restaurantModel = require("../restaurant/restaurant.model.server");
+    return reviewModel
+           .findById(reviewId)
+        .then(function (review) {
+            review.type = "PUBLIC";
+            review.save();
+            return restaurantModel
+                .addReviewForRes(review.restaurant,reviewId);
+        })
+}
+
+function updateReview(reviewId,newReview) {
+    return reviewModel.findOneAndUpdate({_id:reviewId},{$set:newReview});
+}
+
+function deleteReview(reviewId) {
+    var restaurantModel = require("../restaurant/restaurant.model.server");
+    return reviewModel
+        .findOneAndRemove(reviewId)
+        .then(function (review) {
+            return restaurantModel
+                .removeReviewForRes(review.restaurant,reviewId)
+                .then(function () {
+                    var userModel = require("../user/user.model.server");
+                    return userModel
+                        .deleteReviewForUser(review.user,reviewId);
+                });
+        })
+}
+
+function deleteReviewByUser(userId) {
+    return reviewModel.deleteMany({user:userId});
+}
+
+function deleteReviewByRes(resID) {
+    return reviewModel.deleteMany({restaurant:resID});
+}
+

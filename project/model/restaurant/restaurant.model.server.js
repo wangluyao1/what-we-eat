@@ -9,14 +9,27 @@ module.exports = restaurantModel;
 
 restaurantModel.createRestaurant = createRestaurant;
 restaurantModel.updateRestaurant = updateRestaurant;
-restaurantModel.addPlateForRes = addPlateForRes;
-restaurantModel.deletePlateForRes = deletePlateForRes;
 restaurantModel.findRestaurantById = findRestaurantById;
-restaurantModel.findRestaurantByUser = findRestaurantByUser;
 restaurantModel.findResByKey = findResByKey;
-restaurantModel.findAllPlatesByRes = findAllPlatesByRes;
 restaurantModel.deleteRestaurant = deleteRestaurant;
 
+//helper
+restaurantModel.addToArray = addToArray;
+restaurantModel.deleteFromArray=deleteFromArray;
+
+//user
+restaurantModel.delteResForUser = deleteResForUser;
+restaurantModel.findRestaurantByUser = findRestaurantByUser;
+
+//plates
+restaurantModel.addPlateForRes = addPlateForRes;
+restaurantModel.deletePlateForRes = deletePlateForRes;
+restaurantModel.findAllPlatesByRes = findAllPlatesByRes;
+
+//review
+restaurantModel.addReviewForRes = addReviewForRes;
+restaurantModel.removeReviewForRes = removeReviewForRes;
+restaurantModel.getReviewsForRes = getReviewsForRes;
 
 function createRestaurant(res) {
     var userModel = require("../user/user.model.server");
@@ -107,4 +120,46 @@ function deleteRestaurant(resId) {
                     })
                 })
         });
+}
+
+function deleteResForUser(userId) {
+    return restaurantModel.deleteMany({manager:userId});
+}
+
+function addReviewForRes(resId,reviewId) {
+    return restaurantModel.addToArray(resId,"reviews",reviewId);
+}
+
+function removeReviewForRes(resId,reviewId) {
+    return restaurantModel.deleteFromArray(resId,"reviews",reviewId);
+}
+
+function getReviewsForRes(resId) {
+    return restaurantModel
+        .findById(resId)
+        .populate('reviews')
+        .exec()
+        .then(function (restaurant) {
+            return restaurant.reviews;
+        })
+}
+
+function addToArray(resId,where,toAdd) {
+    return restaurantModel
+        .findById(resId)
+        .then(function (res) {
+            res.get(where).push(toAdd);
+            return res.save();
+        })
+}
+
+function deleteFromArray(resId,arrayName,toDeleteId) {
+    return restaurantModel
+        .findById(resId)
+        .then(function (res) {
+            var array = res.get(arrayName);
+            var index = array.indexOf(toDeleteId);
+            res.get(arrayName).splice(index,1);
+            res.save();
+        })
 }
