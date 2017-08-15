@@ -14,12 +14,18 @@ userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByGoogleId = findUserByGoogleId;
 
+//helper
+userModel.addTo = addToArray;
+userModel.deleteFromArray = deleteFromArray;
+
+//star list
+userModel.starResForUser = starResForUser;
+userModel.unstarResForUser = unstarResForUser;
+
 //manager
 userModel.bindRestaurant = bindRestaurant;
 
 //follow
-userModel.addTo = addToArray;
-userModel.deleteFromArray = deleteFromArray;
 userModel.follow = follow;
 userModel.unfollow = unfollow;
 userModel.addFollower = addFollower;
@@ -69,6 +75,14 @@ function findUserByFacebookId(facebookId) {
 
 function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id': googleId});
+}
+
+function starResForUser(userId,resId) {
+    return userModel.addTo(userId,"starList",resId);
+}
+
+function unstarResForUser(userId,resId) {
+    return userModel.deleteFromArray(userId,"starList",resId);
 }
 
 function bindRestaurant(managerId,newRes) {

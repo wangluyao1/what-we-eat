@@ -19,7 +19,7 @@ var userSchema = mongoose.Schema({
     photo: String,
     phone: String,
     roles: {type:String,enum:['USER','ADMIN','MANAGER'],default:'USER'},
-    //restaurantsList: String,
+    starList:[{type:mongoose.Schema.ObjectId,ref:"RestaurantModel"}],
     restaurant:{type:mongoose.Schema.ObjectId,ref:"RestaurantModel"},
     followings:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],
     followers:[{type:mongoose.Schema.ObjectId,ref:"RelationModel"}],

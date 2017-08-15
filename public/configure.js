@@ -31,6 +31,11 @@
                     user:checkLogin
                 }
             })
+            .when("/user/starlist/:uid",{
+                templateUrl: "views/user/templates/user-starlist-edit.view.client.html",
+                controller: "StarListEditController",
+                controllerAs: "model"
+            })
             //view other users
             .when("/user/detail/:uid",{
                 templateUrl: "views/user/templates/user-detail.view.client.html",
@@ -40,16 +45,9 @@
                     user:checkLogin
                 }
             })
-            // .when("/user/detail/:uid/res_list",{
-            //     templateUrl: "views/user/templates/user-detail.view.client.html",
-            //     controller: "",
-            //     controllerAs: "model",
-            // })
-            // .when("/user/detail/:uid/res_list/:listId",{
-            //     templateUrl: "views/user/templates/user-detail.view.client.html",
-            //     controller: "",
-            //     controllerAs: "model",
-            // })
+
+            //*****************restaurant***************************************
+
             .when("/restaurant/create",{
                 templateUrl: "views/restaurant/templates/manager/res-create.view.client.html",
                 controller: "ResCreateController",

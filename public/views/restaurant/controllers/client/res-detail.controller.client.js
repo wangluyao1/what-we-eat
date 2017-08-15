@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ResDetailController", ResDetailController);
 
-    function ResDetailController(resSearchService, $routeParams) {
+    function ResDetailController(resSearchService, $routeParams,restaurantService,userService) {
         var model = this;
         model.restaurantKey = $routeParams['restaurantKey'];
 
@@ -22,5 +22,16 @@
         }
 
         init();
+
+        function star(la) {
+            var newRestaurant = {key:model.restaurantKey,type:"SEARCH"};
+            return restaurantService
+                .createRestaurant(newRestaurant)
+                .then(function (response) {
+                    var restaurant = response.data;
+                    return userService
+                        .
+                })
+        }
     }
 })();

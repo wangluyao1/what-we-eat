@@ -31,11 +31,15 @@ function createRestaurant(res) {
                         rest.save();
                     }
                 });
-            return userModel
-                .bindRestaurant(res.manager,rId)
-                .then(function (status) {
-                    return rId;
-                });
+            if(!rest.manager){
+                return rest;
+            } else {
+                return userModel
+                    .bindRestaurant(res.manager, rId)
+                    .then(function (status) {
+                        return rId;
+                    });
+            }
         });
 }
 

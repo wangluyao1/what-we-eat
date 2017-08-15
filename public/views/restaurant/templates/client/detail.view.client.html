@@ -1,5 +1,7 @@
 <img src= {{model.info.restaurant.logoUrl}}>
-
+<!--ng-if="model.notStar"-->
+<span class="glyphicon glyphicon-star-empty fa-3x" ng-click="model.star(this)" role="button"></span>
+<span ng-if="model.starred" class="glyphicon glyphicon-star" ng-click="model.unstar(this)"></span>
 <h1>{{model.info.restaurant.name}}</h1>
 <h4>Address:</h4>
 {{model.info.restaurant.streetAddress}}

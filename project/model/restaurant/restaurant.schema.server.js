@@ -4,6 +4,7 @@
 var mongoose = require("mongoose");
 var restaurantSchema = mongoose.Schema({
     manager:{type:mongoose.Schema.ObjectId,ref:"UserModel"},
+    type:{type:String,enum:["LOCAL","SEARCH"],default:"LOCAL"},
     key:String,
     name:String,
     address:String,
