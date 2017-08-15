@@ -18,7 +18,12 @@
             "checkLogin": checkLogin,
             "checkLogout" : checkLogout,
             "follow":follow,
-            "unfollow":unfollow
+            "unfollow":unfollow,
+            "findFollowers":findFollowers,
+            "findFollowings":findFollowings,
+            "starRes":starRes,
+            "unstarRes":unstarRes,
+            "getStarList":getStarList
         };
 
         return api;
@@ -79,6 +84,30 @@
             return $http.get(url);
         }
 
+        function findFollowers(userId) {
+            var url = "/api/user/"+userId+"/followers";
+            return $http.get(url);
+        }
+
+        function findFollowings(userId) {
+            var url = "/api/user/"+userId+"/followings";
+            return $http.get(url);
+        }
+
+        function starRes(userId,resId) {
+            var url = "/api/user/"+userId+"/starRestaurant/"+resId;
+            return $http.get(url);
+        }
+
+        function unstarRes(userId,resId) {
+            var url = "/api/user/"+userId+"/unstarRestaurant/"+resId;
+            return $http.get(url);
+        }
+
+        function getStarList(userId) {
+            var url = "/api/user/"+userId+"/starList";
+            return $http.get(url);
+        }
     }
 
 })();

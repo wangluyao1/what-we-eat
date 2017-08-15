@@ -1,0 +1,61 @@
+
+<div ng-show="model.alert"
+     class="alert alert-success">
+    {{model.alert}}
+</div>
+<div class="container-fluid">
+    <label for="restaurantName">Restaurant Name</label>
+    <button class="btn-success" ng-click="model.updateRestaurant(model.res)">Save</button>
+
+    <input name="restaurantName"
+           ng-model="model.res.name"
+           type="text"
+           id="restaurantName"
+           class="form-control"
+           placeholder="restaurantName"
+    />
+    <label for="restaurantAddress">Restaurant Address</label>
+    <input name="restaurantAddress"
+           ng-model="model.res.address"
+           type="text"
+           id="restaurantAddress"
+           class="form-control"
+           placeholder="restaurantAddress"
+    />
+    <!--todo: open hours-->
+    <!--<label for = "hours"></label>-->
+    <label for = "menuTable">Menu</label>
+    <div id="menuTable" class="table">
+        <table class="table">
+            <tr>
+                <th>PlateName</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th><span class="table-add glyphicon glyphicon-plus"
+                          role="button"
+                          ng-click="add=true"></span></th>
+            </tr>
+            <tr ng-repeat="plate in model.plates">
+                <td><input class="form-control input-sm" ng-model="plate.name" ng-readonly="read" value="{{plate.name}}"> </td>
+                <td><input class="form-control input-sm" ng-model="plate.description" value="{{plate.description}}"> </td>
+                <td><input class="form-control input-sm" ng-model="plate.price" value="{{plate.price}}"> </td>
+                <td>
+                <td>Added<span class="glyphicon glyphicon-ok" role="button" ng-click="model.saveMenu()"></span>
+                <span class="glyphicon glyphicon-remove" role="button" ng-click="model.removePlate(plate)"></span>
+                </td>
+                    <!--<span class="glyphicon glyphicon-pencil" role="button"></span>-->
+                </td>
+            </tr>
+            <tr ng-show="add">
+                <td><input class="form-control input-sm" ng-model="model.toAddPlate.name"> </td>
+                <td><input class="form-control input-sm" ng-model="model.toAddPlate.description"> </td>
+                <td><input class="form-control input-sm" ng-model="model.toAddPlate.price"> </td>
+                <td>New<span class="glyphicon glyphicon-ok" role="button" ng-click="model.addPlate(model.toAddPlate)"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+{{model.plates}}
+
+
+</div>

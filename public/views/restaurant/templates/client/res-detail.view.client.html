@@ -1,0 +1,26 @@
+<img src= {{model.info.restaurant.logoUrl}}>
+<!--ng-if="model.notStar"-->
+<span class="glyphicon glyphicon-star-empty fa-3x" ng-click="model.star()" role="button"></span>
+<span ng-if="model.starred" class="glyphicon glyphicon-star" ng-click="model.unstar()" role="button"></span>
+<h1>{{model.info.restaurant.name}}</h1>
+<h4>Address:</h4>
+{{model.info.restaurant.streetAddress}}
+{{model.info.restaurant.city}}
+{{model.info.restaurant.state}}
+<h4>Menu:</h4>
+<table ng-repeat="type in model.menu">
+    <tr>
+        <th>{{type.name}}</th>
+    </tr>
+    <tr ng-repeat="plate in type.items">
+        <td>
+            {{plate.name}}
+        </td>
+        <td>
+            {{plate.description}}
+        </td>
+        <td>
+            {{plate.basePrice}}
+        </td>
+    </tr>
+</table>

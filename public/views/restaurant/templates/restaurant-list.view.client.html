@@ -1,0 +1,14 @@
+
+<table class="table">
+    <tr ng-repeat="restaurant in model.restaurants">
+        <td>
+            <img src= {{restaurant.logoUrl}}>
+        </td>
+
+        <td>
+            <a href="#!/restaurant/details/{{restaurant.apiKey}}">
+                {{restaurant.name}}
+            </a>
+        </td>
+    </tr>
+</table>

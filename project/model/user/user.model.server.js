@@ -14,15 +14,27 @@ userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByGoogleId = findUserByGoogleId;
 
-//follow
+//helper
 userModel.addTo = addToArray;
 userModel.deleteFromArray = deleteFromArray;
+
+//star list
+userModel.starResForUser = starResForUser;
+userModel.unstarResForUser = unstarResForUser;
+userModel.findStarredRes = findStarredRes;
+
+//manager
+userModel.bindRestaurant = bindRestaurant;
+
+//follow
 userModel.follow = follow;
 userModel.unfollow = unfollow;
 userModel.addFollower = addFollower;
 userModel.addFollowing = addFollowing;
 userModel.deleteFollowing = deleteFollowing;
 userModel.deleteFollower = deleteFollower;
+userModel.findAllFollowersByUserId = findAllFollowersByUserId;
+userModel.findAllFollowingsByUserId = findAllFollowingsByUserId;
 
 module.exports = userModel;
 
@@ -47,7 +59,15 @@ function updateUser(userId,user) {
 }
 
 function deleteUser(userId) {
-    return userModel.findByIdAndRemove(userId);
+    var restaurantModel = require("../restaurant/restaurant.model.server");
+    return userModel.findByIdAndRemove(userId)
+        .then(function (user) {
+            return restaurantModel
+                .findRestaurantByUser(userId)
+                .then(function (restaurant) {
+                    restaurantModel.deleteRestaurant(restaurant._id);
+                })
+        });
 }
 
 function findUserByFacebookId(facebookId) {
@@ -57,6 +77,32 @@ function findUserByFacebookId(facebookId) {
 function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id': googleId});
 }
+
+function starResForUser(userId,resId) {
+    return userModel.addTo(userId,"starList",resId);
+}
+
+function unstarResForUser(userId,resId) {
+    return userModel.deleteFromArray(userId,"starList",resId);
+}
+
+function findStarredRes(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('starList')
+        .exec()
+        .then(function (user) {
+            return user.starList;
+        })
+}
+
+function bindRestaurant(managerId,newRes) {
+    return userModel.update({_id:managerId},{$set:{restaurant:newRes}})
+        .then(function (newRestaurant) {
+            return newRestaurant;
+        });
+}
+
 
 function addToArray(userId,where,toAdd) {
     return userModel
@@ -125,6 +171,26 @@ function unfollow(fromId,toId) {
                         })
                 });
         })
+}
+
+function findAllFollowersByUserId(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('followers')
+        .exec()
+        .then(function (user) {
+            return user.followers;
+        });
+}
+
+function findAllFollowingsByUserId(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('followings')
+        .exec()
+        .then(function (user) {
+            return user.followings;
+        });
 }
 
 

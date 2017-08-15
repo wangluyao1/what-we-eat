@@ -9,10 +9,13 @@
     function ProfileController(userService, $location, user) {
         var model = this;
         //model.userId = $routeParams["uid"];
+        model.currentUser = user;
         model.userId = user._id;
 
         model.updateUser = updateUser;
         model.unregister = unregister;
+        model.goToStore = goToStore;
+        model.goToStarList = goToStarList;
 
         function init() {
             //model.user = userService.findUserById(model.userId);
@@ -41,6 +44,18 @@
                     }
                 });
 
+        }
+
+        function goToStore() {
+            if(!model.currentUser.restaurant){
+                $location.url("/restaurant/create");
+            } else{
+                $location.url("/restaurant/details/"+user.restaurant+"/edit");
+            }
+        }
+
+        function goToStarList() {
+            $location.url("/user/starlist/"+user._id);
         }
     }
 })();

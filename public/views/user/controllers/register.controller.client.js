@@ -12,12 +12,11 @@
         model.register = register;
 
         function init() {
-
         }
 
         init();
 
-        function register(user) {
+        function register(user,role) {
             var promise = userService.findUserByUserName(user.username);
             promise.then(function (response) {
                 var responseUser = response.data;
@@ -29,10 +28,12 @@
                     model.alert = "Password should be the same.";
                     return;
                 }
+
+                user.roles = role;
                 var promise2 = userService.createUser(user);
                 promise2.then(function (response2) {
-                    var responseUser2 = response2.data;
-                    $location.url("profile");
+                    var user = response2.data;
+                    $location.url("/profile");
                 });
             });
         }

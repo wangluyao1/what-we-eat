@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("SearchController", SearchController)
 
-    function SearchController($location,userService) {
+    function SearchController($location,userService,resSearchService) {
         var model = this;
 
         model.searchRestaurantsByAddress = searchRestaurantsByAddress;
@@ -20,7 +20,11 @@
         init();
 
         function searchRestaurantsByAddress(address) {
-
+            resSearchService.searchWithAddress(address)
+                .then(function (response) {
+                    var result = response.data;
+                    model.restaurants = result['restaurants'];
+                });
         }
 
         function searchUserByUsername(username) {

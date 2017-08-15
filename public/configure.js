@@ -31,6 +31,11 @@
                     user:checkLogin
                 }
             })
+            .when("/user/starlist/:uid",{
+                templateUrl: "views/user/templates/user-starlist-edit.view.client.html",
+                controller: "StarListEditController",
+                controllerAs: "model"
+            })
             //view other users
             .when("/user/detail/:uid",{
                 templateUrl: "views/user/templates/user-detail.view.client.html",
@@ -40,16 +45,33 @@
                     user:checkLogin
                 }
             })
-            // .when("/user/detail/:uid/res_list",{
-            //     templateUrl: "views/user/templates/user-detail.view.client.html",
-            //     controller: "",
-            //     controllerAs: "model",
-            // })
-            // .when("/user/detail/:uid/res_list/:listId",{
-            //     templateUrl: "views/user/templates/user-detail.view.client.html",
-            //     controller: "",
-            //     controllerAs: "model",
-            // })
+
+            //*****************restaurant***************************************
+
+            .when("/restaurant/create",{
+                templateUrl: "views/restaurant/templates/manager/res-create.view.client.html",
+                controller: "ResCreateController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
+            .when("/restaurant/details/:restaurantKey",{
+                templateUrl: "views/restaurant/templates/client/res-detail.view.client.html",
+                controller: "ResDetailController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
+            .when("/restaurant/details/:restaurantKey/edit",{
+                templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
+                controller: "ResDetailEditController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
 
     }
 
@@ -67,4 +89,37 @@
             });
         return deferred.promise;
     }
+
+    function checkCurrentUser(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .loggedin()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.resolve({});
+                } else {
+                    deferred.resolve(user);
+                }
+            })
+            .catch(function (error) {
+            });
+        return deferred.promise;
+    }
+
+    function checkAdmin(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .checkAdmin()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.reject();
+                    $location.url('/');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
+    }
+
+
 })();

@@ -51,9 +51,16 @@ app.get('/api/checkLogin', checkLogin);
 app.get('/api/checkLogout',logout);
 //app.get('/all/users',getAllUsers);
 
+//star list
+app.get('/api/user/:userId/starRestaurant/:resId',star);
+app.get('/api/user/:userId/unstarRestaurant/:resId',unstar);
+app.get('/api/user/:userId/starList',starList);
+
 //follow
 app.get('/api/user/follow/:tuid',follow);
 app.get('/api/user/unfollow/:tuid',unfollow);
+app.get('/api/user/:userId/followers',findFollowers);
+app.get('/api/user/:userId/followings',findFollowings);
 
 // function facebookStrategy(token, refreshToken, profile, done) {
 //     userModel
@@ -283,6 +290,42 @@ function deserializeUser(user, done) {
         );
 }
 
+//star list
+function star(req,res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+    userModel
+        .starResForUser(userId,resId)
+            .then(function (status) {
+                res.json(status);
+            },function (err) {
+                res.sendStatus(500).send(err);
+            });
+}
+
+function unstar(req,res) {
+    var userId = req.params.userId;
+    var resId = req.params.resId;
+    userModel
+        .unstarResForUser(userId,resId)
+        .then(function (status) {
+            res.json(status);
+        },function (err) {
+            res.sendStatus(500).send(err);
+        });
+}
+
+function starList(req,res) {
+    var userId = req.params.userId;
+    userModel
+        .findStarredRes(userId)
+        .then(function (restarurants) {
+            res.json(restarurants);
+        },function (err) {
+            res.sendStatus(404).send(err);
+        });
+}
+
 //follow
 function follow(req,res) {
     var toUserId = req.params.tuid;
@@ -305,5 +348,27 @@ function unfollow(req,res) {
             res.json(status);
         },function (err) {
             res.sendStatus(500).send(err);
+        })
+}
+
+function findFollowers(req,res) {
+    var userId = req.params.userId;
+    userModel
+        .findAllFollowersByUserId(userId)
+        .then(function (followers) {
+            res.json(followers);
+        },function (err) {
+            res.sendStatus(404).send(err);
+        })
+}
+
+function findFollowings(req,res) {
+    var userId = req.params.userId;
+    userModel
+        .findAllFollowingsByUserId(userId)
+        .then(function (followings) {
+            res.json(followings);
+        },function (err) {
+            res.sendStatus(404).send(err);
         })
 }
