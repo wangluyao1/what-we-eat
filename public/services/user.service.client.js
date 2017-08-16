@@ -27,7 +27,8 @@
             //star list
             "starRes":starRes,
             "unstarRes":unstarRes,
-            "getStarList":getStarList
+            "getStarList":getStarList,
+            "logout":logout
         };
 
         return api;
@@ -46,6 +47,11 @@
                 .then(function (response) {
                     return response.data;
                 })
+        }
+
+        function logout() {
+            var url = "/api/checkLogout";
+            return $http.get(url);
         }
 
         function allUsers() {

@@ -86,11 +86,20 @@ function findUserByGoogleId(googleId) {
 }
 
 function starResForUser(userId,resId) {
-    return userModel.addTo(userId,"starList",resId);
+    var restaurantModel = require("../restaurant/restaurant.model.server");
+    return userModel.addTo(userId,"starList",resId)
+        .then(function (response) {
+            return restaurantModel.starredByUser(resId,userId);
+        });
 }
 
 function unstarResForUser(userId,resId) {
-    return userModel.deleteFromArray(userId,"starList",resId);
+    var restaurantModel = require("../restaurant/restaurant.model.server");
+    return userModel.deleteFromArray(userId,"starList",resId)
+        .then(function (response) {
+            return restaurantModel.unstarredByUser(resId,userId);
+        });
+
 }
 
 function findStarredRes(userId) {

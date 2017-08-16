@@ -15,53 +15,58 @@
                 <li><a ng-if="model.notLogged" href="#!/login">Login</a></li>
                 <li><a ng-if="model.notLogged" href="#!/register">Register</a></li>
                 <li><a ng-if="model.logged" href="#!/profile">Profile</a></li>
-                <li><a ng-if="model.isUser" href="#!/">Starred Restaurants</a></li>
-                <li><a ng-if="model.isManager" href="#!/">My Restaurant</a></li>
-                <li><a ng-if="model.isAdmin" href="#!/">Manage All</a></li>
+                <!--for user-->
+                <li><a ng-if="model.isUser" href="#!/user/starlist">Starred Restaurants</a></li>
+                <!--for manager-->
+                <li><a ng-if="model.isManager" ng-click="model.goToStore()">My Restaurant</a></li>
+                <!--for admin-->
+                <li><a ng-if="model.isAdmin" href="#!/admin/collections">Manage All</a></li>
+                <li><a ng-if="model.logged" ng-click="model.logout()">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 
-<label for="searchAddress">Search Restaurants By Street Address</label>
+<div ng-show="model.alert"
+     class="alert alert-danger">
+    {{model.alert}}
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon" id="address">Address</span>
+    <input type="text" class="form-control" placeholder="370 Huntington Ave, Boston, MA"
+           ng-model="address"
+           aria-label="address" aria-describedby="address">
+</div>
+
+<label for="search"></label>
 <input class="form-control"
-       id = "searchAddress"
-       name = "searchAddress"
-       placeholder="316 W. Washington Ave., Madison, WI"
-       ng-model="address"/>
+       id = "search"
+       name = "search"
+       placeholder="burger"
+       ng-model="keyword"/>
 
-<a class="btn btn-lg btn-default pull-right"
-   role="button"
-   ng-click="model.searchRestaurantsByAddress(address)">Search </a>
+<button type="button" class="btn btn-secondary"
+        ng-click="model.searchRestaurants(address,keyword)">Search EatStreet Restaurants</button>
 
-<label for="searchLocalRes">Search Local Res</label>
-<input class="form-control"
-       id = "searchLocalRes"
-       name = "searchLocalRes"
-       placeholder="restaurant name"
-       ng-model="localResName"/>
+<button type="button" class="btn btn-secondary"
+        ng-click="model.searchLocalRes(keyword)">Search Local Restaurants</button>
 
-<a class="btn btn-lg btn-default pull-right"
-   role="button"
-   ng-click="model.searchLocalRes(localResName)">Search</a>
-
-<label for="searchUser">Search User</label>
-<input class="form-control"
-       id = "searchUser"
-       name = "searchUser"
-       placeholder="username"
-       ng-model="username"/>
-
-<a class="btn btn-lg btn-default pull-right"
-   role="button"
-   ng-click="model.searchUserByUsername(username)">Search</a>
+<button type="button" class="btn btn-secondary"
+        ng-click="model.searchUserByUsername(keyword)">Search Users</button>
 
 
-<div ng-include="'views/restaurant/templates/restaurant-list.view.client.html'"></div>
+<div ng-if="model.restaurants"
+     ng-include="'views/restaurant/templates/restaurant-list.view.client.html'"></div>
 
-<div ng-repeat="localRes in model.localRestaurants">
-<a ng-click="model.goToLocalResDetail(localRes._id)" role="button">{{localRes.name}}</a>
+<div ng-if="model.localRestaurants"
+     ng-repeat="localRes in model.localRestaurants">
+    <h3>Local Restaurants Result</h3>
+<a ng-click="model.goToLocalResDetail(localRes._id)" role="button">
+    {{localRes.name}}</a>
 </div>
 
 <!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
-<a ng-click="model.goToUserDetail(model.usersResult)" role="button"> {{model.usersResult.username}}</a>
+<a ng-if="model.usersResult"
+   ng-click="model.goToUserDetail(model.usersResult)"
+   role="button"><h3>Users Result</h3> {{model.usersResult.username}}</a>

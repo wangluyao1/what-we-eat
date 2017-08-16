@@ -12,9 +12,24 @@
         var api = {
             "searchWithAddress": searchWithAddress,
             "searchWithKey": searchWithKey,
-            "searchMenuWithKey": searchMenuWithKey};
+            "searchMenuWithKey": searchMenuWithKey,
+            "searchWithKeywordAndAddress": searchWithKeywordAndAddress
+        };
 
         return api;
+        
+        function searchWithKeywordAndAddress(address,keyword) {
+            return $http({
+                method: 'GET',
+                url: 'https://api.eatstreet.com/publicapi/v1/restaurant/search',
+                params: {
+                    'street-address': address,
+                    'search':keyword,
+                    'access-token' : ACCESS_TOKEN
+                }
+            });
+        }
+        
         function searchWithAddress(keyword) {
             return $http({
                 method: 'GET',

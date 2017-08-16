@@ -1,26 +1,52 @@
+<div ng-include="'views/communal/header.html'"></div>
+
 <img src= {{model.info.restaurant.logoUrl}}>
 <!--ng-if="model.notStar"-->
-<span class="glyphicon glyphicon-star-empty fa-3x" ng-click="model.star()" role="button"></span>
-<span ng-if="model.starred" class="glyphicon glyphicon-star" ng-click="model.unstar()" role="button"></span>
+<span ng-if="model.unstarred" class="glyphicon glyphicon-star-empty fa-3x" ng-click="model.star()" role="button"></span>
+<span ng-if="model.starred" class="glyphicon glyphicon-star fa-3x" ng-click="model.unstar()" role="button"></span>
 <h1>{{model.info.restaurant.name}}</h1>
 <h4>Address:</h4>
 {{model.info.restaurant.streetAddress}}
 {{model.info.restaurant.city}}
 {{model.info.restaurant.state}}
 <h4>Menu:</h4>
-<table ng-repeat="type in model.menu">
-    <tr>
+
+<div>
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10">Name</div>
+                <div class="col-lg-8 col-sm-4 hidden-xs">Description</div>
+                <div class="col-lg-2 col-md-2">Price</div>
+            </div>
+        </li>
+    </ul>
+<ul ng-repeat="type in model.menu" class="list-group">
+    <li class="list-group-item"><b>{{type.name}}</b></li>
+        <li ng-repeat="plate in type.items" class="list-group-item">
+            <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10">{{plate.name}}</div>
+            <div class="col-lg-8 col-sm-4 hidden-xs">{{plate.description}}</div>
+            <div class="col-lg-2 col-md-2">{{plate.basePrice}}
+            </div>
+            </div>
+    </li>
+</ul>
+</div>
+
+    <div></div>
+    <div class="list-group-item-heading">
         <th>{{type.name}}</th>
-    </tr>
-    <tr ng-repeat="plate in type.items">
-        <td>
+    </div>
+    <div class="list-group-item" ng-repeat="plate in type.items">
+        <td class="wl-30-td">
             {{plate.name}}
         </td>
-        <td>
+        <td class="wl-30-td">
             {{plate.description}}
         </td>
-        <td>
+        <td class="wl-30-td">
             {{plate.basePrice}}
         </td>
-    </tr>
-</table>
+    </div>
+

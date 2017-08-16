@@ -55,7 +55,7 @@
         }
 
         function goToStarList() {
-            $location.url("/user/starlist/"+user._id);
+            $location.url("/user/starlist");
         }
     }
 })();

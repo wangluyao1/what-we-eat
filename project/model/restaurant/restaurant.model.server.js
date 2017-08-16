@@ -19,6 +19,10 @@ restaurantModel.findAllRestaurants = findAllRestaurants;
 restaurantModel.addToArray = addToArray;
 restaurantModel.deleteFromArray=deleteFromArray;
 
+//star
+restaurantModel.starredByUser = starredByUser;
+restaurantModel.unstarredByUser = unstarredByUser;
+
 //user
 restaurantModel.delteResForUser = deleteResForUser;
 restaurantModel.findRestaurantByUser = findRestaurantByUser;
@@ -171,4 +175,14 @@ function deleteFromArray(resId,arrayName,toDeleteId) {
             res.get(arrayName).splice(index,1);
             res.save();
         })
+}
+
+function starredByUser(resId,userId) {
+    return restaurantModel
+        .addToArray(resId,'starredUsers',userId);
+}
+
+function unstarredByUser(resId,userId) {
+    return restaurantModel
+        .deleteFromArray(resId,'starredUsers',userId);
 }

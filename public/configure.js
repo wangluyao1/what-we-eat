@@ -34,10 +34,13 @@
                     user:checkLogin
                 }
             })
-            .when("/user/starlist/:uid",{
+            .when("/user/starlist",{
                 templateUrl: "views/user/templates/user-starlist-edit.view.client.html",
                 controller: "StarListEditController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
             })
             //view other users
             .when("/user/detail/:uid",{

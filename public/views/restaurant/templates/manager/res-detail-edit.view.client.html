@@ -48,7 +48,10 @@
             <tr ng-repeat="plate in model.plates">
                 <td><input class="form-control input-sm" ng-model="plate.name" ng-readonly="read" value="{{plate.name}}"> </td>
                 <td><input class="form-control input-sm" ng-model="plate.description" value="{{plate.description}}"> </td>
-                <td><input class="form-control input-sm" ng-model="plate.price" value="{{plate.price}}"> </td>
+                <td><div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input class="form-control input-sm" ng-model="plate.price" value="{{plate.price}}">
+                </div> </td>
                 <td>
                 <td>Added<span class="glyphicon glyphicon-ok" role="button" ng-click="model.saveMenu()"></span>
                 <span class="glyphicon glyphicon-remove" role="button" ng-click="model.removePlate(plate)"></span>

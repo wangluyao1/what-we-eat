@@ -92,5 +92,9 @@ body {
     margin-top: 8px;
 }
 
+.wl-30-td .table>tbody>tr>td {
+    width : 30%;
+}
+
 
 
