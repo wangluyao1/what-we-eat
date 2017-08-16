@@ -11,7 +11,7 @@ app.get("/api/restaurant/key/:resKey",finResByKey);
 app.get("/api/restaurant/:rId/menu",findMenuByResId);
 app.put("/api/restaurant/:rId",updateRestaurant);
 app.delete("/api/restaurant/:rId",deleteRestaurant);
-app.get("/api/allRestaurants",allRestaurants);
+app.get("/api/restaurant/all",allRestaurants);
 
 function allRestaurants(req,res) {
     return restaurantModel

@@ -15,9 +15,15 @@
             "findPlatesByResId":findPlatesByResId,
             "findResByKey":findResByKey,
             "updateRestaurant":updateRestaurant,
-            "deleteRestaurant":deleteRestaurant
+            "deleteRestaurant":deleteRestaurant,
+            "allRestaurants":allRestaurants
         };
         return api;
+
+        function allRestaurants() {
+            var url ="/api/restaurant/all";
+            return $http.get(url);
+        }
 
         function createRestaurant(restaurant) {
             var url = "/api/restaurant";

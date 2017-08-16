@@ -6,11 +6,15 @@
         .module("what-we-eat")
         .controller("AdminUserController", AdminUserController);
 
-    function AdminUserController() {
+    function AdminUserController(userService) {
         var model = this;
         model.title = "Manager Users";
 
         function init() {
+            return userService.allUsers
+                .then(function (users) {
+                    model.users = users.data;
+                })
 
         }
         init()

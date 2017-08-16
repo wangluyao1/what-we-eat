@@ -12,9 +12,15 @@
             "publishReview":publishReview,
             "updateReview":updateReview,
             "findReviewById" :findReviewById,
-            "deleteReview":deleteReview
+            "deleteReview":deleteReview,
+            "allReviews":allReviews
         };
         return api;
+
+        function allReviews() {
+            var url ="/api/review/all";
+            return $http.get(url);
+        }
 
         function createReview(newReview) {
             var url = "/api/review";

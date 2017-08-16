@@ -12,9 +12,15 @@
             "createPlate":createPlate,
             "findPlateById":findPlateById,
             "updatePlate":updatePlate,
-            "deletePlate":deletePlate
+            "deletePlate":deletePlate,
+            'allPlates':allPlates
         };
         return api;
+
+        function allPlates() {
+            var url = "api/plate/all";
+            return $http.get(url);
+        }
 
         function createPlate(resId,plate) {
             var url = "/api/plate";

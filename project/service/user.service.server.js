@@ -49,7 +49,7 @@ app.put('/api/user/:userId', updateUser);
 app.delete('/api/user/:userId', deleteUser);
 app.get('/api/checkLogin', checkLogin);
 app.get('/api/checkLogout',logout);
-app.get('/api/allUsers',getAllUsers);
+app.get('/api/user/all',getAllUsers);
 
 //star list
 app.get('/api/user/:userId/starRestaurant/:resId',star);

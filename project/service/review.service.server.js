@@ -9,7 +9,7 @@ app.get("/api/review/:reviewId/publish",publishReview);
 app.put("/api/review/:reviewId",updateReview);
 app.get("/api/review/:reviewId",getReviewById);
 app.delete("/api/review/:reviewId",deleteReview);
-app.get("/api/allReviews",allReviews);
+app.get("/api/review/all",allReviews);
 
 function allReviews(req,res) {
     return reviewModel
