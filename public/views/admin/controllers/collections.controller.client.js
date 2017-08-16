@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("AdminCollectionsController", AdminCollectionsController);
 
-    function AdminCollectionsController($location) {
+    function AdminCollectionsController() {
         var model = this;
         model.title = "Collections";
     }

@@ -46,9 +46,14 @@
                 }
             })
             //********************admin*****************************************
-            .when("/admin/list",{
+            .when("/admin/collections",{
                 templateUrl: "views/admin/templates/collections.view.client.html",
                 controller: "AdminCollectionsController",
+                controllerAs: "model"
+            })
+            .when("/admin/users",{
+                templateUrl: "views/admin/templates/user-list.view.client.html",
+                controller: "AdminUserController",
                 controllerAs: "model"
             })
             //*****************restaurant***************************************
