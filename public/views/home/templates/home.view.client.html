@@ -30,6 +30,17 @@
    role="button"
    ng-click="model.searchRestaurantsByAddress(address)">Search </a>
 
+<label for="searchLocalRes">Search Local Res</label>
+<input class="form-control"
+       id = "searchLocalRes"
+       name = "searchLocalRes"
+       placeholder="restaurant name"
+       ng-model="localResName"/>
+
+<a class="btn btn-lg btn-default pull-right"
+   role="button"
+   ng-click="model.searchLocalRes(localResName)">Search</a>
+
 <label for="searchUser">Search User</label>
 <input class="form-control"
        id = "searchUser"
@@ -44,5 +55,9 @@
 
 <div ng-include="'views/restaurant/templates/restaurant-list.view.client.html'"></div>
 
+<div ng-repeat="localRes in model.localRestaurants">
+<a ng-click="model.goToLocalResDetail(localRes._id)" role="button">{{localRes.name}}</a>
+</div>
+
 <!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
-<a ng-click="model.goToUserDetail(model.usersResult)"> userResult: {{model.usersResult.username}}</a>
+<a ng-click="model.goToUserDetail(model.usersResult)" role="button"> {{model.usersResult.username}}</a>

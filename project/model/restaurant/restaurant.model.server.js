@@ -11,6 +11,7 @@ restaurantModel.createRestaurant = createRestaurant;
 restaurantModel.updateRestaurant = updateRestaurant;
 restaurantModel.findRestaurantById = findRestaurantById;
 restaurantModel.findResByKey = findResByKey;
+restaurantModel.searchResByName = searchResByName;
 restaurantModel.deleteRestaurant = deleteRestaurant;
 
 //helper
@@ -85,11 +86,20 @@ function deletePlateForRes(resId,plateId) {
 }
 
 function findRestaurantById(resId) {
-    return restaurantModel.findById(resId);
+    return restaurantModel.findById(resId)
+        .populate('reviews')
+        .exec();
 }
 
 function findResByKey(resKey) {
     return restaurantModel.findOne({key:resKey});
+}
+
+function searchResByName(keyword) {
+    return restaurantModel
+        .find({
+            $and:[{type:"LOCAL"},{name: new RegExp(keyword,"i")}]
+        });
 }
 
 function findAllPlatesByRes(resId) {

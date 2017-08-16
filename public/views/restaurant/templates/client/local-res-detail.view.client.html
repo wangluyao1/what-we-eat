@@ -1,0 +1,21 @@
+<span class="glyphicon glyphicon-star-empty fa-3x" ng-click="model.star()" role="button"></span>
+<span ng-if="model.starred" class="glyphicon glyphicon-star" ng-click="model.unstar()" role="button"></span>
+<h1>{{model.restaurant.name}}</h1>
+<h4>Address:</h4>
+{{model.restaurant.address}}
+<table class="table">
+    <tr>
+        <th>PlateName</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    <tr ng-repeat="plate in model.restaurant.plates">
+        <th>{{plate.name}}</th>
+        <th>{{plate.description}}</th>
+        <th>{{plate.price}}</th>
+    </tr>
+</table>
+
+<a ng-click="model.writeReview()" role="button">Write Review</a>
+<h3>Review</h3>
+{{model.restaurant.reviews}}

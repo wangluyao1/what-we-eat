@@ -7,6 +7,6 @@ var reviewSchema = mongoose.Schema({
     restaurant:{type:mongoose.Schema.ObjectId,ref:"RestaurantModel"},
     content:String,
     //photo:[file]
-    type:{type:String,enum:["PUBLIC","PRIVATE"]}
+    type:{type:String,enum:["PUBLIC","PRIVATE"],default:"PRIVATE"}
 },{collection:"review"});
 module.exports = reviewSchema;

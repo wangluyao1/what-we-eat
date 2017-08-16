@@ -11,6 +11,7 @@
         var api = {
             "createRestaurant":createRestaurant,
             "findRestaurantById":findRestaurantById,
+            "searchRestaurant":searchRestaurant,
             "findPlatesByResId":findPlatesByResId,
             "findResByKey":findResByKey,
             "updateRestaurant":updateRestaurant,
@@ -25,6 +26,11 @@
 
         function findRestaurantById(resId) {
             var url = "/api/restaurant/"+resId;
+            return $http.get(url);
+        }
+
+        function searchRestaurant(keyword) {
+            var url = "/api/search/restaurant/"+keyword;
             return $http.get(url);
         }
 

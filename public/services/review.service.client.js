@@ -22,22 +22,22 @@
         }
 
         function updateReview(reviewId,newReview) {
-            var url = "/api/review"+reviewId;
+            var url = "/api/review/"+reviewId;
             return $http.put(url,newReview);
         }
 
         function publishReview(reviewId) {
-            var url = "/api/review"+reviewId+"/publish";
-            return $http.get(url,newReview);
+            var url = "/api/review/"+reviewId+"/publish";
+            return $http.get(url);
         }
 
         function findReviewById(reviewId) {
-            var url = "/api/review"+reviewId;
+            var url = "/api/review/"+reviewId;
             return $http.get(url);
         }
 
         function deleteReview(reviewId) {
-            var url = "/api/review"+reviewId;
+            var url = "/api/review/"+reviewId;
             return $http.delete(url);
         }
     }

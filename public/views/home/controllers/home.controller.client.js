@@ -6,12 +6,14 @@
         .module("what-we-eat")
         .controller("SearchController", SearchController)
 
-    function SearchController($location,userService,resSearchService) {
+    function SearchController($location,userService,resSearchService,restaurantService) {
         var model = this;
 
         model.searchRestaurantsByAddress = searchRestaurantsByAddress;
         model.searchUserByUsername = searchUserByUsername;
         model.goToUserDetail = goToUserDetail;
+        model.searchLocalRes = searchLocalRes;
+        model.goToLocalResDetail = goToLocalResDetail;
 
         function init() {
 
@@ -27,6 +29,14 @@
                 });
         }
 
+        function searchLocalRes(keyword) {
+            restaurantService
+                .searchRestaurant(keyword)
+                .then(function (response) {
+                    model.localRestaurants = response.data;
+                })
+        }
+
         function searchUserByUsername(username) {
             return userService
                 .findUserByUserName(username)
@@ -34,6 +44,10 @@
                     //todo : cannot find user
                     model.usersResult = response.data;
                 });
+        }
+
+        function goToLocalResDetail(restaurantId) {
+            $location.url("/restaurant/details/"+restaurantId);
         }
 
         function goToUserDetail(userResultId) {
