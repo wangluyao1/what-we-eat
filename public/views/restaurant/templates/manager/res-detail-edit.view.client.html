@@ -4,6 +4,16 @@
     {{model.alert}}
 </div>
 <div class="container-fluid">
+    <label for="restaurantId">Restaurant ID</label>
+
+    <input name="restaurantId"
+           ng-model="model.res._id"
+           readonly
+           type="text"
+           id="restaurantId"
+           class="form-control"
+           placeholder="restaurantId"
+    />
     <label for="restaurantName">Restaurant Name</label>
     <button class="btn-success" ng-click="model.updateRestaurant(model.res)">Save</button>
 

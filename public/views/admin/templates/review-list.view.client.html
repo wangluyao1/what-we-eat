@@ -1,0 +1,52 @@
+<div ng-include="'views/communal/header.html'"></div>
+
+<div class="container-fluid">
+    <div class="col-xs-4 hidden-xs">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a role="button" href="#!/admin/users">Users</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#!/admin/restaurants">Restaurants and Plates</a>
+            </li>
+            <!--<li class="list-group-item">-->
+            <!--<a href="#!/admin/plates">Plates</a>-->
+            <!--</li>-->
+            <li class="list-group-item">
+                <a href="#!/admin/reviews">Reviews</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#!/admin/relations">Relations</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+        <table>
+            <tr>
+                <th>User Id</th>
+                <th>Restaurant Id</th>
+                <th>Content</th>
+            </tr>
+            <tr>
+                <td><input class="form-control input-sm" ng-model="model.toAddReview.user"> </td>
+                <td><input class="form-control input-sm" ng-model="model.toAddReview.restaurant"></td>
+                <td><input class="form-control input-sm" ng-model="model.toAddReview.content"></td>
+                <td>
+                    <div role="button" class="btn" ng-click="model.addReview(model.toAddReview)">Add</div>
+                </td>
+            </tr>
+            <tr ng-repeat="review in model.reviews">
+                <td>{{review.user}} </td>
+                <td>{{review.restaurant}}</td>
+                <td>{{review.content}}</td>
+                <td>
+            <span ng-click="model.goToEdit(review)"
+                  class="glyphicon glyphicon-pencil" role="button"></span>
+                    <span ng-click="model.deleteReview(review._id)" role="button"
+                          class="glyphicon glyphicon-remove"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

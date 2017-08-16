@@ -1,0 +1,20 @@
+<h3>Review</h3>
+<label for="restaurant">For Restaurant</label>
+<input id="restaurant" name="restaurant"
+       class="form-control"
+       readonly
+       ng-model="model.review.restaurant"/>
+
+<label for="restaurant">Type</label>
+<input id="type" name="type"
+       class="form-control"
+       readonly
+       ng-model="model.review.type"/>
+
+<label for="ReviewContent">Content</label>
+<input id="ReviewContent" name="ReviewContent"
+       class="form-control"
+       ng-model="model.review.content"/>
+
+<button ng-click="model.save()" class="btn btn-primary btn-block">Save</button>
+<button ng-if = "model.review.type=='PRIVATE'" ng-click="model.send()" class="btn-primary btn btn-block">Send to Restaurant</button>

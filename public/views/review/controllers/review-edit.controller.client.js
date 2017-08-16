@@ -1,12 +1,12 @@
 /**
- * Created by Luyao on 8/15/2017.
+ * Created by Luyao on 8/16/2017.
  */
 (function () {
     angular
         .module("what-we-eat")
-        .controller("ReviewCreateController", ReviewCreateController);
+        .controller("ReviewEditController", ReviewEditController);
 
-    function ReviewCreateController($routeParams,restaurantService,reviewService,$location) {
+    function ReviewEditController($routeParams,restaurantService,reviewService,$location) {
         var model = this;
 
         model.restaurantId = $routeParams['restaurantId'];
