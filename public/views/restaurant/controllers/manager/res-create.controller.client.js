@@ -19,7 +19,7 @@
             res.manager = user._id;
             return restaurantService.createRestaurant(res)
                 .then(function (newRes) {
-                    $location.url("/restaurant/details/"+newRes.data+"/edit");
+                    $location.url("/restaurant/details/"+newRes.data._id+"/edit");
                 })
         }
     }

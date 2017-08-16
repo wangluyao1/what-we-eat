@@ -11,12 +11,19 @@
         var api = {
             "createRestaurant":createRestaurant,
             "findRestaurantById":findRestaurantById,
+            "searchRestaurant":searchRestaurant,
             "findPlatesByResId":findPlatesByResId,
             "findResByKey":findResByKey,
             "updateRestaurant":updateRestaurant,
-            "deleteRestaurant":deleteRestaurant
+            "deleteRestaurant":deleteRestaurant,
+            "allRestaurants":allRestaurants
         };
         return api;
+
+        function allRestaurants() {
+            var url ="/api/allRestaurants";
+            return $http.get(url);
+        }
 
         function createRestaurant(restaurant) {
             var url = "/api/restaurant";
@@ -25,6 +32,11 @@
 
         function findRestaurantById(resId) {
             var url = "/api/restaurant/"+resId;
+            return $http.get(url);
+        }
+
+        function searchRestaurant(keyword) {
+            var url = "/api/search/restaurant/"+keyword;
             return $http.get(url);
         }
 

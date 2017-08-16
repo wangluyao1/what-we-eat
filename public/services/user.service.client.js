@@ -15,12 +15,16 @@
             "findUserByCredentials": login,
             "updateUser": updateUser,
             "deleteUser": deleteUser,
+            "allUsers":allUsers,
+
             "checkLogin": checkLogin,
             "checkLogout" : checkLogout,
+            //follow
             "follow":follow,
             "unfollow":unfollow,
             "findFollowers":findFollowers,
             "findFollowings":findFollowings,
+            //star list
             "starRes":starRes,
             "unstarRes":unstarRes,
             "getStarList":getStarList
@@ -42,6 +46,11 @@
                 .then(function (response) {
                     return response.data;
                 })
+        }
+
+        function allUsers() {
+            var url = "/api/allUsers";
+            return $http.get(url);
         }
 
         function createUser(user) {

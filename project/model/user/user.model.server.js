@@ -13,6 +13,7 @@ userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.allUsers = allUsers;
 
 //helper
 userModel.addTo = addToArray;
@@ -22,6 +23,11 @@ userModel.deleteFromArray = deleteFromArray;
 userModel.starResForUser = starResForUser;
 userModel.unstarResForUser = unstarResForUser;
 userModel.findStarredRes = findStarredRes;
+
+//review
+userModel.addReviewForUser = addReviewForUser;
+userModel.deleteReviewForUser = deleteReviewForUser;
+userModel.getReviewsByUser = getReviewsByUser;
 
 //manager
 userModel.bindRestaurant = bindRestaurant;
@@ -36,8 +42,12 @@ userModel.deleteFollower = deleteFollower;
 userModel.findAllFollowersByUserId = findAllFollowersByUserId;
 userModel.findAllFollowingsByUserId = findAllFollowingsByUserId;
 
+
 module.exports = userModel;
 
+function allUsers() {
+    return userModel.find();
+}
 function createUser(user) {
     return userModel.create(user);
 }
@@ -63,10 +73,7 @@ function deleteUser(userId) {
     return userModel.findByIdAndRemove(userId)
         .then(function (user) {
             return restaurantModel
-                .findRestaurantByUser(userId)
-                .then(function (restaurant) {
-                    restaurantModel.deleteRestaurant(restaurant._id);
-                })
+                .delteResForUser(userId);
         });
 }
 
@@ -93,6 +100,24 @@ function findStarredRes(userId) {
         .exec()
         .then(function (user) {
             return user.starList;
+        })
+}
+
+function addReviewForUser(userId,reviewId) {
+    return userModel.addTo(userId,"reviews",reviewId);
+}
+
+function deleteReviewForUser(userId,reviewId) {
+    return userModel.deleteFromArray(userId,"reviews",reviewId);
+}
+
+function getReviewsByUser(userId) {
+    return userModel
+        .findUserById(userId)
+        .populate('reviews')
+        .exec()
+        .then(function (user) {
+            return user.reviews;
         })
 }
 

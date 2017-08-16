@@ -9,14 +9,33 @@ module.exports = restaurantModel;
 
 restaurantModel.createRestaurant = createRestaurant;
 restaurantModel.updateRestaurant = updateRestaurant;
+restaurantModel.findRestaurantById = findRestaurantById;
+restaurantModel.findResByKey = findResByKey;
+restaurantModel.searchResByName = searchResByName;
+restaurantModel.deleteRestaurant = deleteRestaurant;
+restaurantModel.findAllRestaurants = findAllRestaurants;
+
+//helper
+restaurantModel.addToArray = addToArray;
+restaurantModel.deleteFromArray=deleteFromArray;
+
+//user
+restaurantModel.delteResForUser = deleteResForUser;
+restaurantModel.findRestaurantByUser = findRestaurantByUser;
+
+//plates
 restaurantModel.addPlateForRes = addPlateForRes;
 restaurantModel.deletePlateForRes = deletePlateForRes;
-restaurantModel.findRestaurantById = findRestaurantById;
-restaurantModel.findRestaurantByUser = findRestaurantByUser;
-restaurantModel.findResByKey = findResByKey;
 restaurantModel.findAllPlatesByRes = findAllPlatesByRes;
-restaurantModel.deleteRestaurant = deleteRestaurant;
 
+//review
+restaurantModel.addReviewForRes = addReviewForRes;
+restaurantModel.removeReviewForRes = removeReviewForRes;
+restaurantModel.getReviewsForRes = getReviewsForRes;
+
+function findAllRestaurants() {
+    return restaurantModel.find();
+}
 
 function createRestaurant(res) {
     var userModel = require("../user/user.model.server");
@@ -28,7 +47,7 @@ function createRestaurant(res) {
         .create(res)
         .then(function (restaurantDoc) {
             var rId = restaurantDoc._id;
-            restaurantModel
+            return restaurantModel
                 .findRestaurantById(rId)
                 .then(function (rest) {
                     if (!rest.key) {
@@ -39,7 +58,7 @@ function createRestaurant(res) {
                         return userModel
                             .bindRestaurant(res.manager, rId)
                             .then(function (status) {
-                                return rId;
+                                return restaurantDoc;
                             });
                     }
                 });
@@ -72,11 +91,20 @@ function deletePlateForRes(resId,plateId) {
 }
 
 function findRestaurantById(resId) {
-    return restaurantModel.findById(resId);
+    return restaurantModel.findById(resId)
+        .populate('reviews')
+        .exec();
 }
 
 function findResByKey(resKey) {
     return restaurantModel.findOne({key:resKey});
+}
+
+function searchResByName(keyword) {
+    return restaurantModel
+        .find({
+            $and:[{type:"LOCAL"},{name: new RegExp(keyword,"i")}]
+        });
 }
 
 function findAllPlatesByRes(resId) {
@@ -100,11 +128,48 @@ function deleteRestaurant(resId) {
         .findByIdAndRemove(resId)
         .then(function (res) {
             return plateModel
-                .findPlatesByRes(resId)
-                .then(function (plates) {
-                    plates.forEach(function (plate) {
-                        return plateModel.deletePlate(plate);
-                    })
-                })
+                .deletePlatesForRes(resId);
         });
+}
+
+function deleteResForUser(userId) {
+    return restaurantModel.deleteMany({manager:userId});
+}
+
+function addReviewForRes(resId,reviewId) {
+    return restaurantModel.addToArray(resId,"reviews",reviewId);
+}
+
+function removeReviewForRes(resId,reviewId) {
+    return restaurantModel.deleteFromArray(resId,"reviews",reviewId);
+}
+
+function getReviewsForRes(resId) {
+    return restaurantModel
+        .findById(resId)
+        .populate('reviews')
+        .exec()
+        .then(function (restaurant) {
+            return restaurant.reviews;
+        })
+}
+
+function addToArray(resId,where,toAdd) {
+    return restaurantModel
+        .findById(resId)
+        .then(function (res) {
+            res.get(where).push(toAdd);
+            return res.save();
+        })
+}
+
+function deleteFromArray(resId,arrayName,toDeleteId) {
+    return restaurantModel
+        .findById(resId)
+        .then(function (res) {
+            var array = res.get(arrayName);
+            var index = array.indexOf(toDeleteId);
+            res.get(arrayName).splice(index,1);
+            res.save();
+        })
 }

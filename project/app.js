@@ -7,3 +7,4 @@ require("./service/user.service.server");
 require("./service/relation.service.server");
 require("./service/restaurant.service.server");
 require("./service/plate.service.server");
+require("./service/review.service.server");

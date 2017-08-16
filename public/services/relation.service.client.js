@@ -10,18 +10,21 @@
 
         var api = {
             "createRelation": createRelation,
-            //find
-            //1.follow
             "findFollow":findFollow,
             "findFollowByTo":findFollowByTo,
             "findFollowByFrom":findFollowByFrom,
 
             "updateFollow":updateFollow,
-
-            "deleteRelation":deleteRelation
+            "deleteRelation":deleteRelation,
+            "allRelations":allRelations
         };
 
         return api;
+
+        function allRelations() {
+            var url = "/api/allRelations";
+            $http.get(url);
+        }
 
         function createRelation(relation) {
             var url = "/api/relation";

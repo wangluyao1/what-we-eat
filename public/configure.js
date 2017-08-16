@@ -45,6 +45,22 @@
                     user:checkLogin
                 }
             })
+            //********************admin*****************************************
+            .when("/admin/collections",{
+                templateUrl: "views/admin/templates/collections.view.client.html",
+                controller: "AdminCollectionsController",
+                controllerAs: "model"
+            })
+            .when("/admin/users",{
+                templateUrl: "views/admin/templates/user-list.view.client.html",
+                controller: "AdminUserController",
+                controllerAs: "model"
+            })
+            .when("/admin/users/edit/:uid",{
+                templateUrl: "views/admin/templates/user-edit.view.client.html",
+                controller: "AdminUserEditController",
+                controllerAs: "model"
+            })
 
             //*****************restaurant***************************************
 
@@ -56,9 +72,17 @@
                     user:checkLogin
                 }
             })
-            .when("/restaurant/details/:restaurantKey",{
+            .when("/eatstreet/restaurant/details/:restaurantKey",{
                 templateUrl: "views/restaurant/templates/client/res-detail.view.client.html",
                 controller: "ResDetailController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
+            .when("/restaurant/details/:restaurantId",{
+                templateUrl: "views/restaurant/templates/client/local-res-detail.view.client.html",
+                controller: "LocalResDetailController",
                 controllerAs: "model",
                 resolve:{
                     user:checkLogin
@@ -67,6 +91,14 @@
             .when("/restaurant/details/:restaurantKey/edit",{
                 templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
                 controller: "ResDetailEditController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
+            .when("/restaurant/:restaurantId/review/:reviewId",{
+                templateUrl: "views/review/templates/review-create.view.client.html",
+                controller: "ReviewEditController",
                 controllerAs: "model",
                 resolve:{
                     user:checkLogin
