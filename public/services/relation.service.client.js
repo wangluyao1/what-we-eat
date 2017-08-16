@@ -22,7 +22,7 @@
         return api;
 
         function allRelations() {
-            var url = "/api/relation/all";
+            var url = "/api/allRelations";
             $http.get(url);
         }
 

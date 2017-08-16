@@ -18,7 +18,7 @@
         return api;
 
         function allReviews() {
-            var url ="/api/review/all";
+            var url ="/api/allReviews";
             return $http.get(url);
         }
 

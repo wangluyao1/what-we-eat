@@ -21,7 +21,7 @@
         return api;
 
         function allRestaurants() {
-            var url ="/api/restaurant/all";
+            var url ="/api/allRestaurants";
             return $http.get(url);
         }
 

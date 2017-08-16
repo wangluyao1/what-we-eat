@@ -49,7 +49,7 @@
         }
 
         function allUsers() {
-            var url = "/api/user/all";
+            var url = "/api/allUsers";
             return $http.get(url);
         }
 

@@ -8,7 +8,7 @@ app.post("/api/plate",createPlate);
 app.get("/api/plate/:pId",findPlateById);
 app.put("/api/plate/:pId",updatePlate);
 app.delete("/api/plate/:pId",deletePlate);
-app.get("api/plate/all",allPlates);
+app.get("api/allPlates",allPlates);
 
 function allPlates(req,res) {
     return plateModel

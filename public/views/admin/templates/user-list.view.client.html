@@ -30,19 +30,20 @@
         <th>ROLE  (USER/MANAGER)</th>
         </tr>
         <tr>
-            <td><input class="form-control input-sm" ng-model="model.toAddUser.name"> </td>
+            <td><input class="form-control input-sm" ng-model="model.toAddUser.username"> </td>
             <td><input class="form-control input-sm" ng-model="model.toAddUser.role"></td>
             <td>
-                <div role="button" class="btn">Add</div>
+                <div role="button" class="btn" ng-click="model.addUser(model.toAddUser)">Add</div>
             </td>
         </tr>
         <tr ng-repeat="user in model.users">
             <td>{{user.username}} </td>
             <td>{{user.roles}}</td>
             <td>
-            <span class="glyphicon glyphicon-plus"></span>
-                <span ng-click="model.deleteUser(userId)"
-                      class="glyphicon glyphicon-pencil"></span>
+            <span ng-click=""
+                  class="glyphicon glyphicon-pencil" role="button"></span>
+                <span ng-click="model.deleteUser(user._id)" role="button"
+                      class="glyphicon glyphicon-remove"></span>
             </td>
         </tr>
     </table>

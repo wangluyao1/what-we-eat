@@ -10,14 +10,37 @@
         var model = this;
         model.title = "Manager Users";
 
+        model.deleteUser = deleteUser;
+        model.addUser = addUser;
+
         function init() {
-            return userService.allUsers
+            refreshModelUsers();
+        }
+
+        function refreshModelUsers() {
+            return userService
+                .allUsers()
                 .then(function (users) {
                     model.users = users.data;
                 })
-
         }
-        init()
+        init();
+
+        function addUser(newUser) {
+            return userService
+                .createUser(newUser)
+                .then(function (response) {
+                    refreshModelUsers();
+                })
+        }
+
+        function deleteUser(userId) {
+            return userService
+                .deleteUser(userId)
+                .then(function (response) {
+                    refreshModelUsers();
+                });
+        }
 
 
     }

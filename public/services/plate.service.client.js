@@ -18,7 +18,7 @@
         return api;
 
         function allPlates() {
-            var url = "api/plate/all";
+            var url = "api/allPlates";
             return $http.get(url);
         }
 

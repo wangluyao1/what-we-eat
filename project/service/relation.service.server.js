@@ -9,7 +9,7 @@ app.get('/api/relation/follow',findFollow);
 app.get('/api/relation/following/:fuid',findFollowByFrom);
 app.get('/api/relation/follower/:tuid',findFollowByToUser);
 app.get('/api/relation',deleteRelation);
-app.get('/api/relation/all',allRelations);
+app.get('/api/allRelations',allRelations);
 
 function allRelations(req,res) {
     relationModel.findAllRelations()
