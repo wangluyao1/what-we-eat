@@ -13,6 +13,11 @@ plateModel.findPlateById = findPlateById;
 plateModel.findPlatesByRes = findPlatesByRes;
 plateModel.deletePlate = deletePlate;
 plateModel.deletePlatesForRes = deletePlatesForRes;
+plateModel.allPlates = allPlates;
+
+function allPlates() {
+    return plateModel.find();
+}
 
 function createPlate(plate) {
     var restaurantModel = require("../restaurant/restaurant.model.server");

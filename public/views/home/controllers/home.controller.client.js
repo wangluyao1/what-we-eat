@@ -4,7 +4,7 @@
 (function () {
     angular
         .module("what-we-eat")
-        .controller("SearchController", SearchController)
+        .controller("SearchController", SearchController);
 
     function SearchController($location,userService,resSearchService,restaurantService) {
         var model = this;

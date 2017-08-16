@@ -14,7 +14,11 @@ reviewModel.deleteReview = deleteReview;
 reviewModel.findReviewById =  findReviewById;
 reviewModel.deleteReviewByUser = deleteReviewByUser;
 reviewModel.deleteReviewByRes = deleteReviewByRes;
+reviewModel.findAllReviews = findAllReviews;
 
+function findAllReviews() {
+    return reviewModel.find();
+}
 
 function createReview(review) {
     var userModel = require("../user/user.model.server");

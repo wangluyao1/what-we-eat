@@ -7,13 +7,17 @@ var relationModel = mongoose.model("RelationModel",relationSchema);
 
 relationModel.createRelation = createRelation;
 relationModel.findRelationById = findRelationById;
-//relationModel.findAllLikes = findAllLikes;
+relationModel.findAllRelations = findAllRelations;
 relationModel.findFollow = findFollow;
 relationModel.findAllFollowers = findAllFollowers;
 relationModel.findAllFollowings = findAllFollowings;
 relationModel.deleteRelation = deleteRelation;
 
 module.exports = relationModel;
+
+function findAllRelations() {
+    return relationModel.find();
+}
 
 function createRelation(relation) {
     return relationModel.create(relation);

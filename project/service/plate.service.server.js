@@ -8,6 +8,17 @@ app.post("/api/plate",createPlate);
 app.get("/api/plate/:pId",findPlateById);
 app.put("/api/plate/:pId",updatePlate);
 app.delete("/api/plate/:pId",deletePlate);
+app.get("api/allPlates",allPlates);
+
+function allPlates(req,res) {
+    return plateModel
+        .allPlates()
+        .then(function (plates) {
+            res.json(plates);
+        },function (err) {
+            res.sendStatus(404).send(err);
+        })
+}
 
 function createPlate(req,res) {
     var newPlate = req.body;

@@ -13,6 +13,7 @@ userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.allUsers = allUsers;
 
 //helper
 userModel.addTo = addToArray;
@@ -41,8 +42,12 @@ userModel.deleteFollower = deleteFollower;
 userModel.findAllFollowersByUserId = findAllFollowersByUserId;
 userModel.findAllFollowingsByUserId = findAllFollowingsByUserId;
 
+
 module.exports = userModel;
 
+function allUsers() {
+    return userModel.find();
+}
 function createUser(user) {
     return userModel.create(user);
 }

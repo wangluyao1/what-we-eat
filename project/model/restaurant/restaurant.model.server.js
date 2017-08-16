@@ -13,6 +13,7 @@ restaurantModel.findRestaurantById = findRestaurantById;
 restaurantModel.findResByKey = findResByKey;
 restaurantModel.searchResByName = searchResByName;
 restaurantModel.deleteRestaurant = deleteRestaurant;
+restaurantModel.findAllRestaurants = findAllRestaurants;
 
 //helper
 restaurantModel.addToArray = addToArray;
@@ -31,6 +32,10 @@ restaurantModel.findAllPlatesByRes = findAllPlatesByRes;
 restaurantModel.addReviewForRes = addReviewForRes;
 restaurantModel.removeReviewForRes = removeReviewForRes;
 restaurantModel.getReviewsForRes = getReviewsForRes;
+
+function findAllRestaurants() {
+    return restaurantModel.find();
+}
 
 function createRestaurant(res) {
     var userModel = require("../user/user.model.server");

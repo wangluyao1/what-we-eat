@@ -49,7 +49,7 @@ app.put('/api/user/:userId', updateUser);
 app.delete('/api/user/:userId', deleteUser);
 app.get('/api/checkLogin', checkLogin);
 app.get('/api/checkLogout',logout);
-//app.get('/all/users',getAllUsers);
+app.get('/api/allUsers',getAllUsers);
 
 //star list
 app.get('/api/user/:userId/starRestaurant/:resId',star);
@@ -164,9 +164,13 @@ function localStrategy(username, password, done) {
 }
 
 
-// function getAllUsers(req,res) {
-//     res.send(userData);
-// }
+function getAllUsers(req,res) {
+    return userModel.allUsers()
+        .then(function (users) {
+            res.json(users);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        })}
 
 function checkLogin(req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');

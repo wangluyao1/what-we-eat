@@ -6,7 +6,7 @@ var relationSchema = mongoose.Schema({
     from:{type:mongoose.Schema.ObjectId,ref:"UserModel"},
     toUser:{type:mongoose.Schema.ObjectId,ref:"UserModel"},
     //toRL:{},
-    type:{type:String,enum:["LIKE","FOLLOW","MESSAGE"]},
+    type:{type:String,enum:["LIKE","FOLLOW"]},
     //content: String,
     dateCreated: {type:Date,default:Date.now}
 },{collection:"relation"});

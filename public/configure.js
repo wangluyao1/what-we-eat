@@ -45,7 +45,12 @@
                     user:checkLogin
                 }
             })
-
+            //********************admin*****************************************
+            .when("/admin/list",{
+                templateUrl: "views/admin/templates/collections.view.client.html",
+                controller: "AdminCollectionsController",
+                controllerAs: "model"
+            })
             //*****************restaurant***************************************
 
             .when("/restaurant/create",{

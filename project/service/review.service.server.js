@@ -9,6 +9,16 @@ app.get("/api/review/:reviewId/publish",publishReview);
 app.put("/api/review/:reviewId",updateReview);
 app.get("/api/review/:reviewId",getReviewById);
 app.delete("/api/review/:reviewId",deleteReview);
+app.get("/api/allReviews",allReviews);
+
+function allReviews(req,res) {
+    return reviewModel
+        .findAllReviews()
+        .then(function (reviews) {
+            res.json(reviews);
+        },function (err) {
+            res.sendStatus(404).send(err);
+        })}
 
 function createReview(req,res) {
     var newReview = req.body;
