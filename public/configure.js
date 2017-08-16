@@ -56,6 +56,12 @@
                 controller: "AdminUserController",
                 controllerAs: "model"
             })
+            .when("/admin/users/edit/:uid",{
+                templateUrl: "views/admin/templates/user-edit.view.client.html",
+                controller: "AdminUserEditController",
+                controllerAs: "model"
+            })
+
             //*****************restaurant***************************************
 
             .when("/restaurant/create",{

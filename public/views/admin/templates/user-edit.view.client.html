@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-include="'views/communal/header.html'"></div>
 
-</body>
-</html>
+<div class="container-fluid">
+<div class="col-xs-4 hidden-xs">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a role="button" href="#!/admin/users">Users</a>
+        </li>
+        <li class="list-group-item">
+            <a href="#!/admin/restaurants">Restaurants</a>
+        </li>
+        <li class="list-group-item">
+            <a href="#!/admin/plates">Plates</a>
+        </li>
+        <li class="list-group-item">
+            <a href="#!/admin/reviews">Reviews</a>
+        </li>
+        <li class="list-group-item">
+            <a href="#!/admin/relations">Relations</a>
+        </li>
+    </ul>
+</div>
+
+    <div class="col-xs-12 col-sm-8">
+<label for="username">Username</label>
+<input name="username"
+       readonly
+       ng-model="model.user.username"
+       type="text"
+       id="username"
+       class="form-control"
+       placeholder="username"
+/>
+<label for="role">ROLE(USER/MANAGER)</label>
+<input name="role"
+       readonly
+       ng-model="model.user.roles"
+       type="text"
+       id="role"
+       class="form-control"
+       placeholder="role"
+/>
+<label for="email">Email</label>
+<input name="email"
+       ng-model="model.user.email"
+       type="email"
+       id="email"
+       class="form-control"
+       placeholder="alice@wonderland.com"
+/>
+<label for="firstName">First Name</label>
+<input name="firstName"
+       ng-model="model.user.firstName"
+       type="text"
+       id="firstName"
+       class="form-control"
+       placeholder="firstname"
+/>
+<label for="lastName">Last Name</label>
+<input name="lastName"
+       ng-model="model.user.lastName"
+       type="text"
+       id="lastName"
+       class="form-control"
+       placeholder="lastName"
+/>
+<div class="btn btn-block btn-success" ng-click="model.saveUser(model.user)">Save Changes</div>
+    </div>
+</div>

@@ -6,12 +6,13 @@
         .module("what-we-eat")
         .controller("AdminUserController", AdminUserController);
 
-    function AdminUserController(userService) {
+    function AdminUserController(userService,$location) {
         var model = this;
         model.title = "Manager Users";
 
         model.deleteUser = deleteUser;
         model.addUser = addUser;
+        model.goToEdit = goToEdit;
 
         function init() {
             refreshModelUsers();
@@ -42,6 +43,9 @@
                 });
         }
 
+        function goToEdit(user) {
+            $location.url("/admin/users/edit/"+user._id);
+        }
 
     }
 
