@@ -11,6 +11,7 @@ relationModel.findAllRelations = findAllRelations;
 relationModel.findFollow = findFollow;
 relationModel.findAllFollowers = findAllFollowers;
 relationModel.findAllFollowings = findAllFollowings;
+relationModel.updateRelation = updateRelation;
 relationModel.deleteRelation = deleteRelation;
 
 module.exports = relationModel;
@@ -43,6 +44,10 @@ function findAllFollowers(toUser) {
 
 function findAllFollowings(from) {
     return relationModel.find({from:from});
+}
+
+function updateRelation(relationId,relation) {
+    return relationModel.update({_id:relationId},{$set:relation});
 }
 
 function deleteRelation(relationId) {

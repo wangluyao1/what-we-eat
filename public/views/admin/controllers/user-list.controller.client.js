@@ -8,7 +8,7 @@
 
     function AdminUserController(userService,$location) {
         var model = this;
-        model.title = "Manager Users";
+        model.title = "Manage Users";
 
         model.deleteUser = deleteUser;
         model.addUser = addUser;

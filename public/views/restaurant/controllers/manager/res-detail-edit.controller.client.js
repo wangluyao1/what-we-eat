@@ -6,12 +6,12 @@
         .module("what-we-eat")
         .controller("ResDetailEditController", ResDetailEditController);
 
-    function ResDetailEditController($routeParams,restaurantService,plateService,user) {
+    function ResDetailEditController($routeParams,restaurantService,plateService) {
         var model = this;
 
         model.restaurantKey = $routeParams['restaurantKey'];
 
-        model.user = user;
+        //model.user = user;
         model.addPlate = addPlate;
         model.saveMenu = saveMenu;
         model.updateRestaurant = updateRestaurant;

@@ -6,13 +6,14 @@ var relationModel = require("../model/relation/relation.model.server");
 
 app.post('/api/relation',createRelation);
 app.get('/api/relation/follow',findFollow);
+app.put('/api/relation/follow/:followId',updateFollow);
 app.get('/api/relation/following/:fuid',findFollowByFrom);
 app.get('/api/relation/follower/:tuid',findFollowByToUser);
-app.get('/api/relation',deleteRelation);
+app.delete('/api/relation/:relationId',deleteRelation);
 app.get('/api/allRelations',allRelations);
 
 function allRelations(req,res) {
-    relationModel.findAllRelations()
+    return relationModel.findAllRelations()
         .then(function (relations) {
             res.json(relations);
         },function (err) {
@@ -22,7 +23,7 @@ function allRelations(req,res) {
 
 function createRelation(req,res) {
     var newRelation = req.body;
-    relationModel
+    return relationModel
         .createRelation(newRelation)
         .then(function (status) {
             res.json(status);
@@ -34,7 +35,7 @@ function createRelation(req,res) {
 function findFollow(req,res) {
     var toUser = req.query.toUser;
     var from = req.query.from;
-    relationModel
+    return relationModel
         .findFollow(from,toUser)
         .then(function (followRelation) {
             res.json(followRelation);
@@ -43,9 +44,22 @@ function findFollow(req,res) {
         });
 }
 
+function updateFollow(req,res) {
+    var followId = req.params.followId;
+    var newFollow = req.body;
+    return relationModel
+        .updateRelation(followId,newFollow)
+        .then(function (follow) {
+            res.json(follow);
+        },function (err) {
+            res.sendStatus(500).send(err);
+        })
+}
+
+
 function findFollowByFrom(req,res) {
     var from = req.params.from;
-    relationModel
+    return relationModel
         .findAllFollowings(from)
         .then(function (followRelation) {
             res.json(followRelation);
@@ -56,7 +70,7 @@ function findFollowByFrom(req,res) {
 
 function findFollowByToUser(req,res) {
     var toUser = req.params.toUser;
-    relationModel
+    return relationModel
         .findAllFollowers(toUser)
         .then(function (followRelation) {
             res.json(followRelation);
@@ -67,7 +81,7 @@ function findFollowByToUser(req,res) {
 
 function deleteRelation(req,res) {
     var relationId = req.params.relationId;
-    relationModel
+    return relationModel
         .deleteRelation(relationId)
         .then(function (status) {
             res.json(status);

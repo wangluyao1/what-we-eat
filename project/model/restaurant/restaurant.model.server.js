@@ -108,9 +108,8 @@ function searchResByName(keyword) {
 }
 
 function findAllPlatesByRes(resId) {
-    // var plateModel = require("../plate/plate.model.server");
     return restaurantModel
-        .findRestaurantById(resId)
+        .findById(resId)
         .populate('menu')
         .exec()
         .then(function (restaurant) {

@@ -23,37 +23,37 @@
 
         function allRelations() {
             var url = "/api/allRelations";
-            $http.get(url);
+            return $http.get(url);
         }
 
         function createRelation(relation) {
             var url = "/api/relation";
-            $http.post(url,relation);
+            return $http.post(url,relation);
         }
 
         function findFollowByTo(toUserId) {
             var url = "/api/relation/follower/"+toUserId;
-            $http.get(url);
+            return $http.get(url);
         }
 
         function findFollowByFrom(fromUserId) {
             var url = "/api/relation/following/"+fromUserId;
-            $http.get(url);
+            return $http.get(url);
         }
 
         function findFollow(fromUserId,toUserId) {
             var url ="/api/relation/follow?from="+fromUserId+"&toUser="+toUserId;
-            $http.get(url);
+            return $http.get(url);
         }
 
-        function updateFollow(followId) {
+        function updateFollow(followId,follow) {
             var url ="/api/relation/follow/"+followId;
-            $http.put(url);
+            return $http.put(url,follow);
         }
 
         function deleteRelation(relationId) {
             var url ="/api/relation/"+relationId;
-            $http.delete(url);
+            return $http.delete(url);
         }
     }
 

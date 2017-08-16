@@ -1,0 +1,52 @@
+<div ng-include="'views/communal/header.html'"></div>
+
+<div class="container-fluid">
+    <div class="col-xs-4 hidden-xs">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a role="button" href="#!/admin/users">Users</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#!/admin/restaurants">Restaurants and Plates</a>
+            </li>
+            <!--<li class="list-group-item">-->
+                <!--<a href="#!/admin/plates">Plates</a>-->
+            <!--</li>-->
+            <li class="list-group-item">
+                <a href="#!/admin/reviews">Reviews</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#!/admin/relations">Relations</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+        <table>
+            <tr>
+                <th>NAME</th>
+                <th>Address</th>
+                <th>Manager ID</th>
+            </tr>
+            <tr>
+                <td><input class="form-control input-sm" ng-model="model.toAddRes.name"> </td>
+                <td><input class="form-control input-sm" ng-model="model.toAddRes.address"></td>
+                <td><input class="form-control input-sm" ng-model="model.toAddRes.managerId"></td>
+                <td>
+                    <div role="button" class="btn" ng-click="model.addRes(model.toAddRes)">Add</div>
+                </td>
+            </tr>
+            <tr ng-repeat="restaurant in model.restaurants">
+                <td>{{restaurant.name}} </td>
+                <td>{{restaurant.address}}</td>
+                <td>{{restaurant.manager}}</td>
+                <td>
+            <span ng-click="model.goToEdit(restaurant._id)"
+                  class="glyphicon glyphicon-pencil" role="button"></span>
+                    <span ng-click="model.deleteRes(restaurant._id)" role="button"
+                          class="glyphicon glyphicon-remove"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

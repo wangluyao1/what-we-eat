@@ -68,7 +68,7 @@ function getReviewById(req,res) {
 
 function deleteReview(req,res) {
     var reviewId = req.params['reviewId'];
-    return reviewId
+    return reviewModel
         .deleteReview(reviewId)
         .then(function (review) {
             res.json(review);

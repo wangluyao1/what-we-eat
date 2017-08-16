@@ -11,7 +11,10 @@
             .when("/", {
                 templateUrl: "views/home/templates/home.view.client.html",
                 controller: "SearchController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                  user:checkCurrentUser
+                }
             })
             .when("/login", {
                 templateUrl: "views/user/templates/login.view.client.html",
@@ -61,6 +64,22 @@
                 controller: "AdminUserEditController",
                 controllerAs: "model"
             })
+            .when("/admin/restaurants",{
+                templateUrl: "views/admin/templates/restaurant-list.view.client.html",
+                controller: "AdminRestaurantController",
+                controllerAs: "model"
+            })
+            .when("/admin/reviews",{
+                templateUrl: "views/admin/templates/review-list.view.client.html",
+                controller: "AdminReviewController",
+                controllerAs: "model"
+            })
+            .when("/admin/relations",{
+                templateUrl: "views/admin/templates/relation-list.view.client.html",
+                controller: "AdminRelationController",
+                controllerAs: "model"
+            })
+
 
             //*****************restaurant***************************************
 
@@ -91,19 +110,31 @@
             .when("/restaurant/details/:restaurantKey/edit",{
                 templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
                 controller: "ResDetailEditController",
-                controllerAs: "model",
-                resolve:{
-                    user:checkLogin
-                }
+                controllerAs: "model"//,
+                // resolve:{
+                //     user:checkLogin,
+                //     user:checkAdmin
+                // }
             })
+
+            //review
             .when("/restaurant/:restaurantId/review/:reviewId",{
                 templateUrl: "views/review/templates/review-create.view.client.html",
-                controller: "ReviewEditController",
+                controller: "ReviewCreateController",
                 controllerAs: "model",
                 resolve:{
                     user:checkLogin
                 }
             })
+            .when("/restaurant/:restaurantId/review/:reviewId/edit",{
+                templateUrl: "views/review/templates/review-edit.view.client.html",
+                controller: "ReviewEditController",
+                controllerAs: "model"//,
+                // resolve:{
+                //     user:checkLogin
+                // }
+            })
+
 
     }
 
@@ -125,7 +156,7 @@
     function checkCurrentUser(userService, $q, $location) {
         var deferred = $q.defer();
         userService
-            .loggedin()
+            .checkLogin()
             .then(function (user) {
                 if (user === '0') {
                     deferred.resolve({});
