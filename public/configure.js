@@ -11,7 +11,10 @@
             .when("/", {
                 templateUrl: "views/home/templates/home.view.client.html",
                 controller: "SearchController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                  user:checkCurrentUser
+                }
             })
             .when("/login", {
                 templateUrl: "views/user/templates/login.view.client.html",
@@ -153,7 +156,7 @@
     function checkCurrentUser(userService, $q, $location) {
         var deferred = $q.defer();
         userService
-            .loggedin()
+            .checkLogin()
             .then(function (user) {
                 if (user === '0') {
                     deferred.resolve({});
