@@ -1,0 +1,75 @@
+<div ng-include="'views/communal/header.html'"></div>
+
+<div class="container-fluid">
+    <div class="col-xs-4 hidden-xs">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a role="button" href="#!/admin/users">Users</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#!/admin/restaurants">Restaurants and Plates</a>
+            </li>
+            <!--<li class="list-group-item">-->
+            <!--<a href="#!/admin/plates">Plates</a>-->
+            <!--</li>-->
+            <li class="list-group-item">
+                <a href="#!/admin/reviews">Reviews</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#!/admin/relations">Relations</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+        <div ng-show="model.alert"
+             class="alert alert-success">
+            {{model.alert}}
+        </div>
+
+        <table>
+            <tr>
+                <th>From ID</th>
+                <th>To User ID</th>
+                <th>Relation Type</th>
+                <th><span ng-click="model.goToEdit(relation)"
+                          class="glyphicon glyphicon-pencil" role="button"></span></th>
+            </tr>
+            <tr>
+                <td><input class="form-control input-sm" ng-model="model.toAddRelation.from"> </td>
+                <td><input class="form-control input-sm" ng-model="model.toAddRelation.toUser"></td>
+                <td><input class="form-control input-sm" ng-model="model.toAddRelation.type"></td>
+                <td>
+                    <div role="button" class="glyphicon glyphicon-plus"
+                         ng-click="model.addRelation(model.toAddRelation)"></div>
+                </td>
+
+            </tr>
+            <tr ng-repeat="relation in model.relations">
+                <td><input class="form-control"
+                           ng-model="relation.from"
+                           value = {{relation.from}}
+                           ng-readonly="model.notEdit">
+                </td>
+                <td><input class="form-control"
+                           ng-model="relation.toUser"
+                           value = {{relation.toUser}}
+                           ng-readonly="model.notEdit">
+                </td>
+                <td><input class="form-control"
+                           ng-model="relation.type"
+                           value = {{relation.type}}
+                           ng-readonly="model.notEdit">
+                </td>
+                <td>
+            <span ng-click="model.saveRelation(relation)"
+                  class="glyphicon glyphicon-ok" role="button"></span>
+                </td>
+                <td>
+                    <span ng-click="model.deleteRelation(relation._id)" role="button"
+                          class="glyphicon glyphicon-remove"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

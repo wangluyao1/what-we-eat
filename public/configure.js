@@ -71,6 +71,11 @@
                 controller: "AdminReviewController",
                 controllerAs: "model"
             })
+            .when("/admin/relations",{
+                templateUrl: "views/admin/templates/relation-list.view.client.html",
+                controller: "AdminRelationController",
+                controllerAs: "model"
+            })
 
 
             //*****************restaurant***************************************
