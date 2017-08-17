@@ -19,12 +19,18 @@
             .when("/login", {
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "LoginController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkCurrentUser
+                }
             })
             .when("/register", {
                 templateUrl: "views/user/templates/register.view.client.html",
                 controller: "RegisterController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkCurrentUser
+                }
             })
             .when("/profile", {
                 templateUrl: "views/user/templates/profile.view.client.html",

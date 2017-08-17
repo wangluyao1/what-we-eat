@@ -50,7 +50,7 @@
         }
 
         function getHour(hourInfo) {
-
+        //todo
         }
 
         function star() {

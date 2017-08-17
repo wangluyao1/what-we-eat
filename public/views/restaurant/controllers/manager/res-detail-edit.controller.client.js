@@ -12,6 +12,7 @@
         model.restaurantKey = $routeParams['restaurantKey'];
 
         //model.user = user;
+        model.title = "Edit My Restaurant";
         model.addPlate = addPlate;
         model.saveMenu = saveMenu;
         model.updateRestaurant = updateRestaurant;
@@ -32,7 +33,7 @@
             return restaurantService
                 .updateRestaurant(res._id,res)
                 .then(function (response) {
-                    model.alert="Save Success!";
+                    model.alert="Restaurant Changes Save Success!";
                 })
         }
 
@@ -42,7 +43,7 @@
                     return plateService
                         .updatePlate(plate._id,plate)
                         .then(function (response) {
-                            model.alert="Save Success";
+                            model.alert="Menu Save Success";
                         })
                 });
         }

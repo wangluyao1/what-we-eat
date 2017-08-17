@@ -1,3 +1,4 @@
+<div ng-include="'views/communal/header.html'"></div>
 
 <div ng-show="model.alert"
      class="alert alert-success">
@@ -5,7 +6,7 @@
 </div>
 <div class="container-fluid">
     <label for="restaurantId">Restaurant ID</label>
-
+    <a class="pull-right" ng-click="model.updateRestaurant(model.res)" role="button">Save Info</a>
     <input name="restaurantId"
            ng-model="model.res._id"
            readonly
@@ -15,7 +16,6 @@
            placeholder="restaurantId"
     />
     <label for="restaurantName">Restaurant Name</label>
-    <button class="btn-success" ng-click="model.updateRestaurant(model.res)">Save</button>
 
     <input name="restaurantName"
            ng-model="model.res.name"
@@ -34,9 +34,10 @@
     />
     <!--todo: open hours-->
     <!--<label for = "hours"></label>-->
-    <label for = "menuTable">Menu</label>
-    <div id="menuTable" class="table">
-        <table class="table">
+    <label for = "menuTable">Menu
+    </label>
+    <a role="button" class="pull-right" ng-click="model.saveMenu()">Save Menu</a>
+        <table class="table" id="menuTable">
             <tr>
                 <th>PlateName</th>
                 <th>Description</th>
@@ -46,29 +47,32 @@
                           ng-click="add=true"></span></th>
             </tr>
             <tr ng-repeat="plate in model.plates">
-                <td><input class="form-control input-sm" ng-model="plate.name" ng-readonly="read" value="{{plate.name}}"> </td>
-                <td><input class="form-control input-sm" ng-model="plate.description" value="{{plate.description}}"> </td>
-                <td><div class="input-group">
+                <td><input class="form-control input-sm" type="text" ng-model="plate.name" ng-readonly="read" value="{{plate.name}}"> </td>
+                <td><input class="form-control input-sm" type="text" ng-model="plate.description" value="{{plate.description}}"> </td>
+                <td>
+                    <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input class="form-control input-sm" ng-model="plate.price" value="{{plate.price}}">
+                    <input class="form-control input-sm" type="number"  ng-model="plate.price" value="{{plate.price}}">
                 </div> </td>
                 <td>
-                <td>Added<span class="glyphicon glyphicon-ok" role="button" ng-click="model.saveMenu()"></span>
                 <span class="glyphicon glyphicon-remove" role="button" ng-click="model.removePlate(plate)"></span>
-                </td>
-                    <!--<span class="glyphicon glyphicon-pencil" role="button"></span>-->
                 </td>
             </tr>
             <tr ng-show="add">
-                <td><input class="form-control input-sm" ng-model="model.toAddPlate.name"> </td>
-                <td><input class="form-control input-sm" ng-model="model.toAddPlate.description"> </td>
-                <td><input class="form-control input-sm" ng-model="model.toAddPlate.price"> </td>
-                <td>New<span class="glyphicon glyphicon-ok" role="button" ng-click="model.addPlate(model.toAddPlate)"></span>
+                <td><input class="form-control input-sm" type="text" ng-model="model.toAddPlate.name"> </td>
+                <td><input class="form-control input-sm" type="text" ng-model="model.toAddPlate.description"> </td>
+
+                <td>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input class="form-control input-sm" type="number" ng-model="model.toAddPlate.price">
+
+                </div>
+                </td>
+
+                <td><span class="glyphicon glyphicon-plus" role="button" ng-click="model.addPlate(model.toAddPlate)"></span>
                 </td>
             </tr>
         </table>
     </div>
-{{model.plates}}
-
-
-</div>
