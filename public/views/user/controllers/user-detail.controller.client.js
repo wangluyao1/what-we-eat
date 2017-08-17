@@ -13,6 +13,7 @@
         model.follow = follow;
         model.unfollow = unfollow;
         model.goToRestaurant =goToRestaurant;
+        model.goToStarList=goToStarList;
 
         model.currentUser = user;
         model.viewedUserId = $routeParams["uid"];
@@ -122,6 +123,8 @@
                 });
         }
 
-
+        function goToStarList() {
+            $location.url("/user/detail/"+model.viewedUserId+"/starlist");
+        }
     }
 })();

@@ -65,6 +65,14 @@
                     user:checkLogin
                 }
             })
+            .when("/user/detail/:uid/starlist",{
+                templateUrl: "views/user/templates/view-user-starlist.view.client.html",
+                controller: "StarListViewController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
             //********************admin*****************************************
             .when("/admin/collections",{
                 templateUrl: "views/admin/templates/collections.view.client.html",
