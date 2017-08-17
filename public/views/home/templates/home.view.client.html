@@ -28,13 +28,15 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+<div class="wl-home">
 <div ng-show="model.alert"
      class="alert alert-danger">
     {{model.alert}}
 </div>
 
 <div class="container-fluid wl-home-center">
-<div class="input-group">
+    <image src="https://image.flaticon.com/icons/png/512/284/284741.png" class="wl-donut-img"></image>
+    <div class="input-group">
     <span class="input-group-addon" id="address">Address</span>
     <input type="text" class="form-control" placeholder="370 Huntington Ave, Boston, MA"
            ng-model="address"
@@ -56,4 +58,5 @@
 
 <button type="button" class="btn btn-secondary wl-home-search-button"
         ng-click="model.searchUserByUsername(keyword)">Search Users</button>
+</div>
 </div>

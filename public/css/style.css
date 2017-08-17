@@ -15,8 +15,14 @@ body {
     margin: 10px;
 }
 
+.wl-donut-img{
+    width: 80px;
+    margin-left: 35%;
+    margin-bottom: 12px;
+}
+
 .wl-home-center{
-    padding-top: 150px;
+    padding-top: 80px;
 }
 
 .wl .navbar-custom {
