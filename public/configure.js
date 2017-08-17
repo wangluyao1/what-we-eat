@@ -10,10 +10,18 @@
         $routeProvider
             .when("/", {
                 templateUrl: "views/home/templates/home.view.client.html",
-                controller: "SearchController",
+                controller: "HomeController",
                 controllerAs: "model",
                 resolve:{
                   user:checkCurrentUser
+                }
+            })
+            .when("/search/:search/address/:address/keyword/:keyword", {
+                templateUrl: "views/home/templates/home-search.view.client.html",
+                controller: "SearchController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkCurrentUser
                 }
             })
             .when("/login", {
@@ -55,6 +63,14 @@
                 resolve:{
                     user:checkLogin
                 }
+            })
+            .when("/user/reviews/:reviewId/edit",{
+                templateUrl: "views/review/templates/review-edit.view.client.html",
+                controller: "ReviewEditController",
+                controllerAs: "model"//,
+                // resolve:{
+                //     user:checkLogin
+                // }
             })
             //view other users
             .when("/user/detail/:uid",{
@@ -154,14 +170,6 @@
                 resolve:{
                     user:checkLogin
                 }
-            })
-            .when("/restaurant/:restaurantId/review/:reviewId/edit",{
-                templateUrl: "views/review/templates/review-edit.view.client.html",
-                controller: "ReviewEditController",
-                controllerAs: "model"//,
-                // resolve:{
-                //     user:checkLogin
-                // }
             })
 
 

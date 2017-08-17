@@ -4,18 +4,15 @@
 (function () {
     angular
         .module("what-we-eat")
-        .controller("SearchController", SearchController);
+        .controller("HomeController", HomeController);
 
-    function SearchController($location,userService,resSearchService,restaurantService,user) {
+    function HomeController($location,userService,user) {
         var model = this;
         model.user = user;
 
         model.searchRestaurants = searchRestaurants;
-        model.searchRestaurantsByAddress = searchRestaurantsByAddress;
         model.searchUserByUsername = searchUserByUsername;
-        model.goToUserDetail = goToUserDetail;
         model.searchLocalRes = searchLocalRes;
-        model.goToLocalResDetail = goToLocalResDetail;
         model.logout = logout;
 
         function init() {
@@ -37,61 +34,31 @@
                 if(!address){
                     model.alert = "Please Enter Your Address."
                 }
-                resSearchService.searchWithKeywordAndAddress(address,keyword)
-                    .then(function (response) {
-                        var result = response.data;
-                        model.restaurants = result['restaurants'];
-                        if(model.restaurants.length === 0){
-                            model.alert = "No Results";
-                        }
-                        model.localRestaurants = null;
-                        model.usersResult =null;
-                    });
+                $location.url("/search/res/address/"+address+"/keyword/"+keyword);
         }
 
-        function searchRestaurantsByAddress(address) {
-            resSearchService.searchWithAddress(address)
-                .then(function (response) {
-                    var result = response.data;
-                    model.restaurants = result['restaurants'];
-                    model.localRestaurants = null;
-                    model.usersResult =null
-                });
-        }
+        // function searchRestaurantsByAddress(address) {
+        //     resSearchService.searchWithAddress(address)
+        //         .then(function (response) {
+        //             var result = response.data;
+        //             model.restaurants = result['restaurants'];
+        //             model.localRestaurants = null;
+        //             model.usersResult =null
+        //         });
+        // }
 
         function searchLocalRes(keyword) {
-            restaurantService
-                .searchRestaurant(keyword)
-                .then(function (response) {
-                    model.localRestaurants = response.data;
-                    if(model.localRestaurants.length === 0){
-                        model.alert = "No Results";
-                    }
-                    model.restaurants = null;
-                    model.usersResult =null;
-                })
+            if(!keyword){
+                model.alert = "Please Enter keyword."
+            }
+            $location.url("/search/localRes/address/na/keyword/"+keyword);
         }
 
         function searchUserByUsername(username) {
-            return userService
-                .findUserByUserName(username)
-                .then(function (response) {
-                    //todo : cannot find user
-                    model.usersResult = response.data;
-                    if(model.userResults === undefined){
-                        model.alert = "No Results";
-                    }
-                    model.restaurants = null;
-                    model.localRestaurants =null;
-                });
-        }
-
-        function goToLocalResDetail(restaurantId) {
-            $location.url("/restaurant/details/"+restaurantId);
-        }
-
-        function goToUserDetail(userResultId) {
-            $location.url("/user/detail/"+ model.usersResult._id);
+            if(!username){
+                model.alert = "Please Enter keyword."
+            }
+            $location.url("/search/user/address/na/keyword/"+username);
         }
 
         function logout() {

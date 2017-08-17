@@ -1,5 +1,10 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
+        <a href="#"
+           role="button"
+           class="navbar-brand">
+            <span class="pull-left glyphicon glyphicon-chevron-left"></span>
+        </a>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -28,12 +33,12 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
 <div ng-show="model.alert"
      class="alert alert-danger">
     {{model.alert}}
 </div>
 
-<div class="container-fluid wl-home-center">
 <div class="input-group">
     <span class="input-group-addon" id="address">Address</span>
     <input type="text" class="form-control" placeholder="370 Huntington Ave, Boston, MA"
@@ -56,4 +61,19 @@
 
 <button type="button" class="btn btn-secondary wl-home-search-button"
         ng-click="model.searchUserByUsername(keyword)">Search Users</button>
+
+
+<div ng-if="model.restaurants"
+     ng-include="'views/restaurant/templates/restaurant-list.view.client.html'"></div>
+
+<div ng-if="model.localRestaurants"
+     ng-repeat="localRes in model.localRestaurants">
+    <h3>Local Restaurants Result</h3>
+<a ng-click="model.goToLocalResDetail(localRes._id)" role="button">
+    {{localRes.name}}</a>
 </div>
+
+<!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
+<a ng-if="model.usersResult"
+   ng-click="model.goToUserDetail(model.usersResult)"
+   role="button"><h3>Users Result</h3> {{model.usersResult.username}}</a>

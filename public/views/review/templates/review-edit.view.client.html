@@ -14,9 +14,9 @@
        ng-model="model.review.type"/>
 
 <label for="ReviewContent">Content</label>
-<input id="ReviewContent" name="ReviewContent"
-       class="form-control"
-       ng-model="model.review.content"/>
+<textarea id="ReviewContent" name="ReviewContent"
+       class="form-control" rows="5"
+          ng-model="model.review.content"></textarea>
 
 <button ng-click="model.save()" class="btn btn-primary btn-block">Save</button>
 <button ng-if = "model.review.type=='PRIVATE'" ng-click="model.send()" class="btn-primary btn btn-block">Send to Restaurant</button>

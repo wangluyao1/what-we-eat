@@ -11,6 +11,14 @@ body {
     padding-bottom: 80px;
 }
 
+.wl-home-search-button{
+    margin: 10px;
+}
+
+.wl-home-center{
+    padding-top: 150px;
+}
+
 .wl .navbar-custom {
     background-color: rgba(4, 11, 16, 0.95);
     border-color: #090909;

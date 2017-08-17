@@ -17,7 +17,7 @@
             return userService.getUserReviews(user._id)
                 .then(function (response) {
                     var originReviews = response.data;
-                    model.reviews = reArray(originReviews);
+                    model.reviews = originReviews;
                 },function (err) {
                     console.log(err);
                 })
@@ -25,23 +25,24 @@
 
         init();
 
-        function reArray(reviews) {
-            var newArray = [];
-            for(var index in reviews) {
-                var review = reviews[index];
-                restaurantService.findRestaurantById(review.restaurant)
-                    .then(function (restaurant) {
-                        var name = restaurant.data.name;
-                        var reviewCopy = {
-                            restaurantName: name, content: review.content,
-                            _id: review._id, type: review.type,restaurant:review.restaurant
-                        };
-                        newArray.push(reviewCopy);
-                    });
-            }
-                console.log(newArray);
-                return newArray;
-        }
+        // function reArray(reviews) {
+        //     var newArray = [];
+        //     for(var index in reviews) {
+        //         var review = reviews[index];
+        //         var name = "";
+        //          restaurantService.findRestaurantById(review.restaurant)
+        //             .then(function (restaurant) {
+        //                 name = restaurant.data.name;
+        //             });
+        //         var reviewCopy = {
+        //             restaurantName: name, content: review.content,
+        //             _id: review._id, type: review.type,restaurant:review.restaurant
+        //         };
+        //         newArray.push(reviewCopy);
+        //     }
+        //         console.log(newArray);
+        //         return newArray;
+        // }
 
         function goToRestaurant(restaurantId) {
             return restaurantService.findRestaurantById(restaurantId)
