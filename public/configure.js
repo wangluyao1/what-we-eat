@@ -49,7 +49,7 @@
                 }
             })
             .when("/user/reviews",{
-                templateUrl: "views/user/templates/review-list.view.client.html",
+                templateUrl: "views/review/templates/review-list.view.client.html",
                 controller: "ReviewListController",
                 controllerAs: "model",
                 resolve:{

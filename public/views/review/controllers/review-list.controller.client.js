@@ -27,22 +27,20 @@
 
         function reArray(reviews) {
             var newArray = [];
-            for(var index in reviews){
+            for(var index in reviews) {
                 var review = reviews[index];
-                var reviewCopy = JSON.parse(JSON.stringify(review));
-                var name = getName(review.restaurant);
-                reviewCopy.restaurantName = name;
-                newArray.push(reviewCopy);
+                restaurantService.findRestaurantById(review.restaurant)
+                    .then(function (restaurant) {
+                        var name = restaurant.data.name;
+                        var reviewCopy = {
+                            restaurantName: name, content: review.content,
+                            _id: review._id, type: review.type,restaurant:review.restaurant
+                        };
+                        newArray.push(reviewCopy);
+                    });
             }
-            console.log(newArray);
-            return newArray;
-        }
-
-        function getName(restaurantId) {
-            restaurantService.findRestaurantById(restaurantId)
-                .then(function (restaurant) {
-                    return restaurant.data.name;
-                })
+                console.log(newArray);
+                return newArray;
         }
 
         function goToRestaurant(restaurantId) {
