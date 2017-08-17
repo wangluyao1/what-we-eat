@@ -122,7 +122,7 @@ function deleteReviewForUser(userId,reviewId) {
 
 function getReviewsByUser(userId) {
     return userModel
-        .findUserById(userId)
+        .findById(userId)
         .populate('reviews')
         .exec()
         .then(function (user) {

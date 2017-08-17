@@ -62,6 +62,9 @@ app.get('/api/user/unfollow/:tuid',unfollow);
 app.get('/api/user/:userId/followers',findFollowers);
 app.get('/api/user/:userId/followings',findFollowings);
 
+//review
+app.get('/api/user/:userId/reviews',userAllReviews);
+
 // function facebookStrategy(token, refreshToken, profile, done) {
 //     userModel
 //         .findUserfindUserByFacebookId(profile.id)
@@ -375,4 +378,15 @@ function findFollowings(req,res) {
         },function (err) {
             res.sendStatus(404).send(err);
         })
+}
+
+function userAllReviews(req,res) {
+    var userId = req.params.userId;
+    userModel
+        .getReviewsByUser(userId)
+        .then(function (reviews) {
+            res.json(reviews);
+        },function (err) {
+            res.sendStatus(404).send(err);
+        });
 }

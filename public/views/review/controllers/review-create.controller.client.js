@@ -9,6 +9,7 @@
     function ReviewCreateController($routeParams,restaurantService,reviewService,$location) {
         var model = this;
 
+        model.title = "Write Review";
         model.restaurantId = $routeParams['restaurantId'];
         model.reviewId = $routeParams['reviewId'];
 

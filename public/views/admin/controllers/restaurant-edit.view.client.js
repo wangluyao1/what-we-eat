@@ -1,18 +1,18 @@
 /**
- * Created by Luyao on 8/13/2017.
+ * Created by Luyao on 8/16/2017.
  */
 (function () {
     angular
         .module("what-we-eat")
-        .controller("ResDetailEditController", ResDetailEditController);
+        .controller("AdminResEditController", AdminResEditController);
 
-    function ResDetailEditController(restaurantService,plateService,user) {
+    function AdminResEditController(restaurantService,plateService,$routeParams) {
         var model = this;
 
 
         //model.user = user;
-        model.title = "Edit My Restaurant";
-        model.restaurantId = user.restaurant;
+        model.title = "Edit Restaurant";
+        model.restaurantId = $routeParams.rid;
         model.addPlate = addPlate;
         model.saveMenu = saveMenu;
         model.updateRestaurant = updateRestaurant;
@@ -40,12 +40,12 @@
 
         function saveMenu() {
             return model.plates.forEach(function (plate) {
-                    return plateService
-                        .updatePlate(plate._id,plate)
-                        .then(function (response) {
-                            model.alert="Menu Save Success";
-                        })
-                });
+                return plateService
+                    .updatePlate(plate._id,plate)
+                    .then(function (response) {
+                        model.alert="Menu Save Success";
+                    })
+            });
         }
 
         function addPlate(newPlate) {

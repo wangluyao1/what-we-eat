@@ -45,7 +45,7 @@
         }
 
         function goToEdit(restaurantId) {
-            $location.url("/restaurant/details/"+restaurantId+"/edit");
+            $location.url("/admin/restaurant/"+restaurantId);
         }
 
     }

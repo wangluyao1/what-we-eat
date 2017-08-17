@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-include="'views/communal/header.html'"></div>
 
-</body>
-</html>
+<h1>Review</h1>
+<div class="container-fluid">
+    <ul class="list-group">
+
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-10">Restaurant</div>
+                <div class="col-md-7 col-sm-7 hidden-xs">Content</div>
+                <div class="col-sm-2 hidden-xs">Status</div>
+            </div>
+        </li>
+
+        <li ng-repeat="review in model.reviews" class="list-group-item">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-10"><a
+                        ng-click="model.goToRestaurant(restaurant)"
+                        >{{review.restaurantName}}</a></div>
+                <div class="col-md-3 col-sm-4 hidden-xs">{{review.content}}</div>
+                <div class="col-sm-2 hidden-xs">{{review.type}}</div>
+            </div>
+        </li>
+    </ul>
+</div>

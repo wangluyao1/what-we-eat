@@ -9,12 +9,14 @@
     function ReviewEditController($routeParams,restaurantService,reviewService,$location) {
         var model = this;
 
+        model.title = "Edit Review";
         model.restaurantId = $routeParams['restaurantId'];
         model.reviewId = $routeParams['reviewId'];
 
         model.save = save;
         model.send = send;
 
+        //todo: check user host
         function init() {
             return reviewService
                 .findReviewById(model.reviewId)

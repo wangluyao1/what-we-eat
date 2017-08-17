@@ -48,6 +48,14 @@
                     user:checkLogin
                 }
             })
+            .when("/user/reviews",{
+                templateUrl: "views/user/templates/review-list.view.client.html",
+                controller: "ReviewListController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
             //view other users
             .when("/user/detail/:uid",{
                 templateUrl: "views/user/templates/user-detail.view.client.html",
@@ -76,6 +84,11 @@
             .when("/admin/restaurants",{
                 templateUrl: "views/admin/templates/restaurant-list.view.client.html",
                 controller: "AdminRestaurantController",
+                controllerAs: "model"
+            })
+            .when("/admin/restaurant/:rid",{
+                templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
+                controller: "AdminResEditController",
                 controllerAs: "model"
             })
             .when("/admin/reviews",{
@@ -116,14 +129,13 @@
                     user:checkLogin
                 }
             })
-            .when("/restaurant/details/:restaurantKey/edit",{
+            .when("/restaurant/edit",{
                 templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
                 controller: "ResDetailEditController",
-                controllerAs: "model"//,
-                // resolve:{
-                //     user:checkLogin,
-                //     user:checkAdmin
-                // }
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
             })
 
             //review

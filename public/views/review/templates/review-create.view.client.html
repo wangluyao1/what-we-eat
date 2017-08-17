@@ -1,3 +1,5 @@
+<div ng-include="'views/communal/header.html'"></div>
+
 <h3>Review</h3>
 <label for="restaurant">For Restaurant</label>
 <input id="restaurant" name="restaurant"
@@ -5,16 +7,16 @@
        readonly
        ng-model="model.restaurant.name"/>
 
-<label for="ReviewUser">Content</label>
+<label for="ReviewUser">UserId</label>
 <input id="ReviewUser" name="ReviewUser"
+       readonly
        class="form-control"
        ng-model="model.review.user"/>
 
 <label for="ReviewContent">Content</label>
-<input id="ReviewContent" name="ReviewContent"
-       class="form-control"
-       ng-model="model.review.content"/>
+<textarea id="ReviewContent" name="ReviewContent"
+       class="form-control" ng-model="model.review.content" rows="5"></textarea>
 
-<button ng-click="model.save()" class="btn-primary">Save As Private</button>
-<button ng-click="model.send()" class="btn-primary">Send to Restaurant</button>
+<button ng-click="model.save()" class="btn btn-primary btn-block">Save As Private</button>
+<button ng-click="model.send()" class="btn btn-success btn-block">Send to Restaurant</button>
 

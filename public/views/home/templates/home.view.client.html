@@ -16,7 +16,9 @@
                 <li><a ng-if="model.notLogged" href="#!/register">Register</a></li>
                 <li><a ng-if="model.logged" href="#!/profile">Profile</a></li>
                 <!--for user-->
-                <li><a ng-if="model.isUser" href="#!/user/starlist">Starred Restaurants</a></li>
+                <li><a ng-if="model.isUser" href="#!/user/starlist">My Favorite Restaurants</a></li>
+                <li><a ng-if="model.isUser" href="#!/user/reviews">My Reviews</a></li>
+
                 <!--for manager-->
                 <li><a ng-if="model.isManager" ng-click="model.goToStore()">My Restaurant</a></li>
                 <!--for admin-->
