@@ -1,6 +1,6 @@
-<span class="glyphicon glyphicon-star-empty fa-3x" ng-click="model.star()" role="button"></span>
-<span ng-if="model.starred" class="glyphicon glyphicon-star" ng-click="model.unstar()" role="button"></span>
 <h1>{{model.restaurant.name}}</h1>
+<span ng-if="model.unstarred" class="glyphicon glyphicon-star-empty fa-3x" ng-click="model.star()" role="button"></span>
+<span ng-if="model.starred" class="glyphicon glyphicon-star fa-3x" ng-click="model.unstar()" role="button"></span>
 <h4>Address:</h4>
 {{model.restaurant.address}}
 <table class="table">

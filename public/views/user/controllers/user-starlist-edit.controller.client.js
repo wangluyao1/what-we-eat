@@ -6,17 +6,24 @@
         .module("what-we-eat")
         .controller("StarListEditController", StarListEditController);
 
-    function StarListEditController($routeParams,userService,user,$location) {
+    function StarListEditController(userService,user,$location) {
         var model = this;
+        model.title = "Favorite Restaurants";
 
         model.userId = user._id;
         model.currentUser = user;
         model.logout = logout;
+        model.unStarRes = unStarRes;
+        model.goToRestaurant = goToRestaurant;
 
         function init() {
             if(user._id) {
                 model.logged = true;
             }
+            refreshStarList();
+        }
+
+        function refreshStarList() {
             return userService
                 .getStarList(model.userId)
                 .then(function (response) {
@@ -32,6 +39,23 @@
                 .then(function () {
                     $location.url('/login');
                 });
+        }
+
+        function unStarRes(resId) {
+            return userService.
+                unstarRes(model.currentUser._id,resId)
+                .then(function (response) {
+                    refreshStarList();
+                });
+
+        }
+
+        function goToRestaurant(restaurant) {
+            if(restaurant.type=== 'LOCAL'){
+                $location.url("/restaurant/details/"+restaurant._id);
+            } else {
+                $location.url("/eatstreet/restaurant/details/"+restaurant.key);
+            }
         }
     }
 })();

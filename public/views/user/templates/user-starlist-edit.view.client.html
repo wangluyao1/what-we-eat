@@ -1,1 +1,26 @@
 <div ng-include="'views/communal/header.html'"></div>
+<h1>Star List</h1>
+<div class="container-fluid">
+    <ul class="list-group">
+
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-10">Restaurant Name</div>
+                <div class="col-md-3 col-sm-4 hidden-xs">Address</div>
+                <div class="col-sm-2 hidden-xs">Review</div>
+            </div>
+        </li>
+
+        <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-10" ng-click="model.goToRestaurant(restaurant)">{{restaurant.name}}</div>
+                <div class="col-md-3 col-sm-4 hidden-xs">{{restaurant.address}}</div>
+                <div class="col-sm-2 hidden-xs" ng-click="model.goToReview()">Reviews</div>
+                <div class="col-xs-1 col-md-4">
+                    <a ng-click="model.unStarRes(restaurant._id)" role="button"> <span
+                        class="pull-right glyphicon glyphicon-remove-circle"></span>
+                </a></div>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -9,6 +9,7 @@
     function ResDetailController(resSearchService, $routeParams,restaurantService,userService,user) {
         var model = this;
 
+        model.title = "Restaurant Detail";
         model.currentUser = user;
         model.restaurantKey = $routeParams['restaurantKey'];
         model.star = star;
