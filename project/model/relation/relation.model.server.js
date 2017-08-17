@@ -39,7 +39,7 @@ function findFollow(from,toUser) {
 }
 
 function findAllFollowers(toUser) {
-    return relationModel.find({toUser:toUser,type:"FOLLOW"});
+    return relationModel.find({toUser:toUser,type:"FOLLOW"})
 }
 
 function findAllFollowings(from) {

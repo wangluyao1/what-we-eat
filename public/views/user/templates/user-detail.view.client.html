@@ -1,44 +1,72 @@
+<div ng-include="'views/communal/header.html'"></div>
+
+<h1>User Detail</h1>
+
+<div class="container-fluid">
 <div ng-show="model.alert"
      class="alert alert-success">
     {{model.alert}}
 </div>
 
+    <h4>Username:{{model.viewedUser.username}}</h4>
+    <h4>
+    <span class="glyphicon glyphicon-eye-open" ng-if="model.notFollowing"
+       role="button" ng-click="model.follow(model.viewedUser._id)">Follow</span>
+    <span class="glyphicon glyphicon-eye-close" ng-if="model.haveFollowed"
+       role="button" ng-click="model.unfollow(model.viewedUser._id)">Unfollow</span>
+    </h4>
+    <div ng-if="model.viewedUser.roles==='MANAGER'">
+        <a ng-click="model.goToRestaurant()">Go To His Restaurant</a>
+    </div>
 
-<div>
-    <form>
-    username : {{model.viewedUser.username}}
-    <button ng-click="model.follow(viewedUser._id)" role="button">
-        Follow
-    </button>
-        <button ng-click="model.unfollow(viewedUser._id)" role="button">
-            Unfollow
-        </button>
-    </form>
-    first name: {{model.viewedUser.firstname}}
-    last name :{{model.viewedUser.lastName}}
+    <div ng-if="model.viewedUser.roles==='USER'">
+        <a ng-click="model.goToStarList()"></a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-4">Reviews</div>
+                <div class="col-xs-4">Followers</div>
+                <div class="col-xs-4">Followings</div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-4">{{model.viewedUser.reviews.length}}</div>
+                <div role="button" class="col-xs-4" ng-click="showFollowers=true;showFollowings=false">{{model.followers.length}} Show</div>
+                <div role="button" class="col-xs-4" ng-click="showFollowings=true;showFollowers=false">{{model.followings.length}} Show</div>
+            </div>
+        </li>
+    </ul>
+
+        <ul ng-if="showFollowers" class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-8">Followers</div>
+                </div>
+            </li>
+            <li class="list-group-item" ng-repeat="follower in model.followers">
+                <div class="row">
+                    <div class="col-xs-4">UserName</div>
+                    <div class="col-xs-8">{{follower.username}}</div>
+                </div>
+            </li>
+        </ul>
+
+        <ul ng-if="showFollowings" class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-8">Followers</div>
+                </div>
+            </li>
+            <li class="list-group-item" ng-repeat="following in model.followings">
+                <div class="row">
+                    <div class="col-xs-4">UserName</div>
+                    <div class="col-xs-8">{{following.username}}</div>
+                </div>
+            </li>
+        </ul>
+
 </div>
-
-<form>
-    Followings:{{model.followings.length}}
-    Followers:{{model.followers.length}}
-</form>
-<table>
-    <tr>
-    <th>Followers</th>
-    </tr>
-    <tr ng-repeat="follower in model.followers">
-        <td>{{follower.username}}</td>
-    </tr>
-</table>
-
-<table>
-    <tr>
-        <th>Followers</th>
-    </tr>
-    <tr ng-repeat="following in model.followings">
-        <td>{{following.username}}</td>
-    </tr>
-</table>
-
-Followers: {{model.followers}}
-Followings:{{model.followings}}
+</div>
