@@ -20,7 +20,7 @@
                 <li><a ng-if="model.isUser" href="#!/user/reviews">My Reviews</a></li>
 
                 <!--for manager-->
-                <li><a ng-if="model.isManager" ng-click="model.goToStore()">My Restaurant</a></li>
+                <li><a ng-if="model.isManager" href="#!/restaurant/edit">My Restaurant</a></li>
                 <!--for admin-->
                 <li><a ng-if="model.isAdmin" href="#!/admin/collections">Manage All</a></li>
                 <li><a ng-if="model.logged" ng-click="model.logout()">Logout</a></li>

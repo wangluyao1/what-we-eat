@@ -22,6 +22,10 @@
                 .then(function (response) {
                     model.restaurant = response.data;
                     checkStar();
+                    restaurantService.findPlatesByResId(model.restaurantId)
+                        .then(function (response) {
+                            model.plates = response.data;
+                        })
                 });
         }
 

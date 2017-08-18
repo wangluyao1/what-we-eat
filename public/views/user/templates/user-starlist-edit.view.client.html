@@ -13,9 +13,10 @@
 
         <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
             <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-10" ng-click="model.goToRestaurant(restaurant)">{{restaurant.name}}</div>
+                <div class="col-md-3 col-sm-3 col-xs-10" ng-click="model.goToRestaurant(restaurant)"
+                role="button">{{restaurant.name}}</div>
                 <div class="col-md-3 col-sm-4 hidden-xs">{{restaurant.address}}</div>
-                <div class="col-sm-2 hidden-xs" ng-click="model.goToReview()">Reviews</div>
+                <div class="col-sm-2 hidden-xs" ng-click="model.goToReview()">Write Reviews</div>
                 <div class="col-xs-1 col-md-4">
                     <a ng-click="model.unStarRes(restaurant._id)" role="button"> <span
                         class="pull-right glyphicon glyphicon-remove-circle"></span>
