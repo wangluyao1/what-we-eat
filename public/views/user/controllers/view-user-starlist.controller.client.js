@@ -15,8 +15,13 @@
         model.goToRestaurant = goToRestaurant;
 
         function init() {
-            if(user._id) {
+            if(user._id){
                 model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
             }
             refreshStarList();
         }

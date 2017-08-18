@@ -22,27 +22,44 @@
     </div>
 
     <div class="col-xs-12 col-sm-8">
+        <div ng-show="model.alert"
+             class="alert alert-success">
+            {{model.alert}}
+        </div>
+
         <table>
             <tr>
                 <th>User Id</th>
                 <th>Restaurant Id</th>
                 <th>Content</th>
+                <th><span ng-click="model.goToEdit(review)"
+                          class="glyphicon glyphicon-pencil" role="button"></span></th>
             </tr>
             <tr>
-                <td><input class="form-control input-sm" ng-model="model.toAddReview.user"> </td>
-                <td><input class="form-control input-sm" ng-model="model.toAddReview.restaurant"></td>
-                <td><input class="form-control input-sm" ng-model="model.toAddReview.content"></td>
+                <td><input class="form-control" ng-model="model.toAddReview.user"> </td>
+                <td><input class="form-control" ng-model="model.toAddReview.restaurant"></td>
+                <td><input class="form-control" ng-model="model.toAddReview.content"></td>
                 <td>
                     <div role="button" class="btn" ng-click="model.addReview(model.toAddReview)">Add</div>
                 </td>
             </tr>
             <tr ng-repeat="review in model.reviews">
-                <td>{{review.user}} </td>
-                <td>{{review.restaurant}}</td>
-                <td>{{review.content}}</td>
+                <td><input class="form-control"
+                           ng-model="review.user"
+                           ng-readonly="model.notEdit"
+                           value={{review.user}}> </td>
+                <td><input class="form-control"
+                           ng-model="review.restaurant"
+                           ng-readonly="model.notEdit"
+                           value={{review.restaurant}}></td>
+                <td><input class="form-control"
+                           ng-model="review.content"
+                           ng-readonly="model.notEdit"
+                           value={{review.content}}></td>
                 <td>
-            <span ng-click="model.goToEdit(review)"
-                  class="glyphicon glyphicon-pencil" role="button"></span>
+            <span ng-click="model.saveReview(review)"
+                  class="glyphicon glyphicon-ok" role="button"></span></td>
+                <td>
                     <span ng-click="model.deleteReview(review._id)" role="button"
                           class="glyphicon glyphicon-remove"></span>
                 </td>
@@ -50,3 +67,4 @@
         </table>
     </div>
 </div>
+<div ng-include="'views/communal/footer.html'"></div>

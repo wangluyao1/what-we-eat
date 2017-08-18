@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ReviewEditController", ReviewEditController);
 
-    function ReviewEditController($routeParams,restaurantService,reviewService,$location) {
+    function ReviewEditController($routeParams,restaurantService,reviewService,$location,user) {
         var model = this;
 
         model.title = "Edit Review";
@@ -17,6 +17,14 @@
 
         //todo: check user host
         function init() {
+            if(user._id){
+                model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
+            }
             return reviewService
                 .findReviewById(model.reviewId)
                 .then(function (response) {

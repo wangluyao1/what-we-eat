@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("AdminResEditController", AdminResEditController);
 
-    function AdminResEditController(restaurantService,plateService,$routeParams) {
+    function AdminResEditController(restaurantService,plateService,$routeParams,userService) {
         var model = this;
 
 
@@ -18,6 +18,8 @@
         model.updateRestaurant = updateRestaurant;
         model.removePlate = removePlate;
         model.refreshPlates = refreshPlates();
+        model.logout = logout;
+
 
         function init() {
             return restaurantService
@@ -28,6 +30,14 @@
                 });
         }
         init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
 
         function updateRestaurant(res) {
             return restaurantService

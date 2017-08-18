@@ -6,15 +6,18 @@
         .module("what-we-eat")
         .controller("AdminReviewController", AdminReviewController);
 
-    function AdminReviewController(reviewService, $location) {
+    function AdminReviewController(reviewService, $location,userService) {
         var model = this;
         model.title = "Manage Reviews";
 
         model.addReview = addReview;
         model.deleteReview = deleteReview;
         model.goToEdit = goToEdit;
+        model.logout =logout;
+        model.saveReview = saveReview;
 
         function init() {
+            model.notEdit = true;
             refreshReview();
         }
 
@@ -44,8 +47,26 @@
                 })
         }
 
+        function saveReview(review) {
+            return reviewService
+                .updateReview(review._id,review)
+                .then(function (response) {
+                    model.alert = "Changes save";
+                })
+        }
+
         function goToEdit(review) {
-            $location.url("/restaurant/"+review.restaurant+"/review/"+review._id +"/edit")
+            // $location.url("/restaurant/"+review.restaurant+"/review/"+review._id +"/edit")
+            model.notEdit = false;
+
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
     }

@@ -9,5 +9,21 @@
     function AdminCollectionsController() {
         var model = this;
         model.title = "Collections";
+
+        function init() {
+
+        }
+
+        init();
+
+        model.logout = logout;
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
     }
 })();

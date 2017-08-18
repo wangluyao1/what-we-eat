@@ -17,6 +17,14 @@
         model.getHour = getHour;
 
         function init() {
+            if(user._id){
+                model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
+            }
             resSearchService.searchWithKey(model.restaurantKey)
                 .then(function (response) {
                     model.info = response.data;
