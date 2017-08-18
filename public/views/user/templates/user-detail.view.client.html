@@ -1,27 +1,36 @@
 <div ng-include="'views/communal/header.html'"></div>
 
-<h1>User Detail</h1>
 
 <div class="container-fluid">
 <div ng-show="model.alert"
      class="alert alert-success">
     {{model.alert}}
 </div>
+<div class="container-fluid wl-user-center">
+    <h1>{{model.viewedUser.username}}</h1>
+</div>
 
-    <h4>Username:{{model.viewedUser.username}}</h4>
-    <h4>
-    <span class="glyphicon glyphicon-eye-open" ng-if="model.notFollowing"
-       role="button" ng-click="model.follow(model.viewedUser._id)">Follow</span>
-    <span class="glyphicon glyphicon-eye-close" ng-if="model.haveFollowed"
-       role="button" ng-click="model.unfollow(model.viewedUser._id)">Unfollow</span>
-    </h4>
-    <div ng-if="model.viewedUser.roles==='MANAGER'">
-        <a ng-click="model.goToRestaurant(model.viewedUser.restaurant)" role="button">Go To His Restaurant</a>
-    </div>
-
-    <div ng-if="model.viewedUser.roles==='USER'">
-        <a ng-click="model.goToStarList()" role="button">Go To His Favorite Restaurants</a>
-    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6">
+            <div ng-if="model.viewedUser.roles==='MANAGER'">
+                <a ng-click="model.goToRestaurant(model.viewedUser.restaurant)" role="button">
+                    <span class="glyphicon glyphicon-fire wl-fire-center"></span><br>His Restaurant</a>
+            </div>
+            <div ng-if="model.viewedUser.roles==='USER'">
+                <a ng-click="model.goToStarList()" role="button">Go To His Favorite Restaurants</a>
+            </div>
+                </div>
+                    <div class="col-xs-6">
+                       <a> <span class="glyphicon glyphicon-eye-open" ng-if="model.notFollowing"
+                              role="button" ng-click="model.follow(model.viewedUser._id)"></span><br>Follow</a>
+                        <span class="glyphicon glyphicon-eye-close" ng-if="model.haveFollowed"
+                              role="button" ng-click="model.unfollow(model.viewedUser._id)">Unfollow</span>
+                    </div>
+                </div>
+        </li>
+    </ul>
 
     <ul class="list-group">
         <li class="list-group-item">

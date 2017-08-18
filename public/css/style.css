@@ -53,6 +53,18 @@ body {
     margin-right: 10px;
 }
 
+.wl-user-center{
+    width:35%;
+}
+
+.glyphicon-eye-open:before {
+    padding-left: 10px;
+}
+
+.wl-fire-center .glyphicon-fire:before {
+    padding-left :40px;
+}
+
 .wl .navbar-custom {
     background-color: rgba(125, 125, 125, 0.95);
     border-color: rgba(125, 125, 125, 0.95);
