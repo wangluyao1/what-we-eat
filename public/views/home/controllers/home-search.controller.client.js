@@ -33,15 +33,9 @@
                 model.logged = false;
             }
             if(model.searchItem === "res"){
-                if(model.keyword === "undefined"){
-                    searchRestaurants(model.address,null);
-                } else {
                     searchRestaurants(model.address, model.keyword);
+                    searchLocalRes(model.keyword);
                 }
-            }
-            if(model.searchItem === "localRes"){
-                searchLocalRes(model.keyword);
-            }
             if(model.searchItem === "user"){
                 searchUserByUsername(model.keyword);
             }
@@ -58,11 +52,10 @@
                         var result = response.data;
                         model.restaurants = result['restaurants'];
                         if(model.restaurants.length === 0){
-                            model.alert = "No Results";
+                            model.alert = "No eat street restaurant Results";
                         } else{
                             model.alert = null;
                         }
-                        model.localRestaurants = null;
                         model.usersResult =null;
                     });
         }
@@ -84,11 +77,10 @@
                 .then(function (response) {
                     model.localRestaurants = response.data;
                     if(model.localRestaurants.length === 0){
-                        model.alert = "No Results";
+                        model.alert = "No Local restaurant Results";
                     } else{
                         model.alert = null;
                     }
-                    model.restaurants = null;
                     model.usersResult =null;
 
                 })
@@ -101,7 +93,7 @@
                     //todo : cannot find user
                     model.usersResult = response.data;
                     if(model.usersResult === undefined){
-                        model.alert = "No Results";
+                        model.alert = "No User Results";
                         return;
                     } else{
                         model.alert = null;

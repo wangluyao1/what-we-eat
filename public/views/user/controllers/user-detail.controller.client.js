@@ -17,8 +17,17 @@
 
         model.currentUser = user;
         model.viewedUserId = $routeParams["uid"];
+        model.logout = logout;
 
         function init() {
+            if(user._id){
+                model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
+            }
             return userService
                 .findUserById(model.viewedUserId)
                 .then(function (response) {
@@ -125,6 +134,14 @@
 
         function goToStarList() {
             $location.url("/user/detail/"+model.viewedUserId+"/starlist");
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

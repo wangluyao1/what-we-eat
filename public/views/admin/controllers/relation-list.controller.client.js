@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("AdminRelationController", AdminRelationController);
 
-    function AdminRelationController(relationService, $location) {
+    function AdminRelationController(relationService,userService) {
         var model = this;
         model.title = "Manage Relations";
 
@@ -14,6 +14,7 @@
         model.deleteRelation = deleteRelation;
         model.goToEdit = goToEdit;
         model.saveRelation = saveRelation;
+        model.logout = logout;
 
         function init() {
             model.notEdit = true;
@@ -56,6 +57,15 @@
                 .then(function (relation) {
                     model.alert = "Changes Saved";
                 })
+        }
+
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

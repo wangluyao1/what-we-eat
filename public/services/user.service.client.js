@@ -17,18 +17,26 @@
             "deleteUser": deleteUser,
             "allUsers":allUsers,
 
+            //user action
             "logout":logout,
             "checkLogin": checkLogin,
             "checkLogout" : checkLogout,
+            "register":register,
+            "checkAdmin":checkAdmin,
+            "checkGeneralUser":checkGeneralUser,
+            "checkManager":checkManager,
+
             //follow
             "follow":follow,
             "unfollow":unfollow,
             "findFollowers":findFollowers,
             "findFollowings":findFollowings,
+
             //star list
             "starRes":starRes,
             "unstarRes":unstarRes,
             "getStarList":getStarList,
+
             //reviews
             "getUserReviews":getUserReviews
         };
@@ -50,6 +58,37 @@
                     return response.data;
                 })
         }
+
+        function checkAdmin() {
+            var url = "/api/checkAdmin";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkGeneralUser() {
+            var url = "/api/checkGeneralUser";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkManager() {
+            var url = "/api/checkManager";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+
+        function register(user) {
+            var url = "/api/register";
+            return $http.post(url, user);
+        }
+
 
         function logout() {
             var url = "/api/checkLogout";

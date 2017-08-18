@@ -13,10 +13,16 @@
         model.userId = $routeParams["uid"];
         model.logout = logout;
         model.goToRestaurant = goToRestaurant;
+        model.logout = logout;
 
         function init() {
-            if(user._id) {
+            if(user._id){
                 model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
             }
             refreshStarList();
         }
@@ -45,6 +51,14 @@
             } else {
                 $location.url("/eatstreet/restaurant/details/"+restaurant.key);
             }
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

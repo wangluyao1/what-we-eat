@@ -13,6 +13,7 @@
         model.deleteUser = deleteUser;
         model.addUser = addUser;
         model.goToEdit = goToEdit;
+        model.logout = logout;
 
         function init() {
             refreshModelUsers();
@@ -45,6 +46,14 @@
 
         function goToEdit(user) {
             $location.url("/admin/users/edit/"+user._id);
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
     }

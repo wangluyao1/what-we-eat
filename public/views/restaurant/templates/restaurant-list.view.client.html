@@ -1,10 +1,26 @@
 <div class="container-fluid">
     <h3>EatStreet Restaurants Result</h3>
+
+    <ul  class="list-group">
+        <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-2">
+                    <img src= {{restaurant.logoUrl}}></div>
+                <div class="col-xs-5 pull-right">
+                    <a href="#!/eatstreet/restaurant/details/{{restaurant.apiKey}}">{{restaurant.name}}
+                    </a><br>
+                    <b>Address: </b>{{restaurant.streetAddress}} {{restaurant.city}} {{restaurant.state}}
+                    <br><b>Food Type: </b>
+                    <div ng-repeat="type in restaurant.foodTypes">#{{type}} </div>
+                </div>
+                </div>
+        </li>
+    </ul>
 <table class="table">
     <!--<col width="60">-->
     <!--<col width="150">-->
     <tr ng-repeat="restaurant in model.restaurants">
-        <td class="wl-30-td"><img src= {{restaurant.logoUrl}}></td>
+        <td><img src= {{restaurant.logoUrl}}></td>
         <td><a href="#!/eatstreet/restaurant/details/{{restaurant.apiKey}}">{{restaurant.name}}
             </a>
             <br><b>Address: </b>{{restaurant.streetAddress}} {{restaurant.city}} {{restaurant.state}}

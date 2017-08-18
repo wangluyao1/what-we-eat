@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("StarListEditController", StarListEditController);
 
-    function StarListEditController(userService,user,$location) {
+    function StarListEditController(userService,user,$location,reviewService) {
         var model = this;
         model.title = "Favorite Restaurants";
 
@@ -15,8 +15,18 @@
         model.logout = logout;
         model.unStarRes = unStarRes;
         model.goToRestaurant = goToRestaurant;
+        model.writeReview = writeReview;
+        model.logout = logout;
 
         function init() {
+            if(user._id){
+                model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
+            }
             if(user._id) {
                 model.logged = true;
             }
@@ -33,14 +43,6 @@
         
         init();
 
-        function logout() {
-            userService
-                .logout()
-                .then(function () {
-                    $location.url('/login');
-                });
-        }
-
         function unStarRes(resId) {
             return userService.
                 unstarRes(model.currentUser._id,resId)
@@ -56,6 +58,23 @@
             } else {
                 $location.url("/eatstreet/restaurant/details/"+restaurant.key);
             }
+        }
+
+        function writeReview(restaurant) {
+            var newReview = {restaurant:restaurant._id,user:user};
+            return reviewService
+                .createReview(newReview)
+                .then(function (response) {
+                    $location.url("/restaurant/"+restaurant._id+"/review/"+response.data._id);
+                })
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

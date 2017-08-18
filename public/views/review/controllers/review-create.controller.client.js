@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ReviewCreateController", ReviewCreateController);
 
-    function ReviewCreateController($routeParams,restaurantService,reviewService,$location) {
+    function ReviewCreateController($routeParams,restaurantService,reviewService,$location,user,userService) {
         var model = this;
 
         model.title = "Write Review";
@@ -15,8 +15,17 @@
 
         model.save = save;
         model.send = send;
+        model.logout = logout;
 
         function init() {
+            if(user._id){
+                model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
+            }
             return reviewService
                 .findReviewById(model.reviewId)
                 .then(function (response) {
@@ -28,6 +37,8 @@
                         })
                 });
         }
+
+        init();
 
         function save() {
             return reviewService
@@ -46,7 +57,13 @@
                 })
         }
 
-        init();
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
     }
 })();
 

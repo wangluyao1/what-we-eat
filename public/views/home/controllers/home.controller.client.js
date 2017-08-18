@@ -12,7 +12,7 @@
 
         model.searchRestaurants = searchRestaurants;
         model.searchUserByUsername = searchUserByUsername;
-        model.searchLocalRes = searchLocalRes;
+        //model.searchLocalRes = searchLocalRes;
         model.logout = logout;
 
         function init() {
@@ -32,7 +32,12 @@
 
         function searchRestaurants(address,keyword) {
                 if(!address){
-                    model.alert = "Please Enter Your Address."
+                    model.alert = "Please Enter Your Address.";
+                    return;
+                }
+                if(!keyword){
+                    model.alert = "Please Enter keyword.";
+                    return;
                 }
                 $location.url("/search/res/address/"+address+"/keyword/"+keyword);
         }
@@ -47,12 +52,12 @@
         //         });
         // }
 
-        function searchLocalRes(keyword) {
-            if(!keyword){
-                model.alert = "Please Enter keyword."
-            }
-            $location.url("/search/localRes/address/na/keyword/"+keyword);
-        }
+        // function searchLocalRes(keyword) {
+        //     if(!keyword){
+        //         model.alert = "Please Enter keyword."
+        //     }
+        //     $location.url("/search/localRes/address/na/keyword/"+keyword);
+        // }
 
         function searchUserByUsername(username) {
             if(!username){

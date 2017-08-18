@@ -6,17 +6,28 @@
         .module("what-we-eat")
         .controller("ReviewEditController", ReviewEditController);
 
-    function ReviewEditController($routeParams,restaurantService,reviewService,$location) {
+    function ReviewEditController($routeParams,restaurantService,reviewService,$location,user,userService) {
         var model = this;
 
         model.title = "Edit Review";
         model.reviewId = $routeParams['reviewId'];
 
+
+        model.deleteReview = deleteReview;
         model.save = save;
         model.send = send;
+        model.logout = logout;
 
         //todo: check user host
         function init() {
+            if(user._id){
+                model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
+            }
             return reviewService
                 .findReviewById(model.reviewId)
                 .then(function (response) {
@@ -29,11 +40,13 @@
                 });
         }
 
+        init();
+
         function save() {
             return reviewService
                 .updateReview(model.review._id,model.review)
                 .then(function (response) {
-                    $location.url("restaurant/details/"+model.restaurant._id);
+                    $location.url("/user/reviews");
                 })
         }
 
@@ -46,7 +59,22 @@
                 })
         }
 
-        init();
+        function deleteReview() {
+            return reviewService
+                .deleteReview(model.reviewId)
+                .then(function (response) {
+                    $location.url("/user/reviews");
+                })
+        }
+
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
     }
 })();
 

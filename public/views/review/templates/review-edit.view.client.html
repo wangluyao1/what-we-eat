@@ -7,7 +7,13 @@
        readonly
        ng-model="model.review.restaurant"/>
 
-<label for="restaurant">Type</label>
+<label for="name">Restaurant Name</label>
+<input id="name" name="name"
+       class="form-control"
+       readonly
+       ng-model="model.restaurant.name"/>
+
+<label for="type">Type</label>
 <input id="type" name="type"
        class="form-control"
        readonly
@@ -19,4 +25,7 @@
           ng-model="model.review.content"></textarea>
 
 <button ng-click="model.save()" class="btn btn-primary btn-block">Save</button>
+<button ng-click="model.deleteReview()" class="btn btn-danger btn-block">Delete</button>
+
 <button ng-if = "model.review.type=='PRIVATE'" ng-click="model.send()" class="btn-primary btn btn-block">Send to Restaurant</button>
+<div ng-include="'views/communal/footer.html'"></div>

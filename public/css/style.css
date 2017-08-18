@@ -9,10 +9,12 @@ textarea {
 body {
     padding-top: 70px;
     padding-bottom: 80px;
+    overflow-x: hidden;
 }
 
 .wl-home-search-button{
     margin: 10px;
+    width: 43%;
 }
 
 .wl-donut-img{
@@ -25,9 +27,67 @@ body {
     padding-top: 80px;
 }
 
+.navbar-default{
+    background-color: #D7D7D7;
+    border-color: #D7D7D7;
+}
+
+.navbar-inverse {
+    background-color: #4D5973;
+    border-color: #4D5973;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #cbd5df;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #e6e4d6;
+}
+
+.h2, h2{
+    font: status-bar;
+}
+
+.glyphicon-hand-right:before {
+    margin-right: 10px;
+}
+
+.wl-hand-center .glyphicon-hand-right:before {
+    padding-left :60px;
+}
+
+.wl-user-center{
+    width:35%;
+}
+
+.glyphicon-eye-open:before {
+    padding-left: 10px;
+}
+
+.wl-fire-center .glyphicon-fire:before {
+    padding-left :40px;
+}
+
+.wl-head-no-line .list-group-item{
+    border : 0px;
+}
+
 .wl .navbar-custom {
-    background-color: rgba(4, 11, 16, 0.95);
-    border-color: #090909;
+    background-color: rgba(125, 125, 125, 0.95);
+    border-color: rgba(125, 125, 125, 0.95);
+}
+
+.list-group-item.active{
+    background-color: #4D5973;
+    border-color: #4D5973;
+}
+
+.list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: rgba(125, 125, 125, 0.95);
+    border-color: rgba(125, 125, 125, 0.95);
 }
 
 .wl .navbar-custom .navbar-brand {
@@ -64,34 +124,13 @@ body {
 }
 
 .wl > a {
-    color: #f5f5f5;
-}
-
-.wl .widget {
-    margin-bottom: 10px;
-    margin-top: 15px;
-    padding-bottom: 5px;
-}
-
-.wl .widget-toolbar {
-    position: absolute;
-    right: 15px;
-    z-index: 1;
-    background: white;
-}
-
-.wl .widget > img {
-    width: 100%;
+    color: #f5e009;
 }
 
 .wl .away-from-footer {
     padding-bottom: 60px;
 }
 
-.wl .videoFrame {
-    width: 100%;
-    height: 350px;
-}
 
 .wl .wl-blackIcon {
     color: black;
@@ -100,10 +139,6 @@ body {
 .wl-noUnderLine > a:focus, a:hover {
     color: #23527c;
     text-decoration: none;
-}
-
-.wl-button{
-    margin-top: 8px;
 }
 
 .wl-30-td .table>tbody>tr>td {

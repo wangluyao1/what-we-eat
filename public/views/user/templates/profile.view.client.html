@@ -62,18 +62,26 @@
                placeholder="lastName"
         />
 
-        <a href="#!/user/detail/{{model.currentUser._id}}"><h2>Go To Detail</h2></a>
+        <a href="#!/user/detail/{{model.currentUser._id}}">
+            <h2><span class="glyphicon glyphicon-arrow-right"></span>Go To Detail</h2></a>
 
         <div ng-switch="model.currentUser.roles">
             <div ng-switch-when="USER">
-            <a ng-click="model.goToStarList()" role="button"><h2>Starred Restaurant List</h2></a>
+            <a ng-click="model.goToStarList()" role="button">
+
+                <h2><span class="glyphicon glyphicon-arrow-right"></span>Starred Restaurant List</h2></a>
+                <a href="#!/user/reviews" role="button">
+                    <h2><span class="glyphicon glyphicon-arrow-right"></span> Reviews</h2></a>
+
             </div>
 
             <div ng-switch-when="MANAGER">
-                    <a ng-click="model.goToStore()" role="button"><h2>Store</h2></a>
+                    <a ng-click="model.goToStore()" role="button">
+                        <h2><span class="glyphicon glyphicon-arrow-right"></span>Store</h2></a>
             </div>
             <div ng-switch-when="ADMIN">
-                    <a ng-click="model.goToStore()" role="button"><h2>Manage All</h2></a>
+                    <a href="#!/admin/collections" role="button">
+                        <h2><span class="glyphicon glyphicon-arrow-right"></span>Manage All</h2></a>
             </div>
         </div>
 
@@ -84,15 +92,5 @@
            href="#!/login"
            role="button">Logout</a>
     </div>
-
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <ul class="nav navbar-nav pull-right wl-navRight">
-                <li><a href="#!/user/{{model.user._id}}">
-                    <span class="pull-right glyphicon glyphicon-user"></span>
-                </a></li>
-            </ul>
-        </div><!-- /.container-fluid -->
-    </nav>
 </div>
+    <div ng-include="'views/communal/footer.html'"></div>

@@ -12,6 +12,7 @@
         model.userId = $routeParams.uid;
 
         model.saveUser = saveUser;
+        model.logout = logout;
 
         function init() {
             return userService
@@ -30,6 +31,14 @@
                     if(response.status === 200)
                     $location.url("/admin/users");
                 })
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
 

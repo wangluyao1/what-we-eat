@@ -12,8 +12,17 @@
         model.title = "My reviews";
         model.goToEdit = goToEdit;
         model.goToRestaurant = goToRestaurant;
+        model.logout = logout;
 
         function init() {
+            if(user._id){
+                model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
+            }
             return userService.getUserReviews(user._id)
                 .then(function (response) {
                     var originReviews = response.data;
@@ -60,5 +69,12 @@
             $location.url("/restaurant/"+review.restaurant+"/review/"+review._id+"/edit");
         }
 
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
     }
 })();

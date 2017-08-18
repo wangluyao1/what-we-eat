@@ -6,13 +6,15 @@
         .module("what-we-eat")
         .controller("AdminRestaurantController", AdminRestaurantController);
 
-    function AdminRestaurantController(restaurantService, $location) {
+    function AdminRestaurantController(restaurantService, $location,userService) {
         var model = this;
         model.title = "Manage Restaurants";
 
         model.addRes = addRes;
         model.deleteRes = deleteRes;
         model.goToEdit = goToEdit;
+        model.logout = logout;
+
 
         function init() {
             refreshRes();
@@ -46,6 +48,14 @@
 
         function goToEdit(restaurantId) {
             $location.url("/admin/restaurant/"+restaurantId);
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
     }

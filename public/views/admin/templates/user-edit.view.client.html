@@ -42,7 +42,6 @@
 />
 <label for="role">ROLE(USER/MANAGER)</label>
 <input name="role"
-       readonly
        ng-model="model.user.roles"
        type="text"
        id="role"
@@ -76,3 +75,4 @@
 <div class="btn btn-block btn-success" ng-click="model.saveUser(model.user)">Save Changes</div>
     </div>
 </div>
+<div ng-include="'views/communal/footer.html'"></div>

@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ResDetailController", ResDetailController);
 
-    function ResDetailController(resSearchService, $routeParams,restaurantService,userService,user) {
+    function ResDetailController(resSearchService, $routeParams,restaurantService,userService,user,$location) {
         var model = this;
 
         model.title = "Restaurant Detail";
@@ -15,8 +15,17 @@
         model.star = star;
         model.unstar = unstar;
         model.getHour = getHour;
+        model.logout = logout;
 
         function init() {
+            if(user._id){
+                model.logged = true;
+                model.isUser = (user.roles === 'USER');
+                model.isManager = (user.roles === 'MANAGER');
+                model.isAdmin = (user.roles === 'ADMIN');
+            } else{
+                model.logged = false;
+            }
             resSearchService.searchWithKey(model.restaurantKey)
                 .then(function (response) {
                     model.info = response.data;
@@ -91,6 +100,14 @@
                             checkStar();
                         });
                 })
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();
