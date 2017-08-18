@@ -12,8 +12,11 @@
         model.title = "Edit Review";
         model.reviewId = $routeParams['reviewId'];
 
+
+        model.deleteReview = deleteReview;
         model.save = save;
         model.send = send;
+        model.logout = logout;
 
         //todo: check user host
         function init() {
@@ -37,6 +40,8 @@
                 });
         }
 
+        init();
+
         function save() {
             return reviewService
                 .updateReview(model.review._id,model.review)
@@ -54,7 +59,22 @@
                 })
         }
 
-        init();
+        function deleteReview() {
+            return reviewService
+                .deleteReview(model.reviewId)
+                .then(function (response) {
+                    $location.url("/user/reviews");
+                })
+        }
+
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
     }
 })();
 

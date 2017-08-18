@@ -12,6 +12,7 @@
         model.title = "My reviews";
         model.goToEdit = goToEdit;
         model.goToRestaurant = goToRestaurant;
+        model.logout = logout;
 
         function init() {
             if(user._id){
@@ -68,5 +69,12 @@
             $location.url("/restaurant/"+review.restaurant+"/review/"+review._id+"/edit");
         }
 
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
     }
 })();

@@ -38,10 +38,22 @@ body {
 }
 
 .navbar-inverse .navbar-brand {
-    color: #c79f60;
+    color: #cbd5df;
 }
 
 .wl .navbar-custom {
+    background-color: rgba(125, 125, 125, 0.95);
+    border-color: rgba(125, 125, 125, 0.95);
+}
+
+.list-group-item.active{
+    background-color: #4D5973;
+    border-color: #4D5973;
+}
+
+.list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
     background-color: rgba(125, 125, 125, 0.95);
     border-color: rgba(125, 125, 125, 0.95);
 }

@@ -15,6 +15,7 @@
         model.logout = logout;
         model.unStarRes = unStarRes;
         model.goToRestaurant = goToRestaurant;
+        model.logout = logout;
 
         function init() {
             if(user._id){
@@ -64,6 +65,14 @@
             } else {
                 $location.url("/eatstreet/restaurant/details/"+restaurant.key);
             }
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

@@ -17,6 +17,7 @@
 
         model.currentUser = user;
         model.viewedUserId = $routeParams["uid"];
+        model.logout = logout;
 
         function init() {
             if(user._id){
@@ -133,6 +134,14 @@
 
         function goToStarList() {
             $location.url("/user/detail/"+model.viewedUserId+"/starlist");
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

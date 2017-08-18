@@ -6,20 +6,21 @@
 
         <li class="list-group-item active">
             <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-10">Restaurant</div>
-                <div class="col-md-7 col-sm-7 hidden-xs">Content</div>
-                <div class="col-sm-2 hidden-xs">Status</div>
+                <div class="col-md-3 hidden-sm hidden-xs">Restaurant</div>
+                <div class="col-md-5 col-xs-6">Content</div>
+                <div class="col-xs-3">Status</div>
+                <div class="col-xs-3">Edit</div>
             </div>
         </li>
 
         <li ng-repeat="review in model.reviews" class="list-group-item">
             <div class="row">
-                <div class="col-md-3 hidden-xs"><a
+                <div class="col-md-3 hidden-sm hidden-xs"><a
                         ng-click="model.goToRestaurant(review.restaurant)"
                         >{{review.restaurant}}</a></div>
-                <div class="col-sm-9">{{review.content}}</div>
-                <div class="col-sm-2 hidden-xs">{{review.type}}</div>
-                <div class="col-sm-3">
+                <div class="col-md-5 col-xs-6">{{review.content}}</div>
+                <div class="col-xs-3">{{review.type}}</div>
+                <div class="col-xs-3">
                     <a href="#!/user/reviews/{{review._id}}/edit">
                         <span class="glyphicon glyphicon-pencil">Edit</span></a>
                 </div>

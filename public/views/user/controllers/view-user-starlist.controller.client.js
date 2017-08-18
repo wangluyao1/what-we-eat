@@ -13,6 +13,7 @@
         model.userId = $routeParams["uid"];
         model.logout = logout;
         model.goToRestaurant = goToRestaurant;
+        model.logout = logout;
 
         function init() {
             if(user._id){
@@ -50,6 +51,14 @@
             } else {
                 $location.url("/eatstreet/restaurant/details/"+restaurant.key);
             }
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();
