@@ -33,7 +33,7 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
+<div class="container-fluid">
 <div ng-show="model.alert"
      class="alert alert-danger">
     {{model.alert}}
@@ -54,28 +54,26 @@
        ng-model="keyword"/>
 
 <button type="button" class="btn btn-secondary wl-home-search-button"
-        ng-click="model.searchRestaurants(address,keyword)">Search EatStreet Restaurants</button>
-
-<button type="button" class="btn btn-secondary wl-home-search-button"
-        ng-click="model.searchLocalRes(keyword)">Search Local Restaurants</button>
+        ng-click="model.searchRestaurants(address,keyword)">Search Restaurants</button>
 
 <button type="button" class="btn btn-secondary wl-home-search-button"
         ng-click="model.searchUserByUsername(keyword)">Search Users</button>
-
-
+<div class="container-fluid">
+    <h3>Local Restaurants Result</h3>
+<div ng-if="model.localRestaurants"
+     ng-repeat="localRes in model.localRestaurants">
+    <a ng-click="model.goToLocalResDetail(localRes._id)" role="button">
+        <h4>{{localRes.name}}</h4></a>
+</div>
+</div>
 <div ng-if="model.restaurants"
      ng-include="'views/restaurant/templates/restaurant-list.view.client.html'"></div>
 
-<div ng-if="model.localRestaurants"
-     ng-repeat="localRes in model.localRestaurants">
-    <h3>Local Restaurants Result</h3>
-<a ng-click="model.goToLocalResDetail(localRes._id)" role="button">
-    {{localRes.name}}</a>
-</div>
 
 <!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
 <div ng-if="model.usersResult">
     <h3>User Results</h3>
 <a ng-click="model.goToUserDetail(model.usersResult)"
    role="button">{{model.usersResult.username}}</a>
+</div>
 </div>

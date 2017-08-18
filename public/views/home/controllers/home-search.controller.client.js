@@ -33,15 +33,9 @@
                 model.logged = false;
             }
             if(model.searchItem === "res"){
-                if(model.keyword === "undefined"){
-                    searchRestaurants(model.address,null);
-                } else {
                     searchRestaurants(model.address, model.keyword);
+                    searchLocalRes(model.keyword);
                 }
-            }
-            if(model.searchItem === "localRes"){
-                searchLocalRes(model.keyword);
-            }
             if(model.searchItem === "user"){
                 searchUserByUsername(model.keyword);
             }
@@ -62,7 +56,6 @@
                         } else{
                             model.alert = null;
                         }
-                        model.localRestaurants = null;
                         model.usersResult =null;
                     });
         }
@@ -88,7 +81,6 @@
                     } else{
                         model.alert = null;
                     }
-                    model.restaurants = null;
                     model.usersResult =null;
 
                 })

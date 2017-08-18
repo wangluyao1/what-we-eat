@@ -11,6 +11,9 @@
         model.createRestaurant = createRestaurant;
 
         function init() {
+            if(user.restaurant !== undefined){
+                $location.url("/restaurant/edit");
+            }
             model.title = "Create My Restaurant";
 
         }

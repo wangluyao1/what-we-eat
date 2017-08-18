@@ -9,10 +9,12 @@ textarea {
 body {
     padding-top: 70px;
     padding-bottom: 80px;
+    overflow-x: hidden;
 }
 
 .wl-home-search-button{
     margin: 10px;
+    width: 43%;
 }
 
 .wl-donut-img{
@@ -26,8 +28,8 @@ body {
 }
 
 .wl .navbar-custom {
-    background-color: rgba(4, 11, 16, 0.95);
-    border-color: #090909;
+    background-color: rgba(74, 106, 105, 0.95);
+    border-color: rgba(255, 255, 255, 0.68);
 }
 
 .wl .navbar-custom .navbar-brand {

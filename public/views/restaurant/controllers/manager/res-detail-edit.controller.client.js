@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ResDetailEditController", ResDetailEditController);
 
-    function ResDetailEditController(restaurantService,plateService,user) {
+    function ResDetailEditController($location,restaurantService,plateService,user) {
         var model = this;
 
 
@@ -20,6 +20,9 @@
         model.refreshPlates = refreshPlates();
 
         function init() {
+            if(model.restaurantId === undefined){
+                $location.url("/restaurant/create");
+            }
             return restaurantService
                 .findRestaurantById(model.restaurantId)
                 .then(function (response) {
