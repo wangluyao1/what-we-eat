@@ -50,6 +50,8 @@ app.put('/api/user/:userId', updateUser);
 app.delete('/api/user/:userId', deleteUser);
 app.post('/api/register', register);
 app.get('/api/checkAdmin', checkAdmin);
+app.get('api/checkGeneralUser',checkGeneralUser);
+app.get('api/checkManager',checkManager);
 app.get('/api/checkLogin', checkLogin);
 app.get('/api/checkLogout',logout);
 app.get('/api/allUsers',getAllUsers);
@@ -184,7 +186,23 @@ function checkLogin(req, res) {
 }
 
 function checkAdmin(req, res) {
-    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
+    if (req.isAuthenticated() && req.user.roles === 'ADMIN') {
+        res.json(req.user);
+    } else {
+        res.send('0');
+    }
+}
+
+function checkManager(req,res) {
+    if (req.isAuthenticated() && req.user.roles === 'MANAGER') {
+        res.json(req.user);
+    } else {
+        res.send('0');
+    }
+}
+
+function  checkGeneralUser(req,res) {
+    if (req.isAuthenticated() && req.user.roles === 'USER') {
         res.json(req.user);
     } else {
         res.send('0');
