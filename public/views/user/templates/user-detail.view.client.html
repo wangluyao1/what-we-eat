@@ -52,8 +52,11 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-4">{{model.viewedUser.reviews.length}}</div>
-                <div role="button" class="col-xs-4" ng-click="showFollowers=true;showFollowings=false">{{model.followers.length}} Show</div>
-                <div role="button" class="col-xs-4" ng-click="showFollowings=true;showFollowers=false">{{model.followings.length}} Show</div>
+                <div class="col-xs-4">
+                    <a role="button" ng-click="showFollowers=true;showFollowings=false">{{model.followers.length}} Show</a></div>
+                <div  class="col-xs-4">
+                    <a role="button" ng-click="showFollowings=true;showFollowers=false">{{model.followings.length}} Show</a>
+                    </div>
             </div>
         </li>
     </ul>
