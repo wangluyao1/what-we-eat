@@ -31,14 +31,9 @@
                 } else {
                     $location.url("/");// + response.data._id);
                 }
-            })
-
-            // user = userService.findUserByCredentials(user.username, user.password);
-            // if (user === null) {
-            //     model.alert = "Unable to log in.";
-            // } else {
-            //     $location.url("user/" + user._id);
-            // }
+            },function (err) {
+                    model.alert = "Username or password not correct.";
+            });
         }
     }
 })();
