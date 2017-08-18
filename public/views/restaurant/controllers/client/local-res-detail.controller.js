@@ -15,6 +15,7 @@
         model.star = star;
         model.unstar = unstar;
         model.writeReview = writeReview;
+        model.logout = logout;
 
         function init() {
             if(user._id){
@@ -81,6 +82,14 @@
                 .unstarRes(model.currentUser._id,model.restaurantId)
                 .then(function () {
                     checkStar();
+                });
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
                 });
         }
     }

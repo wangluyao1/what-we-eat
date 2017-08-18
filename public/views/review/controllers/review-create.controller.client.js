@@ -15,6 +15,7 @@
 
         model.save = save;
         model.send = send;
+        model.logout = logout;
 
         function init() {
             if(user._id){
@@ -37,6 +38,8 @@
                 });
         }
 
+        init();
+
         function save() {
             return reviewService
                 .updateReview(model.review._id,model.review)
@@ -54,7 +57,13 @@
                 })
         }
 
-        init();
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
     }
 })();
 

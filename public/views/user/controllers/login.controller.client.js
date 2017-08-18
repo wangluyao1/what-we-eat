@@ -21,11 +21,13 @@
         init();
 
         function login(user) {
+            if(!user.username || !user.password){
+                model.alert = "Please enter username and password";
+            }
             var promise = userService.findUserByCredentials(user.username, user.password);
             promise.then(function (response) {
                 if (!response.data) {
-                    //todo remind why cannot log in
-                    model.alert = "Unable to log in.";
+                    model.alert = "Username or password not correct.";
                 } else {
                     $location.url("/");// + response.data._id);
                 }

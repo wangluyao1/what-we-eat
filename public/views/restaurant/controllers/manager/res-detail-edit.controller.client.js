@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ResDetailEditController", ResDetailEditController);
 
-    function ResDetailEditController($location,restaurantService,plateService,user) {
+    function ResDetailEditController($location,restaurantService,plateService,user,userService) {
         var model = this;
 
 
@@ -17,7 +17,9 @@
         model.saveMenu = saveMenu;
         model.updateRestaurant = updateRestaurant;
         model.removePlate = removePlate;
-        model.refreshPlates = refreshPlates();
+        model.refreshPlates = refreshPlates;
+        model.logout = logout;
+
 
         function init() {
             if(user._id){
@@ -85,6 +87,14 @@
                 .then(function () {
                     refreshPlates();
                 })
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

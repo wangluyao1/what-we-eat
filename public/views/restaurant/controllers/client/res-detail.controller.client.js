@@ -15,6 +15,7 @@
         model.star = star;
         model.unstar = unstar;
         model.getHour = getHour;
+        model.logout = logout;
 
         function init() {
             if(user._id){
@@ -99,6 +100,14 @@
                             checkStar();
                         });
                 })
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

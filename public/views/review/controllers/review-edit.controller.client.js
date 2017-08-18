@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ReviewEditController", ReviewEditController);
 
-    function ReviewEditController($routeParams,restaurantService,reviewService,$location,user) {
+    function ReviewEditController($routeParams,restaurantService,reviewService,$location,user,userService) {
         var model = this;
 
         model.title = "Edit Review";

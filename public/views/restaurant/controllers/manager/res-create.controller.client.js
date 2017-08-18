@@ -6,9 +6,10 @@
         .module("what-we-eat")
         .controller("ResCreateController", ResCreateController);
 
-    function ResCreateController(restaurantService,user,$location) {
+    function ResCreateController(restaurantService,user,$location,userService) {
         var model = this;
         model.createRestaurant = createRestaurant;
+        model.logout = logout;
 
         function init() {
             if(user._id){
@@ -34,8 +35,15 @@
                     $location.url("/restaurant/edit");
                 })
         }
-    }
 
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
+    }
 
 
 })();
