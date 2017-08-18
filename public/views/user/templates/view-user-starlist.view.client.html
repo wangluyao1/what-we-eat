@@ -1,0 +1,20 @@
+<div ng-include="'views/communal/header.html'"></div>
+<h1>Star List</h1>
+<div class="container-fluid">
+    <ul class="list-group">
+
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-md-6 col-xs-10">Restaurant Name</div>
+                <div class="col-md-6 hidden-xs">Address</div>
+            </div>
+        </li>
+
+        <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
+            <div class="row">
+                <div class="col-md-6 col-xs-10" href="#!/restaurant/details/{{restaurant._id}}" role="button">{{restaurant.name}}</div>
+                <div class="col-md-6 hidden-xs">{{restaurant.address}}</div>
+            </div>
+        </li>
+    </ul>
+</div>

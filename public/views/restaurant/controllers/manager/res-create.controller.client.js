@@ -11,6 +11,7 @@
         model.createRestaurant = createRestaurant;
 
         function init() {
+            model.title = "Create My Restaurant";
 
         }
         init();
@@ -19,7 +20,7 @@
             res.manager = user._id;
             return restaurantService.createRestaurant(res)
                 .then(function (newRes) {
-                    $location.url("/restaurant/details/"+newRes.data._id+"/edit");
+                    $location.url("/restaurant/edit");
                 })
         }
     }

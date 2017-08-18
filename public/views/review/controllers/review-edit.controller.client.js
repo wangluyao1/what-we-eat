@@ -9,19 +9,20 @@
     function ReviewEditController($routeParams,restaurantService,reviewService,$location) {
         var model = this;
 
-        model.restaurantId = $routeParams['restaurantId'];
+        model.title = "Edit Review";
         model.reviewId = $routeParams['reviewId'];
 
         model.save = save;
         model.send = send;
 
+        //todo: check user host
         function init() {
             return reviewService
                 .findReviewById(model.reviewId)
                 .then(function (response) {
                     model.review = response.data;
                     return restaurantService
-                        .findRestaurantById(model.restaurantId)
+                        .findRestaurantById(model.review.restaurant)
                         .then(function (response) {
                             model.restaurant = response.data;
                         })
@@ -32,7 +33,7 @@
             return reviewService
                 .updateReview(model.review._id,model.review)
                 .then(function (response) {
-                    $location.url("restaurant/details/"+model.restaurantId);
+                    $location.url("restaurant/details/"+model.restaurant._id);
                 })
         }
 
@@ -41,7 +42,7 @@
             return reviewService
                 .publishReview(model.review._id)
                 .then(function (response) {
-                    $location.url("restaurant/details/"+model.restaurantId);
+                    $location.url("restaurant/details/"+model.restaurant._id);
                 })
         }
 

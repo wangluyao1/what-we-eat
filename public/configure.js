@@ -10,21 +10,35 @@
         $routeProvider
             .when("/", {
                 templateUrl: "views/home/templates/home.view.client.html",
-                controller: "SearchController",
+                controller: "HomeController",
                 controllerAs: "model",
                 resolve:{
                   user:checkCurrentUser
                 }
             })
+            .when("/search/:search/address/:address/keyword/:keyword", {
+                templateUrl: "views/home/templates/home-search.view.client.html",
+                controller: "SearchController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkCurrentUser
+                }
+            })
             .when("/login", {
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "LoginController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkCurrentUser
+                }
             })
             .when("/register", {
                 templateUrl: "views/user/templates/register.view.client.html",
                 controller: "RegisterController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkCurrentUser
+                }
             })
             .when("/profile", {
                 templateUrl: "views/user/templates/profile.view.client.html",
@@ -34,15 +48,42 @@
                     user:checkLogin
                 }
             })
-            .when("/user/starlist/:uid",{
+            .when("/user/starlist",{
                 templateUrl: "views/user/templates/user-starlist-edit.view.client.html",
                 controller: "StarListEditController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
+            .when("/user/reviews",{
+                templateUrl: "views/review/templates/review-list.view.client.html",
+                controller: "ReviewListController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
+            .when("/user/reviews/:reviewId/edit",{
+                templateUrl: "views/review/templates/review-edit.view.client.html",
+                controller: "ReviewEditController",
+                controllerAs: "model"//,
+                // resolve:{
+                //     user:checkLogin
+                // }
             })
             //view other users
             .when("/user/detail/:uid",{
                 templateUrl: "views/user/templates/user-detail.view.client.html",
                 controller: "UserDetailController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
+            .when("/user/detail/:uid/starlist",{
+                templateUrl: "views/user/templates/view-user-starlist.view.client.html",
+                controller: "StarListViewController",
                 controllerAs: "model",
                 resolve:{
                     user:checkLogin
@@ -67,6 +108,11 @@
             .when("/admin/restaurants",{
                 templateUrl: "views/admin/templates/restaurant-list.view.client.html",
                 controller: "AdminRestaurantController",
+                controllerAs: "model"
+            })
+            .when("/admin/restaurant/:rid",{
+                templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
+                controller: "AdminResEditController",
                 controllerAs: "model"
             })
             .when("/admin/reviews",{
@@ -107,14 +153,13 @@
                     user:checkLogin
                 }
             })
-            .when("/restaurant/details/:restaurantKey/edit",{
+            .when("/restaurant/edit",{
                 templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
                 controller: "ResDetailEditController",
-                controllerAs: "model"//,
-                // resolve:{
-                //     user:checkLogin,
-                //     user:checkAdmin
-                // }
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
             })
 
             //review
@@ -125,14 +170,6 @@
                 resolve:{
                     user:checkLogin
                 }
-            })
-            .when("/restaurant/:restaurantId/review/:reviewId/edit",{
-                templateUrl: "views/review/templates/review-edit.view.client.html",
-                controller: "ReviewEditController",
-                controllerAs: "model"//,
-                // resolve:{
-                //     user:checkLogin
-                // }
             })
 
 

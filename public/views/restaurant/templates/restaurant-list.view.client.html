@@ -1,14 +1,16 @@
-
+<div class="container-fluid">
+    <h3>EatStreet Restaurants Result</h3>
 <table class="table">
+    <!--<col width="60">-->
+    <!--<col width="150">-->
     <tr ng-repeat="restaurant in model.restaurants">
-        <td>
-            <img src= {{restaurant.logoUrl}}>
-        </td>
-
-        <td>
-            <a href="#!/eatstreet/restaurant/details/{{restaurant.apiKey}}">
-                {{restaurant.name}}
+        <td class="wl-30-td"><img src= {{restaurant.logoUrl}}></td>
+        <td><a href="#!/eatstreet/restaurant/details/{{restaurant.apiKey}}">{{restaurant.name}}
             </a>
+            <br><b>Address: </b>{{restaurant.streetAddress}} {{restaurant.city}} {{restaurant.state}}
+            <br><b>Food Type: </b>
+            <div ng-repeat="type in restaurant.foodTypes">#{{type}} </div>
         </td>
     </tr>
 </table>
+</div>

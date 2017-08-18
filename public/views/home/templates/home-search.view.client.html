@@ -1,5 +1,10 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
+        <a href="#"
+           role="button"
+           class="navbar-brand">
+            <span class="pull-left glyphicon glyphicon-chevron-left"></span>
+        </a>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -20,7 +25,7 @@
                 <li><a ng-if="model.isUser" href="#!/user/reviews">My Reviews</a></li>
 
                 <!--for manager-->
-                <li><a ng-if="model.isManager" href="#!/restaurant/edit">My Restaurant</a></li>
+                <li><a ng-if="model.isManager" ng-click="model.goToStore()">My Restaurant</a></li>
                 <!--for admin-->
                 <li><a ng-if="model.isAdmin" href="#!/admin/collections">Manage All</a></li>
                 <li><a ng-if="model.logged" ng-click="model.logout()">Logout</a></li>
@@ -28,15 +33,13 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<div class="wl-home">
+
 <div ng-show="model.alert"
      class="alert alert-danger">
     {{model.alert}}
 </div>
 
-<div class="container-fluid wl-home-center">
-    <image src="https://image.flaticon.com/icons/png/512/284/284741.png" class="wl-donut-img"></image>
-    <div class="input-group">
+<div class="input-group">
     <span class="input-group-addon" id="address">Address</span>
     <input type="text" class="form-control" placeholder="370 Huntington Ave, Boston, MA"
            ng-model="address"
@@ -58,5 +61,21 @@
 
 <button type="button" class="btn btn-secondary wl-home-search-button"
         ng-click="model.searchUserByUsername(keyword)">Search Users</button>
+
+
+<div ng-if="model.restaurants"
+     ng-include="'views/restaurant/templates/restaurant-list.view.client.html'"></div>
+
+<div ng-if="model.localRestaurants"
+     ng-repeat="localRes in model.localRestaurants">
+    <h3>Local Restaurants Result</h3>
+<a ng-click="model.goToLocalResDetail(localRes._id)" role="button">
+    {{localRes.name}}</a>
 </div>
+
+<!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
+<div ng-if="model.usersResult">
+    <h3>User Results</h3>
+<a ng-click="model.goToUserDetail(model.usersResult)"
+   role="button">{{model.usersResult.username}}</a>
 </div>

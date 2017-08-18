@@ -50,12 +50,12 @@
             if(!model.currentUser.restaurant){
                 $location.url("/restaurant/create");
             } else{
-                $location.url("/restaurant/details/"+user.restaurant+"/edit");
+                $location.url("/restaurant/edit");
             }
         }
 
         function goToStarList() {
-            $location.url("/user/starlist/"+user._id);
+            $location.url("/user/starlist");
         }
     }
 })();

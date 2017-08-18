@@ -4,16 +4,14 @@
 (function () {
     angular
         .module("what-we-eat")
-        .controller("StarListEditController", StarListEditController);
+        .controller("StarListViewController", StarListViewController);
 
-    function StarListEditController(userService,user,$location) {
+    function StarListViewController($routeParams,userService,$location,user) {
         var model = this;
         model.title = "Favorite Restaurants";
 
-        model.userId = user._id;
-        model.currentUser = user;
+        model.userId = $routeParams["uid"];
         model.logout = logout;
-        model.unStarRes = unStarRes;
         model.goToRestaurant = goToRestaurant;
 
         function init() {
@@ -39,15 +37,6 @@
                 .then(function () {
                     $location.url('/login');
                 });
-        }
-
-        function unStarRes(resId) {
-            return userService.
-                unstarRes(model.currentUser._id,resId)
-                .then(function (response) {
-                    refreshStarList();
-                });
-
         }
 
         function goToRestaurant(restaurant) {

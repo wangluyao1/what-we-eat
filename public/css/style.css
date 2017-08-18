@@ -11,6 +11,20 @@ body {
     padding-bottom: 80px;
 }
 
+.wl-home-search-button{
+    margin: 10px;
+}
+
+.wl-donut-img{
+    width: 80px;
+    margin-left: 35%;
+    margin-bottom: 12px;
+}
+
+.wl-home-center{
+    padding-top: 80px;
+}
+
 .wl .navbar-custom {
     background-color: rgba(4, 11, 16, 0.95);
     border-color: #090909;
@@ -90,6 +104,10 @@ body {
 
 .wl-button{
     margin-top: 8px;
+}
+
+.wl-30-td .table>tbody>tr>td {
+    width : 30%;
 }
 
 

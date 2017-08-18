@@ -6,7 +6,7 @@ var plateSchema = mongoose.Schema({
     restaurant:{type:mongoose.Schema.ObjectId,ref:"RestaurantModel"},
     name:String,
     description:String,
-    price:String,
+    price:Number,
     dateCreated: {type:Date,default:Date.now}
 },{collection:"plate"});
 

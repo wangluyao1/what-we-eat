@@ -17,6 +17,7 @@
             "deleteUser": deleteUser,
             "allUsers":allUsers,
 
+            "logout":logout,
             "checkLogin": checkLogin,
             "checkLogout" : checkLogout,
             //follow
@@ -27,7 +28,9 @@
             //star list
             "starRes":starRes,
             "unstarRes":unstarRes,
-            "getStarList":getStarList
+            "getStarList":getStarList,
+            //reviews
+            "getUserReviews":getUserReviews
         };
 
         return api;
@@ -46,6 +49,11 @@
                 .then(function (response) {
                     return response.data;
                 })
+        }
+
+        function logout() {
+            var url = "/api/checkLogout";
+            return $http.get(url);
         }
 
         function allUsers() {
@@ -115,6 +123,11 @@
 
         function getStarList(userId) {
             var url = "/api/user/"+userId+"/starList";
+            return $http.get(url);
+        }
+
+        function getUserReviews(userId) {
+            var url = "/api/user/"+userId+"/reviews";
             return $http.get(url);
         }
     }

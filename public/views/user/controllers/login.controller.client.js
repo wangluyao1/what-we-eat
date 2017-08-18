@@ -6,13 +6,16 @@
         .module("what-we-eat")
         .controller("LoginController", LoginController)
 
-    function LoginController($location, userService) {
+    function LoginController($location, userService,user) {
         var model = this;
 
+        model.title = "Login";
         model.login = login;
 
         function init() {
-
+            if(user._id){
+                $location.url("/profile");
+            }
         }
 
         init();
@@ -24,8 +27,7 @@
                     //todo remind why cannot log in
                     model.alert = "Unable to log in.";
                 } else {
-                    $location.url("profile");// + response.data._id);
-
+                    $location.url("/");// + response.data._id);
                 }
             })
 

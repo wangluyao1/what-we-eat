@@ -9,23 +9,49 @@
     function ResDetailController(resSearchService, $routeParams,restaurantService,userService,user) {
         var model = this;
 
+        model.title = "Restaurant Detail";
         model.currentUser = user;
         model.restaurantKey = $routeParams['restaurantKey'];
         model.star = star;
         model.unstar = unstar;
+        model.getHour = getHour;
 
         function init() {
             resSearchService.searchWithKey(model.restaurantKey)
                 .then(function (response) {
                     model.info = response.data;
+                    model.hours = model.getHour(model.info.restaurant.hours);
                 });
             resSearchService.searchMenuWithKey(model.restaurantKey)
                 .then(function (response) {
                     model.menu = response.data;
-                })
+                });
+            checkStar();
         }
 
         init();
+
+        function checkStar() {
+            return userService.getStarList(model.currentUser._id)
+                .then(function (response) {
+                    var list = response.data;
+                    if(list.find(sameKey)){
+                        model.starred = true;
+                        model.unstarred = false;
+                    } else{
+                        model.unstarred = true;
+                        model.starred = false;
+                    }
+                })
+        }
+
+        function sameKey(restaurant) {
+            return restaurant.key === model.restaurantKey;
+        }
+
+        function getHour(hourInfo) {
+        //todo
+        }
 
         function star() {
             var newRestaurant = {key:model.restaurantKey,type:"SEARCH",
@@ -50,7 +76,7 @@
             return userService
                 .starRes(model.currentUser._id,restaurant._id)
                 .then(function () {
-                    model.starred = true;
+                    checkStar();
                 });
         }
 
@@ -60,7 +86,10 @@
                 .then(function (response) {
                     var restaurant = response.data;
                     return userService
-                        .unstarRes(model.currentUser._id,restaurant._id);
+                        .unstarRes(model.currentUser._id,restaurant._id)
+                        .then(function () {
+                            checkStar();
+                        });
                 })
         }
     }

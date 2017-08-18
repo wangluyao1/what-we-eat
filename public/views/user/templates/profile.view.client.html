@@ -62,6 +62,8 @@
                placeholder="lastName"
         />
 
+        <a href="#!/user/detail/{{model.currentUser._id}}"><h2>Go To Detail</h2></a>
+
         <div ng-switch="model.currentUser.roles">
             <div ng-switch-when="USER">
             <a ng-click="model.goToStarList()" role="button"><h2>Starred Restaurant List</h2></a>
