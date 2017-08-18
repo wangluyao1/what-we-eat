@@ -243,7 +243,7 @@
     function checkManager(userService, $q, $location) {
         var deferred = $q.defer();
         userService
-            .checkAdmin()
+            .checkManager()
             .then(function (user) {
                 if (user === '0') {
                     deferred.reject();
