@@ -62,13 +62,15 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-xs-4"></div>
-                    <div class="col-xs-8">Followers</div>
+                    <div class="col-xs-4">Followers</div>
+                    <div class="col-xs-4"></div>
                 </div>
             </li>
             <li class="list-group-item" ng-repeat="follower in model.followers">
                 <div class="row">
                     <div class="col-xs-4">UserName</div>
-                    <div class="col-xs-8">{{follower.username}}</div>
+                    <div class="col-xs-4">{{follower.username}}</div>
+                    <div class="col-xs-4"></div>
                 </div>
             </li>
         </ul>
@@ -77,13 +79,16 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-xs-4"></div>
-                    <div class="col-xs-8">Followers</div>
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">Followings</div>
                 </div>
             </li>
             <li class="list-group-item" ng-repeat="following in model.followings">
                 <div class="row">
+
                     <div class="col-xs-4">UserName</div>
-                    <div class="col-xs-8">{{following.username}}</div>
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">{{following.username}}</div>
                 </div>
             </li>
         </ul>
