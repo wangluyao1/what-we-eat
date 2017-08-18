@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ResDetailController", ResDetailController);
 
-    function ResDetailController(resSearchService, $routeParams,restaurantService,userService,user) {
+    function ResDetailController(resSearchService, $routeParams,restaurantService,userService,user,$location) {
         var model = this;
 
         model.title = "Restaurant Detail";

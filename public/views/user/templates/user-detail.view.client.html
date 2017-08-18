@@ -19,14 +19,23 @@
                     <span class="glyphicon glyphicon-fire wl-fire-center"></span><br>His Restaurant</a>
             </div>
             <div ng-if="model.viewedUser.roles==='USER'">
-                <a ng-click="model.goToStarList()" role="button">Go To His Favorite Restaurants</a>
+                <a ng-click="model.goToStarList()" role="button">
+                    <span class="glyphicon glyphicon-hand-right wl-hand-center"></span>
+                    <br>His Favorite Restaurants</a>
             </div>
                 </div>
                     <div class="col-xs-6">
-                       <a> <span class="glyphicon glyphicon-eye-open" ng-if="model.notFollowing"
-                              role="button" ng-click="model.follow(model.viewedUser._id)"></span><br>Follow</a>
-                        <span class="glyphicon glyphicon-eye-close" ng-if="model.haveFollowed"
-                              role="button" ng-click="model.unfollow(model.viewedUser._id)">Unfollow</span>
+                       <a role="button" ng-if="model.notFollowing"
+                          ng-click="model.follow(model.viewedUser._id)">
+                           <span class="glyphicon glyphicon-eye-open"></span>
+                           <br>Follow</a>
+
+
+                        <a ng-if="model.haveFollowed"
+                           role="button"
+                           ng-click="model.unfollow(model.viewedUser._id)">
+                           <span class="glyphicon glyphicon-eye-open"></span>
+                            <br>Unfollow</a>
                     </div>
                 </div>
         </li>

@@ -53,6 +53,10 @@ body {
     margin-right: 10px;
 }
 
+.wl-hand-center .glyphicon-hand-right:before {
+    padding-left :60px;
+}
+
 .wl-user-center{
     width:35%;
 }
@@ -63,6 +67,10 @@ body {
 
 .wl-fire-center .glyphicon-fire:before {
     padding-left :40px;
+}
+
+.wl-head-no-line .list-group-item{
+    border : 0px;
 }
 
 .wl .navbar-custom {

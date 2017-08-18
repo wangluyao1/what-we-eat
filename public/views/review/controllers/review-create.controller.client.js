@@ -6,7 +6,7 @@
         .module("what-we-eat")
         .controller("ReviewCreateController", ReviewCreateController);
 
-    function ReviewCreateController($routeParams,restaurantService,reviewService,$location,user) {
+    function ReviewCreateController($routeParams,restaurantService,reviewService,$location,user,userService) {
         var model = this;
 
         model.title = "Write Review";

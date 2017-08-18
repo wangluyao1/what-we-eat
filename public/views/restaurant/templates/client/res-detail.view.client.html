@@ -1,23 +1,30 @@
 <div ng-include="'views/communal/header.html'"></div>
 
-<img src= {{model.info.restaurant.logoUrl}}>
-<!--ng-if="model.notStar"-->
-<span ng-if="model.unstarred" class="glyphicon glyphicon-star-empty fa-3x pull-right" ng-click="model.star()" role="button"></span>
-<span ng-if="model.starred" class="glyphicon glyphicon-star fa-3x pull-right" ng-click="model.unstar()" role="button"></span>
-<h1>{{model.info.restaurant.name}}</h1>
-<h4>Address:</h4>
-{{model.info.restaurant.streetAddress}}
-{{model.info.restaurant.city}}
-{{model.info.restaurant.state}}
-<h4>Menu:</h4>
+<div class="container-fluid">
+    <h1>{{model.info.restaurant.name}}</h1>
+    <ul class="list-group wl-head-no-line">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-10"><img src= {{model.info.restaurant.logoUrl}}></div>
+                <div class="col-lg-8 col-sm-6 hidden-xs">
+                    <h4>Address:</h4>
+                    {{model.info.restaurant.streetAddress}}
+                    {{model.info.restaurant.city}}
+                    {{model.info.restaurant.state}}
+                    </div>
+                <div class="col-xs-2"><span ng-if="model.unstarred" class="glyphicon glyphicon-star-empty fa-3x pull-right" ng-click="model.star()" role="button"></span>
+                    <span ng-if="model.starred" class="glyphicon glyphicon-star fa-3x pull-right" ng-click="model.unstar()" role="button"></span></div>
+            </div>
+        </li>
+    </ul>
 
-<div>
+
     <ul class="list-group">
         <li class="list-group-item active">
             <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10">Name</div>
-                <div class="col-lg-8 col-sm-4 hidden-xs">Description</div>
-                <div class="col-lg-2 col-md-2">Price</div>
+                <div class="col-md-4 col-sm-4 col-xs-10">Name</div>
+                <div class="col-lg-8 col-sm-6 hidden-xs">Description</div>
+                <div class="col-xs-2">Price</div>
             </div>
         </li>
     </ul>
@@ -25,10 +32,9 @@
     <li class="list-group-item"><b>{{type.name}}</b></li>
         <li ng-repeat="plate in type.items" class="list-group-item">
             <div class="row">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10">{{plate.name}}</div>
-            <div class="col-lg-8 col-sm-4 hidden-xs">{{plate.description}}</div>
-            <div class="col-lg-2 col-md-2">{{plate.basePrice}}
-            </div>
+            <div class="col-md-4 col-sm-4 col-xs-10">{{plate.name}}</div>
+            <div class="col-lg-8 col-sm-6 hidden-xs">{{plate.description}}</div>
+            <div class="col-xs-2">{{plate.basePrice}}</div>
             </div>
     </li>
 </ul>
