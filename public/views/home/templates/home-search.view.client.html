@@ -63,7 +63,7 @@
 <div ng-if="model.localRestaurants"
      ng-repeat="localRes in model.localRestaurants">
     <a ng-click="model.goToLocalResDetail(localRes._id)" role="button">
-        <h4>{{localRes.name}}</h4></a>
+        <h4><span class="glyphicon glyphicon-fire"></span>{{localRes.name}}</h4></a>
 </div>
 </div>
 <div ng-if="model.restaurants"
@@ -71,9 +71,10 @@
 
 
 <!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
-<div ng-if="model.usersResult">
+
+<div class="container-fluid" ng-if="model.usersResult">
     <h3>User Results</h3>
 <a ng-click="model.goToUserDetail(model.usersResult)"
-   role="button"><h4>{{model.usersResult.username}}</h4></a>
+   role="button"><h4><span class="glyphicon glyphicon-hand-right"></span>{{model.usersResult.username}}</h4></a>
 </div>
 </div>

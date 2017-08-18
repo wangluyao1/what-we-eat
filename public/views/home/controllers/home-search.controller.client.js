@@ -52,7 +52,7 @@
                         var result = response.data;
                         model.restaurants = result['restaurants'];
                         if(model.restaurants.length === 0){
-                            model.alert = "No Results";
+                            model.alert = "No eat street restaurant Results";
                         } else{
                             model.alert = null;
                         }
@@ -77,7 +77,7 @@
                 .then(function (response) {
                     model.localRestaurants = response.data;
                     if(model.localRestaurants.length === 0){
-                        model.alert = "No Results";
+                        model.alert = "No Local restaurant Results";
                     } else{
                         model.alert = null;
                     }
@@ -93,7 +93,7 @@
                     //todo : cannot find user
                     model.usersResult = response.data;
                     if(model.usersResult === undefined){
-                        model.alert = "No Results";
+                        model.alert = "No User Results";
                         return;
                     } else{
                         model.alert = null;

@@ -41,6 +41,18 @@ body {
     color: #cbd5df;
 }
 
+.navbar-inverse .navbar-nav>li>a {
+    color: #e6e4d6;
+}
+
+.h2, h2{
+    font: status-bar;
+}
+
+.glyphicon-hand-right:before {
+    margin-right: 10px;
+}
+
 .wl .navbar-custom {
     background-color: rgba(125, 125, 125, 0.95);
     border-color: rgba(125, 125, 125, 0.95);
