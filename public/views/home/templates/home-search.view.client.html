@@ -74,6 +74,8 @@
 </div>
 
 <!--<div ng-include="'./views/user/templates/user-search-result.view.client.html'"></div>-->
-<a ng-if="model.usersResult"
-   ng-click="model.goToUserDetail(model.usersResult)"
-   role="button"><h3>Users Result</h3> {{model.usersResult.username}}</a>
+<div ng-if="model.usersResult">
+    <h3>User Results</h3>
+<a ng-click="model.goToUserDetail(model.usersResult)"
+   role="button">{{model.usersResult.username}}</a>
+</div>

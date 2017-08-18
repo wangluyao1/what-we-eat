@@ -100,7 +100,7 @@
                 .then(function (response) {
                     //todo : cannot find user
                     model.usersResult = response.data;
-                    if(model.userResults === undefined){
+                    if(model.usersResult === undefined){
                         model.alert = "No Results";
                         return;
                     } else{

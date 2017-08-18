@@ -49,6 +49,7 @@
         }
 
         function addPlate(newPlate) {
+            model.saveMenu();
             var copy = JSON.parse(JSON.stringify(newPlate));
             return plateService
                 .createPlate(model.restaurantId,copy)
