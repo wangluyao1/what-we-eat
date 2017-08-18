@@ -33,7 +33,7 @@
             return reviewService
                 .updateReview(model.review._id,model.review)
                 .then(function (response) {
-                    $location.url("restaurant/details/"+model.restaurant._id);
+                    $location.url("/user/reviews");
                 })
         }
 
