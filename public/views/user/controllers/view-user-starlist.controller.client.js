@@ -37,14 +37,6 @@
         
         init();
 
-        function logout() {
-            userService
-                .logout()
-                .then(function () {
-                    $location.url('/login');
-                });
-        }
-
         function goToRestaurant(restaurant) {
             if(restaurant.type=== 'LOCAL'){
                 $location.url("/restaurant/details/"+restaurant._id);

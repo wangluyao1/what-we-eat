@@ -17,7 +17,7 @@
         <li ng-repeat="review in model.reviews" class="list-group-item">
             <div class="row">
                 <div class="col-md-3 hidden-sm hidden-xs"><a
-                        ng-click="model.goToRestaurant(review.restaurant)"
+                        ng-click="model.goToRestaurant(review.restaurant)" role="button"
                         >{{review.restaurant}}</a></div>
                 <div class="col-md-4 col-xs-6">{{review.content}}</div>
                 <div class="col-xs-3">{{review.type}}</div>

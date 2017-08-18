@@ -98,9 +98,9 @@ body {
     color: #f5f5f5;
 }
 
-.wl .navbar-custom .navbar-nav > li > a:focus, .navbar-custom .navbar-nav > li > a:hover {
-    color: #23527c;
-    background-color: transparent;
+
+.wl-no-change-color .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover:disabled {
+
 }
 
 /*.wl .navbar-default .navbar-brand {*/

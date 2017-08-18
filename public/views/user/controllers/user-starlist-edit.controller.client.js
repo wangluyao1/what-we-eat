@@ -65,7 +65,7 @@
             return reviewService
                 .createReview(newReview)
                 .then(function (response) {
-                    $location.url("/restaurant/"+restaurant._id+"/review/"+response.data._id);
+                    $location.url("/user/reviews/"+response.data._id+"/create");
                 })
         }
 

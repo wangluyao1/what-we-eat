@@ -10,7 +10,6 @@
         var model = this;
 
         model.title = "Write Review";
-        model.restaurantId = $routeParams['restaurantId'];
         model.reviewId = $routeParams['reviewId'];
 
         model.save = save;
@@ -20,9 +19,6 @@
         function init() {
             if(user._id){
                 model.logged = true;
-                model.isUser = (user.roles === 'USER');
-                model.isManager = (user.roles === 'MANAGER');
-                model.isAdmin = (user.roles === 'ADMIN');
             } else{
                 model.logged = false;
             }
@@ -30,6 +26,7 @@
                 .findReviewById(model.reviewId)
                 .then(function (response) {
                     model.review = response.data;
+                    model.restaurantId = model.review.restaurant;
                     return restaurantService
                         .findRestaurantById(model.restaurantId)
                         .then(function (response) {
@@ -44,17 +41,19 @@
             return reviewService
                 .updateReview(model.review._id,model.review)
                 .then(function (response) {
-                    $location.url("restaurant/details/"+model.restaurantId);
+                    $location.url("user/reviews");
                 })
         }
 
         function send() {
-            model.save();
-            return reviewService
-                .publishReview(model.review._id)
+            return reviewService.updateReview(model.review._id,model.review)
                 .then(function (response) {
-                    $location.url("restaurant/details/"+model.restaurantId);
-                })
+                    return reviewService
+                        .publishReview(model.review._id)
+                        .then(function (response) {
+                            $location.url("user/reviews");
+                        })
+                });
         }
 
         function logout() {

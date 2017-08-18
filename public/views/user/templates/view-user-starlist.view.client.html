@@ -12,7 +12,8 @@
 
         <li ng-repeat="restaurant in model.restaurants" class="list-group-item">
             <div class="row">
-                <div class="col-md-6 col-xs-10" href="#!/restaurant/details/{{restaurant._id}}" role="button">{{restaurant.name}}</div>
+                <div class="col-md-6 col-xs-10" >
+                    <a ng-click="model.goToRestaurant(restaurant)" role="button">{{restaurant.name}}</a></div>
                 <div class="col-md-6 hidden-xs">{{restaurant.address}}</div>
             </div>
         </li>

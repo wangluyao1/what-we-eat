@@ -64,6 +64,14 @@
                     user:checkLogin
                 }
             })
+            .when("/user/reviews/:reviewId/create",{
+                templateUrl: "views/review/templates/review-create.view.client.html",
+                controller: "ReviewCreateController",
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
+            })
             .when("/user/reviews/:reviewId/edit",{
                 templateUrl: "views/review/templates/review-edit.view.client.html",
                 controller: "ReviewEditController",
@@ -182,16 +190,6 @@
                 }
             })
 
-
-            //review
-            .when("/restaurant/:restaurantId/review/:reviewId",{
-                templateUrl: "views/review/templates/review-create.view.client.html",
-                controller: "ReviewCreateController",
-                controllerAs: "model",
-                resolve:{
-                    user:checkLogin
-                }
-            })
     }
 
     function checkLogin(userService,$q,$location) {
