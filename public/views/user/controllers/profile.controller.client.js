@@ -16,6 +16,7 @@
         model.unregister = unregister;
         model.goToStore = goToStore;
         model.goToStarList = goToStarList;
+        model.logout = logout;
 
         function init() {
             //model.user = userService.findUserById(model.userId);
@@ -56,6 +57,14 @@
 
         function goToStarList() {
             $location.url("/user/starlist");
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();
