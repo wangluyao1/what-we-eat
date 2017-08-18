@@ -67,10 +67,10 @@
             .when("/user/reviews/:reviewId/edit",{
                 templateUrl: "views/review/templates/review-edit.view.client.html",
                 controller: "ReviewEditController",
-                controllerAs: "model"//,
-                // resolve:{
-                //     user:checkLogin
-                // }
+                controllerAs: "model",
+                resolve:{
+                    user:checkLogin
+                }
             })
             //view other users
             .when("/user/detail/:uid",{
@@ -94,39 +94,65 @@
                 templateUrl: "views/admin/templates/collections.view.client.html",
                 controller: "AdminCollectionsController",
                 controllerAs: "model"
+                // ,
+                // resolve:{
+                //     user:checkAdmin
+                // }
             })
             .when("/admin/users",{
                 templateUrl: "views/admin/templates/user-list.view.client.html",
                 controller: "AdminUserController",
                 controllerAs: "model"
+                // ,
+                // resolve:{
+                //     user:checkAdmin
+                // }
             })
             .when("/admin/users/edit/:uid",{
                 templateUrl: "views/admin/templates/user-edit.view.client.html",
                 controller: "AdminUserEditController",
                 controllerAs: "model"
+                // ,
+                // resolve:{
+                //     user:checkAdmin
+                // }
             })
             .when("/admin/restaurants",{
                 templateUrl: "views/admin/templates/restaurant-list.view.client.html",
                 controller: "AdminRestaurantController",
                 controllerAs: "model"
+                // ,
+                // resolve:{
+                //     user:checkAdmin
+                // }
             })
             .when("/admin/restaurant/:rid",{
                 templateUrl: "views/restaurant/templates/manager/res-detail-edit.view.client.html",
                 controller: "AdminResEditController",
                 controllerAs: "model"
+                // ,
+                // resolve:{
+                //     user:checkAdmin
+                // }
             })
             .when("/admin/reviews",{
                 templateUrl: "views/admin/templates/review-list.view.client.html",
                 controller: "AdminReviewController",
                 controllerAs: "model"
+                // ,
+                // resolve:{
+                //     user:checkAdmin
+                // }
             })
             .when("/admin/relations",{
                 templateUrl: "views/admin/templates/relation-list.view.client.html",
                 controller: "AdminRelationController",
                 controllerAs: "model"
+                // ,
+                // resolve:{
+                //     user:checkAdmin
+                // }
             })
-
-
             //*****************restaurant***************************************
 
             .when("/restaurant/create",{

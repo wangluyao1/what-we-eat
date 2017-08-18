@@ -20,6 +20,8 @@
             "logout":logout,
             "checkLogin": checkLogin,
             "checkLogout" : checkLogout,
+            "register":register,
+            "checkAdmin":checkAdmin,
             //follow
             "follow":follow,
             "unfollow":unfollow,
@@ -50,6 +52,20 @@
                     return response.data;
                 })
         }
+
+        function checkAdmin() {
+            var url = "/api/checkAdmin";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function register(user) {
+            var url = "/api/register";
+            return $http.post(url, user);
+        }
+
 
         function logout() {
             var url = "/api/checkLogout";

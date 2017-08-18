@@ -3,6 +3,7 @@
  */
 var app = require('../../express');
 var userModel = require("../model/user/user.model.server");
+var bcrypt = require("bcrypt-nodejs");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 // var FacebookStrategy = require('passport-facebook').Strategy;
@@ -47,6 +48,8 @@ app.post('/api/login', passport.authenticate('local'), login);
 app.get('/api/user/:userId', findUserById);
 app.put('/api/user/:userId', updateUser);
 app.delete('/api/user/:userId', deleteUser);
+app.post('/api/register', register);
+app.get('/api/checkAdmin', checkAdmin);
 app.get('/api/checkLogin', checkLogin);
 app.get('/api/checkLogout',logout);
 app.get('/api/allUsers',getAllUsers);
@@ -150,13 +153,14 @@ function googleStrategy(token, refreshToken, profile, done) {
 
 function localStrategy(username, password, done) {
     userModel
-        .findUserByCredentials(username, password)//{username: username, password: password})
+        .findUserByUsername(username)//{username: username, password: password})
         .then(
             function (user) {
-                if (!user) {
-                    return done(null, false);
+                if (user && bcrypt.compareSync(password, user.password)) {
+                    done(null, user);
+                } else {
+                    done(null, false);
                 }
-                return done(null, user);
             },
             function (err) {
                 if (err) {
@@ -177,6 +181,26 @@ function getAllUsers(req,res) {
 
 function checkLogin(req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
+}
+
+function checkAdmin(req, res) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
+        res.json(req.user);
+    } else {
+        res.send('0');
+    }
+}
+
+function register(req, res) {
+    var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
+    userModel
+        .createUser(user)
+        .then(function (user) {
+            req.login(user, function (status) {
+                res.send(user);
+            });
+        });
 }
 
 function logout(req, res) {

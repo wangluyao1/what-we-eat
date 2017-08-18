@@ -30,7 +30,7 @@
                 }
 
                 user.roles = role;
-                var promise2 = userService.createUser(user);
+                var promise2 = userService.register(user);
                 promise2.then(function (response2) {
                     var user = response2.data;
                     $location.url("/profile");
