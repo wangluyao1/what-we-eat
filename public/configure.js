@@ -197,8 +197,6 @@
                     user:checkLogin
                 }
             })
-
-
     }
 
     function checkLogin(userService,$q,$location) {
